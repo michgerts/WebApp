@@ -1,0 +1,63 @@
+<div ng-controller='SignUpController'>
+<div class='container'>
+	<div class='row'>
+		<div class='col-md-12 text-center'>
+			<h1>User Registration</h1>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='col-md-3'></div>
+		<div id='user-signup' class='col-md-8 text-center'>
+			<form id='user-signup-form' ng-submit='signup()' class='form-horizontal'>
+				<div class="form-group has-feedback">
+    			<label class='control-label col-md-2' for="user-name">User Name</label>
+    			<div class='col-md-6 required'>
+    				<input type="text" class="form-control" name="user-name" placeholder="User Name" ng-model='user.Name'>
+    				<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+    			</div>
+  			</div>
+			  <div class="form-group has-feedback">
+			   	<label class='control-label col-md-2' for="user-password">Password</label>
+			   	<div class='col-md-6 required'>
+				   	<input type="password" class="form-control" name="user-password" placeholder="Password" ng-model='user.Password'>
+				   	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+			   	</div>
+			  </div>
+			  <div class="form-group has-feedback">
+			   	<label class='control-label col-md-2' for="user-nickname">Nickname</label>
+			   	<div class='col-md-6 required'>
+				   	<input type="text" class="form-control" name="user-nickname" placeholder="Nickname" ng-model='user.NickName'>
+				   	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+			   	</div>
+			  </div>
+			  <div class="form-group has-feedback">
+			   	<label class='control-label col-md-2' for="user-description">Description</label>
+			   	<div class='col-md-6'>
+				   	<textarea class="form-control" name="user-description" placeholder="Description" ng-model='user.Description'></textarea>
+				   	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+			   	</div>
+			  </div>
+				<div class="form-group has-feedback">
+			   	<label class='control-label col-md-2' for="user-pic">Picture</label>
+			   	<div class='col-md-6'>
+				   	<input type="text" class="form-control" name="user-pic" placeholder="Picture URL" ng-model='user.Pic'>
+				   	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+			   	</div>
+			  </div>
+			  <div class='col-md-6'>			  			  			  
+  				<button id='user-login-btn' type="submit" class="btn btn-primary">Sign Up</button>
+ 				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class='container'>
+	<div class = 'row'>
+		<div class ='col-md-4'></div>
+		<div class ='col-md-4'>
+			<ul id="error-list" class="error-list">
+			</ul>
+		</div>
+	</div>
+</div>
+</div>

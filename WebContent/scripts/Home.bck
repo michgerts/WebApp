@@ -1,0 +1,77 @@
+// Front end js
+function validateInner (input, maxLength)
+{
+	var value = input.val();
+	inputLen = value.length; 
+	if ((inputLen>10) || (inputLen<1))
+	{
+		input.parent().removeClass('has-success');
+		input.parent().addClass('has-error');
+		input.next().removeClass('glyphicon-ok');
+		input.next().addClass('glyphicon-remove');
+	}
+	else
+	{
+		input.parent().removeClass('has-error');
+		input.parent().addClass('has-success');
+		input.next().removeClass('glyphicon-remove');
+		input.next().addClass('glyphicon-ok');
+	}
+}
+function validate (input, maxLength)
+{
+	input.keyup(function (){validateInner(input, maxLength)});
+	$(document).mousemove(function (){validateInner(input, maxLength)});
+}
+$(document).ready(function()
+{
+	$("input[name='user-name']").focus(function ()
+	{	
+		validate ($(this),10);
+	});
+	 $("input[name='user-password']").focus(function ()
+	{	
+		validate ($(this),8);
+	});
+	$('#user-login').submit(function()
+	{
+		var Name = $("input[name='user-name']").val();
+		var Pass = $("input[name='user-password']").val();
+		var login = {};
+		if (!$('div.has-error').length)
+		{
+			login = {"user-name": Name, "user-password": Pass};
+			$.post("./indexcontroller",login,function(response)
+			{
+				if (response)
+				{
+					var w = window.self;
+					w.location.href = response;
+				}
+				else
+				{
+					alert("User name or Password are incorrect please try again or sign-up");
+				}
+			});
+		}
+		return false;
+	});
+	$('#Refresh').click(function ()
+	{
+		$.get("./indexcontroller", function(users)
+		{    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
+			if ( $( "#user-data").children().length )
+			{
+				$("#user-data #ID").text(users.ID);
+				$("#user-data #Name").text(users.Name);
+				$("#user-data #Pic").attr("src", users.Pic);
+			}
+			else
+			{
+				$("div#user-data").append('<p id="ID">'+users.ID+'</p>');
+				$("div#user-data").append('<p id="Name">'+users.Name+'</p>');
+				$("div#user-data").append('<img id="Pic" src='+users.Pic+'></img>');
+			}
+		});
+	});
+});

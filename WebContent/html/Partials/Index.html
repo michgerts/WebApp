@@ -1,0 +1,37 @@
+<div ng-controller='IndexController'>
+<div class='container'>
+	<div class='row'>
+		<div class='col-md-12 text-center'>
+			<h1 id="welcome">Welcome to Ask Your Wife!</h1>
+			<h4 id="intro"><strong>We encourage you to ask your actual wife 
+			<br>
+			but if she is busy or not speaking to you 
+			<br>
+			(because you did something terrible)
+			<br> feel free to ask here.</strong></h4>
+	  		<h2>Have Fun!</h2>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='col-md-4'></div>
+		<div id='user-login' class='col-md-4 text-center'>
+			<form id='user-login-form' ng-submit='login()'>
+				<div class="form-group has-feedback">
+    			<label class='control-label' for="user-name">User Name</label>
+    			<input type="text" class="form-control" name="user-name" placeholder="User Name" ng-model='user.Name'>
+    			<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+  			</div>
+			  <div class="form-group has-feedback">
+			   	<label class='control-label' for="user-password">Password</label>
+			   	<input type="password" class="form-control" name="user-password" placeholder="Password" ng-model='user.Password'>
+			   	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+			  </div>
+  			<button id='user-login-btn' type="submit" class="btn btn-primary">Sign In</button>
+  			<a id='user-signup-btn' class="btn btn-default" href='./#/signup'>Sign Up</a>
+			</form>
+			<ul id="error-list" class="error-list">
+			</ul>
+		</div>
+	</div>
+</div>
+</div>

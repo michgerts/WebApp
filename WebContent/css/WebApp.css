@@ -1,0 +1,37 @@
+
+.error-list
+{
+    color: red;
+}
+#sign-out
+{
+	margin-top: 20px;
+    margin-bottom: 10px;
+}
+#welcome
+{
+	margin-top: 90px;
+	font-family: Book Antiqua;
+	
+}
+#intro
+{
+	margin-top: 105px;
+}
+#user-login
+{
+	margin-left: 15px;
+}
+html
+{
+  font-family: Courier New;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+body 
+{
+	background-image: url('../images/corpseBride.jpg');
+ 	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
