@@ -3,24 +3,39 @@
 {
     color: red;
 }
+#intro
+{
+	margin-top: 90px;
+	font-family: Tangerine;
+	font-size: 90px;	
+}
 #sign-out
 {
 	margin-top: 20px;
     margin-bottom: 10px;
 }
-#welcome
+#welcome 
 {
 	margin-top: 90px;
-	font-family: Book Antiqua;
-	
+	font-family: Tangerine;
+	font-size: 55px;
 }
-#intro
+#fun
+{
+	font-family: Tangerine;
+	font-size: 55px;
+}
+#words
 {
 	margin-top: 105px;
 }
-#user-login
+#user-login 
 {
 	margin-left: 15px;
+}
+#SignUp
+{
+	margin-left: 63px;
 }
 html
 {
@@ -35,4 +50,7 @@ body
 	background-size: 100%;
 	font-family: Courier New;
 }
-
+.control-label, .btn-default, .btn
+{
+	font-size: 16.7px;
+}
