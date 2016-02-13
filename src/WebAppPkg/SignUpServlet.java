@@ -45,7 +45,7 @@ public class SignUpServlet extends HttpServlet
         	if (users.next())
     		{
             	// such a user already exists
-        		msg = "[\"This name is taken pleas choose another\"]";
+        		msg = "[\"This name is taken please choose another\"]";
     		}
         	else
         	{

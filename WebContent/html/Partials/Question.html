@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="windows-1255">
-<title>Insert title here</title>
-</head>
-<body>
 
-</body>
-</html>
+<div ng-controller='QuestionSubmit'>
+	<div class='container'>
+		<div class='row'>
+			<div class='col-md-10 text-center'>
+				<h1 id="welcome">Don't be shy, Ask!</h1>
+				<form class="form-horizontal">
+				<div class="form-group has-feedback " id="submit-question">
+			   		<label class='control-label col-md-3 text-center' for="user-question" id="MyQuestion">My Question</label>
+			   		<div class='col-md-8'>
+				   		<textarea class="form-control" name="user-question" placeholder="Question" ng-model='question.text'></textarea>
+			  	 	</div>
+			  	</div>		
+				<div class="form-group has-feedback" id="submit-tpic">
+			   			<label class='control-label col-md-3' for="user-topic" id="MyTopic">On the topic\s:</label>		   			
+			   				<div class='col-md-8'>
+				   				<textarea class="form-control" name="user-topic" placeholder="Topic" ng-model='topic.text'></textarea>
+			  	 			</div>
+				</div>
+				 <button type="submit" class="btn btn-primary">Submit my question</button>
+				</form>
+			</div>
+			</div>
+			</div>
+
+
