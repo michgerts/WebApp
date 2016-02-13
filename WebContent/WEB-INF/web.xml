@@ -18,6 +18,10 @@
       <servlet-name>LoginServlet</servlet-name>
       <servlet-class>WebAppPkg.LoginServlet</servlet-class>
    </servlet>
+    <servlet>
+      <servlet-name>QSubmitServlet</servlet-name>
+      <servlet-class>WebAppPkg.QSubmitServlet</servlet-class>
+   </servlet>
  
    <!-- Note: All <servlet> elements MUST be grouped together and
          placed IN FRONT of the <servlet-mapping> elements -->
@@ -33,7 +37,11 @@
    <servlet-mapping>
       <servlet-name>UserServlet</servlet-name>
       <url-pattern>/userservlet</url-pattern>
-   </servlet-mapping>      
+   </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>QSubmitServlet</servlet-name>
+      <url-pattern>/qsubmitservlet</url-pattern>
+   </servlet-mapping>       
    
    <welcome-file-list>
     	<welcome-file>./html/Index.html</welcome-file>
