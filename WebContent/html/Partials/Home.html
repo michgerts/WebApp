@@ -1,19 +1,27 @@
 <div class='container' id="SignInContainer">
-<div ng-controller='HomeController'>
-  <header>
-	  <div class="container-fluid"  id="home">
-	  <div class="row">
-	   	<div class="col-md-12" id="SignOut">
-	   		<button type="button" class="btn btn-danger" ng-click='signout()' id="sign-out">It's dangerous to sign out but you can do it</button>
-	   	</div>
-	  </div>
-	  <div class="row">
-	  	<div class="col-md-8">
-	  		<h2 id="Hello">Hello {{currentUser.NickName}}, please remember that:</h2>
-	  	</div>
-	  </div>
-	</div>	
- </header>
- <ng-include src="'./html/Partials/Question.html'"></ng-include>
-</div>
+	<div ng-controller='HomeController'>
+		<header>
+			<div class="container-fluid" id="home">
+				<div class='row'>
+					<div class='col-lg-12' id="SignOut">
+						<button type="button" class="btn btn-danger" ng-click='signout()'
+							id="sign-out">It's dangerous to sign out but you can do
+							it</button>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='col-lg-8'>
+						<h2 id="Hello">Hello {{currentUser.NickName}}, please
+							remember that:</h2>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div>
+			<ng-include src="'./html/Partials/Question.html'"></ng-include>
+		</div>
+		<div>
+			<ng-include src="'./html/Partials/NewestQuestions.html'"></ng-include>
+		</div>
+	</div>
 </div>

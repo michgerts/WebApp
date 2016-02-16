@@ -17,7 +17,27 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 					data:  JSON.stringify($scope.question)
 				}).success( function (response)
 				{
-					$scope.question.ID = response.msg;
+					$scope.question.ID = response.data.records;
+				});
+		$http(
+				{
+					method: 'GET',
+					url: 'qsubmitservlet',
+					headers: {'Content-Type': 'application/json'}
+				}).success( function (response)
+				{
+					debugger;
+					
+					
+					for(var i=0; i<response.length; i++){
+					      var text = response[i].Text;
+					      var time = response[i].Time;
+					      var likes = response[i].Likes;
+					      $("#newQuestionsTable").append('<tr><td>'+ text + '</td><td>'+time+'</td><td>' +'</td><td>'+likes+'</td></tr>');
+					   }
+					
+				    
+				    
 				});
 	}
 });
