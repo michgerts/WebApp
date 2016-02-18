@@ -3,16 +3,24 @@
 {
     color: red;
 }
+#shy
+{
+	font-family: Rancho;
+	margin-top: 150px;
+	text-align: left;
+	
+}
 #intro
 {
 	margin-top: 90px;
 	font-family: Tangerine;
 	font-size: 90px;	
 }
-#sign-out
+#sign-out 
 {
 	margin-top: 20px;
-    margin-bottom: 10px;
+    float: left;
+    
 }
 #Hello
 {
@@ -23,20 +31,21 @@
 }
 #welcome
 {
-	margin-top: 130px;
-	font-family: Rancho;
+	margin-top: 90px;
+	font-family: Tangerine;
 	font-size: 55px;
-	margin-right: 450px;
+	margin-right: 30px;
 }
 #fun
 {
 	font-family: Tangerine;
 	font-size: 55px;
 }
-#words, #submit-question
+#words, #submit-question, #submit-topic
 {
 	margin-top: 10px;
 	margin-bottom: 15px;
+	margin-left: 35px;
 }
 #user-login 
 {
@@ -58,6 +67,7 @@ html
  	background-repeat: no-repeat;
 	background-size: 100%;
 	font-family: Courier New;
+	height: 625px;
 }
 .control-label, .btn-default, .btn
 {
@@ -69,17 +79,29 @@ html
  	background-repeat: no-repeat;
 	background-size: 100%;
 	font-family: Courier New;
+	
 }
-#SignUpContainer, #SignInContainer
+#SignUpContainer, #SignInContainer 
 {
     height: 625px;
 }
 #SignOut
 {
-	align: right;
+	text-align: right;
 }
 #MyQuestion, #MyTopic
 {
 	font-family: Rancho;
 	font-size: 33px;
+	text-align: right;
+}
+#pleaseProvide
+{
+	font-family: Rancho;
+	text-align: center;
+
+}
+#topicErrors
+{
+	text-align: left;
 }

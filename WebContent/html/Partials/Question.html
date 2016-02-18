@@ -3,22 +3,36 @@
 	<div class='container'>
 		<div class='row'>
 			<div class='col-md-10 text-center'>
-				<h1 id="welcome">Don't be shy, Ask!</h1>
+				<h1 id="shy"> So don't be shy, Ask!</h1>
 				<form class="form-horizontal" ng-submit='ask()'>
 				<div class="form-group has-feedback " id="submit-question">
 			   		<label class='control-label col-md-3 text-center' for="user-question" id="MyQuestion">My Question</label>
-			   		<div class='col-md-8'>
-				   		<textarea class="form-control" name="user-question" placeholder="Question" ng-model='question.Text'></textarea>
+			   		<div class='col-md-9' id="texting">
+				   		<textarea class="form-control" name="user-question" placeholder="Question" ng-model='question.Text' id="textArea" ></textarea>
 			  	 	</div>
 			  	</div>		
-				<div class="form-group has-feedback" id="submit-tpic">
-			   			<label class='control-label col-md-3' for="user-topic" id="MyTopic">On the topic\s:</label>		   			
-			   				<div class='col-md-8'>
-				   				<textarea class="form-control" name="user-topic" placeholder="Topic" ng-model='topic.text'></textarea>
-			  	 			</div>
-				</div>
-				 <button type="submit" class="btn btn-primary">Submit my question</button>
+				<div class="form-group has-feedback" id="submit-topic">
+			   			<label class='control-label col-md-3 text-center' for="user-topic" id="MyTopic">The topic\s:</label>	   			
+			   		<div class='col-md-9' id="texting">
+				   		<textarea class="form-control" name="user-topic" placeholder="Topic/s" ng-model='topic.Text' id="textArea"></textarea>
+			  	 	</div>
+			  	 	<div class='col-md-9' id="pleaseProvide">
+			  	 		<h3><strong>please provide each topic under 50 chars and separate them by ","</strong></h3>	
+			  	 	</div>
+			  	 </div>
+				 <button type="submit" class="btn btn-primary" id="submitBtn">Submit my question</button>
 				</form>
+				<div class='container'>
+					<div class = 'row'>
+						<div class ='col-md-12' id="topicErrors">
+							<ul id="error-list-questions" class="error-list">
+							<div ng-if="errorArray.length > 0">
+								<h4>These topics are over 50 chars:</h4>
+							</div>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 			</div>
 			</div>
