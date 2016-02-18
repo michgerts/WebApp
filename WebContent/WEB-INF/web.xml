@@ -18,9 +18,13 @@
       <servlet-name>LoginServlet</servlet-name>
       <servlet-class>WebAppPkg.LoginServlet</servlet-class>
    </servlet>
-    <servlet>
+   <servlet>
       <servlet-name>QSubmitServlet</servlet-name>
       <servlet-class>WebAppPkg.QSubmitServlet</servlet-class>
+   </servlet>
+   <servlet>
+      <servlet-name>NewestQuestionsServlet</servlet-name>
+      <servlet-class>WebAppPkg.NewestQuestionsServlet</servlet-class>
    </servlet>
  
    <!-- Note: All <servlet> elements MUST be grouped together and
@@ -41,7 +45,11 @@
     <servlet-mapping>
       <servlet-name>QSubmitServlet</servlet-name>
       <url-pattern>/qsubmitservlet</url-pattern>
-   </servlet-mapping>       
+   </servlet-mapping>
+   <servlet-mapping>
+      <servlet-name>NewestQuestionsServlet</servlet-name>
+      <url-pattern>/newestquestionsservlet</url-pattern>
+   </servlet-mapping>         
    
    <welcome-file-list>
     	<welcome-file>./html/Index.html</welcome-file>

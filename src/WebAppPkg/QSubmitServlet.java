@@ -6,11 +6,16 @@ import java.io.IOException;
 import WebAppPkg.WebAppDB;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 // Servlet
 import javax.servlet.*;
 import javax.servlet.http.*;
 // JSON
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 

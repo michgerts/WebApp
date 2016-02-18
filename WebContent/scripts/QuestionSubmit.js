@@ -56,11 +56,10 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 		{
 				for (var l=0; l<$scope.errorArray.length; l++)
 				{
+
 					$('ul.error-list').append('<li>' + $scope.errorArray[l] + '</li>');				
 				}
 
 		}	
 	}
 });
-
-	

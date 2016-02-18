@@ -1,0 +1,26 @@
+<div ng-controller='NewestQuestions' data-ng-init="init()">
+	<div >
+		<div>
+			<div>
+				<div id="newestQuestionsList">
+					<table id="newQuestionsTable" class="table table-striped">
+						<tr>
+							<th>Question's text</th>
+							<th>Time of submission</th>
+							<th>Rating</th>
+						</tr>
+					</table>
+				</div>
+
+				<input type="text" class="form-control" name="answer"
+					ng-model='answer'>
+				<form class="form-horizontal" ng-submit='answer()'>
+					<button type="submit" class="btn btn-primary">answer</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
