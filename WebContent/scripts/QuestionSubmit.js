@@ -1,7 +1,6 @@
 // Front end js
 app.controller('QuestionSubmit',function ($scope, $http, $window)
 {
-
 	$scope.ask = function ()
 	{
 		/*Handels questions submit*/
@@ -10,7 +9,8 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 		$scope.question.ID=0;
 		$scope.question.Likes=0;
 		$scope.question.Answered=false;
-		/*Handels topics submit*/
+		$scope.question.Text = commaSep($scope.question.Text);
+		/*Handels topics submit*/ 
 		var topicsArray = $scope.topic.Text.split(",");
 		topicsArray.sort;
 		var res = [];
@@ -25,7 +25,7 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 				}
 				
 			if (flag=="false")
-				res.push(topicsArray[i]);
+				res.push(commaSep(topicsArray[i]));
 		}
 		topicsArray = res;
 		var j=0;
@@ -47,10 +47,21 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 				headers: {'Content-Type': 'application/json'},
 				data:  JSON.stringify($scope.question)
 			}).success( function (response)
-			{
-				$scope.question.ID = response.msg;
-			});
+			{	
+				for (var i=0; i<topicsArray.length; i++)
+				{
+					var Topic= {QID: response.msg, Topic: topicsArray[i]};
+					$http(
+						{
+							method: 'POST',
+							url: 'topicsservlet',
+							headers: {'Content-Type': 'application/json'},
+							data:  JSON.stringify(Topic)
+						});
+				}
+				location.reload();
 			
+			});
 		}
 		else
 		{
@@ -63,3 +74,15 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 		}	
 	}
 });
+function commaSep (InputText)
+{
+	var Text =InputText.split("'");
+	var res = "";
+	for (var j=0; j <Text.length-1; j++)
+		{
+		Text[j]+="''";
+		res+=Text[j];
+		}
+	res+=(Text[Text.length-1]);
+	return res;
+}
