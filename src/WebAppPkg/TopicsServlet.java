@@ -25,14 +25,13 @@ import WebAppPkg.Topic;
 public class TopicsServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
-	private String dbURL = "jdbc:derby://localhost:1527/c:/Users/koganmic/Documents/DB/MyDB";
     private String tableName = "TOPICS";
     @Override
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {
     	WebAppDB db = new WebAppDB();
-		db.createConnection(dbURL); 
+		db.createConnection(); 
 		StringBuilder sb = new StringBuilder();
         BufferedReader br = request.getReader();
         String str = null;
