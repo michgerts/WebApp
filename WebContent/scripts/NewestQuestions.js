@@ -3,7 +3,6 @@ app.controller('NewestQuestions',function ($scope, $http, $window)
 {
 	$scope.init = function ()//answers a question
 	{
-		var a = 1;
 		$http(
 		{
 			method: 'get',

@@ -11,11 +11,10 @@ public class Topic
 		Topic = topic;
 
 	}
-	public int geQtID ()
+	public int getQID ()
 	{
 		return QID;
 	}
-	
 	public String getTopic()
 	{
 		return Topic;
