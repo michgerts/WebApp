@@ -23,7 +23,6 @@ import WebAppPkg.Question;
 public class NewestQuestionsServlet extends HttpServlet
 {//this will submit an answer -- need to change the name
 	private static final long serialVersionUID = 1L;
-	private String dbURL =  "jdbc:derby://localhost:1527/c:/Users/koganmic/Documents/DB/MyDB";
     private String tableName = "QUESTIONS";
     @Override
     public void doGet (HttpServletRequest request, HttpServletResponse response)
@@ -33,7 +32,7 @@ public class NewestQuestionsServlet extends HttpServlet
     	{
     		WebAppDB db = new WebAppDB();
     		ResultSet questions;
-    		db.createConnection(dbURL); 
+    		db.createConnection(); 
     		List<Question> questionsToPresent = new ArrayList<Question>();
     	
             StringBuilder sb = new StringBuilder();

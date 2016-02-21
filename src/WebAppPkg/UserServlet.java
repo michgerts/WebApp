@@ -18,7 +18,6 @@ import WebAppPkg.User;
 public class UserServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
-	private String dbURL = "jdbc:derby://localhost:1527/c:/Users/koganmic/Documents/DB/MyDB";
     private String tableName = "USERS";
     @Override
     public void doPost (HttpServletRequest request, HttpServletResponse response)
@@ -26,7 +25,7 @@ public class UserServlet extends HttpServlet
     {
     	WebAppDB db = new WebAppDB();
 		ResultSet users;
-		db.createConnection(dbURL); 
+		db.createConnection(); 
 	
         StringBuilder sb = new StringBuilder();
         BufferedReader br = request.getReader();
