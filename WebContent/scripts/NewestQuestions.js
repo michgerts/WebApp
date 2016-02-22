@@ -5,7 +5,7 @@ app.controller('NewestQuestions',function ($scope, $http, $window)
 	{
 		$http(
 		{
-			method: 'get',
+			method: 'post',
 			url: 'newestquestionsservlet',
 			headers: {'Content-Type': 'application/json'}
 		}).success( function (response)
@@ -38,10 +38,11 @@ app.controller('NewestQuestions',function ($scope, $http, $window)
 	{
 		$http(
 				{
-					method: 'get',
+					method: 'post',
 					url: 'newestquestionsservlet',
 					headers: {'Content-Type': 'application/json'},
-					data:  JSON.stringify(1)
+					cache: false,
+					data:  JSON.stringify('1')
 				}).success( function (response)
 				{				
 					var ul = document.getElementById("newQuestionsList");
@@ -73,10 +74,11 @@ app.controller('NewestQuestions',function ($scope, $http, $window)
 	{
 		$http(
 				{
-					method: 'get',
+					method: 'post',
 					url: 'newestquestionsservlet',
 					headers: {'Content-Type': 'application/json'},
-					data:  JSON.stringify(0)
+					cache: false,
+					data:  JSON.stringify('0')
 				}).success( function (response)
 				{			
 					var ul = document.getElementById("newQuestionsList");
