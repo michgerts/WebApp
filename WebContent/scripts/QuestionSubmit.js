@@ -64,7 +64,8 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 			});
 		}
 		else
-		{
+		{	
+			$('ul.error-list li').remove();
 				for (var l=0; l<$scope.errorArray.length; l++)
 				{
 

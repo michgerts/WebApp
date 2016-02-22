@@ -24,7 +24,6 @@ import WebAppPkg.Question;
 public class NewestQuestionsServlet extends HttpServlet
 {//this will submit an answer -- need to change the name
 	private static final long serialVersionUID = 1L;
-	private String dbURL =  "jdbc:derby://localhost:1527/C:/Program Files/Derby/db-derby-10.12.1.1-bin/bin/MyDbTest";
     private String tableName = "QUESTIONS";
     private int page=0;
     @Override
@@ -35,7 +34,7 @@ public class NewestQuestionsServlet extends HttpServlet
     	{
     		WebAppDB db = new WebAppDB();
     		ResultSet questions;
-    		db.createConnection(dbURL); 
+    		db.createConnection(); 
     		List<Question> questionsToPresent = new ArrayList<Question>();
     	
             StringBuilder sb = new StringBuilder();
