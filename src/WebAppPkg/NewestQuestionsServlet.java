@@ -11,6 +11,7 @@ import java.util.List;
 
 // Servlet
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 // JSON
 import com.google.gson.Gson;
@@ -24,8 +25,9 @@ public class NewestQuestionsServlet extends HttpServlet
 {//this will submit an answer -- need to change the name
 	private static final long serialVersionUID = 1L;
     private String tableName = "QUESTIONS";
+    private int page=0;
     @Override
-    public void doGet (HttpServletRequest request, HttpServletResponse response)
+    public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {    	
     	try
@@ -37,13 +39,34 @@ public class NewestQuestionsServlet extends HttpServlet
     	
             StringBuilder sb = new StringBuilder();
             BufferedReader br = request.getReader();
-            String str = null;
+            StringBuffer requestURL = request.getRequestURL();
+            String str =  requestURL.toString();
+            str.charAt(str.length()-1);
+        	page = (int) request.getSession().getValue("numOfPage");
             while ((str = br.readLine()) != null)
             {
                 sb.append(str);
             }
-            questions = db.executeQuery("SELECT * FROM "+ tableName+ " where answered=false order by time desc FETCH FIRST 20 ROWS ONLY ");
+
+    		String nextOrPrev = new Gson().fromJson(sb.toString(),String.class);
     		
+    		if(nextOrPrev != null && !nextOrPrev.isEmpty())
+    		{
+    			if(nextOrPrev.equals("0") && page>0)
+    				request.getSession().putValue("numOfPage", --page);
+        		else
+        			if(nextOrPrev.equals("1"))
+        				request.getSession().putValue("numOfPage", ++page);
+    		}
+    		
+    		ResultSet numOfRowsSet = db.executeQuery("select count(*) as A from QUESTIONS");
+    		String numOfRows = "";
+    		if(numOfRowsSet.next())
+    			numOfRows = numOfRowsSet.getString("A");
+    		int numOfRowsInt = Integer.parseInt(numOfRows);//this is for the descending order later
+            questions = db.executeQuery("SELECT * FROM "+ tableName+ " where answered=false order by time asc "+" offset " + page*20 +" rows"+" FETCH FIRST 20 ROWS ONLY ");
+            
+            
             while (questions.next())
     		{
             		Question question = new Question( Integer.parseInt(questions.getString("ID")), questions.getString("Text"),
@@ -53,9 +76,9 @@ public class NewestQuestionsServlet extends HttpServlet
     		}
             
             String categoriesJson = new Gson().toJson(questionsToPresent);
-            response.getWriter().write(categoriesJson);
-	    	response.setContentType("application/json");
+            response.setContentType("application/json");
 	    	response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(categoriesJson);
 			response.getWriter().close();
 			}
     	catch (IOException | SQLException e)
