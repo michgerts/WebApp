@@ -15,10 +15,11 @@ public class WebAppDB
 		conn = null;
 	}
 	
-	public void createConnection(String dbURL)
+	public void createConnection()
     {
     	try
     	{
+    		String dbURL= "jdbc:derby://localhost:1527/c:/Users/koganmic/Documents/DB/MyDB";
     		Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
     		//Get a connection
     		conn = DriverManager.getConnection(dbURL); 

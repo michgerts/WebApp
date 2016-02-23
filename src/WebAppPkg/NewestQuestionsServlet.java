@@ -11,7 +11,7 @@ import java.util.List;
 
 // Servlet
 import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
+
 import javax.servlet.http.*;
 // JSON
 import com.google.gson.Gson;
@@ -24,18 +24,19 @@ import WebAppPkg.Question;
 public class NewestQuestionsServlet extends HttpServlet
 {//this will submit an answer -- need to change the name
 	private static final long serialVersionUID = 1L;
-	private String dbURL =  "jdbc:derby://localhost:1527/C:/Program Files/Derby/db-derby-10.12.1.1-bin/bin/MyDbTest";
+
     private String tableName = "QUESTIONS";
     private int page=0;
     @Override
-    public void doPost (HttpServletRequest request, HttpServletResponse response)
+   
+   public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {    	
     	try
     	{
     		WebAppDB db = new WebAppDB();
     		ResultSet questions;
-    		db.createConnection(dbURL); 
+    		db.createConnection(); 
     		List<Question> questionsToPresent = new ArrayList<Question>();
     	
             StringBuilder sb = new StringBuilder();
@@ -65,7 +66,8 @@ public class NewestQuestionsServlet extends HttpServlet
     		if(numOfRowsSet.next())
     			numOfRows = numOfRowsSet.getString("A");
     		int numOfRowsInt = Integer.parseInt(numOfRows);//this is for the descending order later
-            questions = db.executeQuery("SELECT * FROM "+ tableName+ " where answered=false order by time asc "+" offset " + page*20 +" rows"+" FETCH FIRST 20 ROWS ONLY ");
+            
+			questions = db.executeQuery("SELECT * FROM "+ tableName+ " where answered=false order by time asc "+" offset " + page*20 +" rows"+" FETCH FIRST 20 ROWS ONLY ");
             
             
             while (questions.next())
