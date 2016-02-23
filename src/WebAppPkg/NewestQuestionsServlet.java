@@ -24,13 +24,6 @@ import WebAppPkg.Question;
 public class NewestQuestionsServlet extends HttpServlet
 {//this will submit an answer -- need to change the name
 	private static final long serialVersionUID = 1L;
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 7f0458c5508fba08238d6819c48e37a67b2b7af6
-=======
->>>>>>> 7f0458c5508fba08238d6819c48e37a67b2b7af6
     private String tableName = "QUESTIONS";
     private int page=0;
     @SuppressWarnings("deprecation")
