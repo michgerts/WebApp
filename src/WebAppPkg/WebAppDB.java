@@ -19,7 +19,7 @@ public class WebAppDB
     {
     	try
     	{
-    		String dbURL= "jdbc:derby://localhost:1527/c:/Users/koganmic/Documents/DB/MyDB";
+    		String dbURL= "jdbc:derby://localhost:1527/C:/Program Files/Derby/db-derby-10.12.1.1-bin/bin/MyDbTest";
     		Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
     		//Get a connection
     		conn = DriverManager.getConnection(dbURL); 
