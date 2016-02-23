@@ -16,12 +16,15 @@ import com.google.gson.JsonParser;
 
 // Data types
 import WebAppPkg.User;
- 
 public class LoginServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
     private String tableName = "USERS";
     @SuppressWarnings("deprecation")
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 7f0458c5508fba08238d6819c48e37a67b2b7af6
 	@Override
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
