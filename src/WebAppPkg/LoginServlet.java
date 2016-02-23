@@ -22,6 +22,10 @@ public class LoginServlet extends HttpServlet
     private String tableName = "USERS";
     @SuppressWarnings("deprecation")
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 7f0458c5508fba08238d6819c48e37a67b2b7af6
 =======
     
 >>>>>>> 7f0458c5508fba08238d6819c48e37a67b2b7af6
