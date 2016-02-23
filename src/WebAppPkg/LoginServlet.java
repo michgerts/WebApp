@@ -16,15 +16,17 @@ import com.google.gson.JsonParser;
 
 // Data types
 import WebAppPkg.User;
- 
 public class LoginServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
     private String tableName = "USERS";
-    @Override
+    @SuppressWarnings("deprecation")
+    
+	@Override
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {
+    	request.getSession().putValue("numOfPage", 0);
     	WebAppDB db = new WebAppDB();
 		ResultSet users;
 		db.createConnection(); 
