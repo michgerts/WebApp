@@ -90,6 +90,11 @@ html
 {
 	text-align: right;
 }
+#happy
+{
+	font-family: Tangerine;
+	font-size:6vw;
+}
 #MyQuestion, #MyTopic
 {
 	font-family: Rancho;
@@ -105,4 +110,12 @@ html
 #topicErrors
 {
 	text-align: left;
+}
+.list-group-item {
+    position: relative;
+    display: block;
+    margin-bottom: -1px;
+    border: 1px solid #ddd;
+    background-color: transparent;
+    width: 68%;
 }
