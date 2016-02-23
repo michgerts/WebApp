@@ -26,8 +26,10 @@ public class NewestQuestionsServlet extends HttpServlet
 	private static final long serialVersionUID = 1L;
     private String tableName = "QUESTIONS";
     private int page=0;
-    @Override
-    public void doPost (HttpServletRequest request, HttpServletResponse response)
+    @SuppressWarnings("deprecation")
+	@Override
+   
+   public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {    	
     	try
@@ -40,8 +42,7 @@ public class NewestQuestionsServlet extends HttpServlet
             StringBuilder sb = new StringBuilder();
             BufferedReader br = request.getReader();
             StringBuffer requestURL = request.getRequestURL();
-            String str =  requestURL.toString();
-            str.charAt(str.length()-1);
+            String str;
         	page = (int) request.getSession().getValue("numOfPage");
             while ((str = br.readLine()) != null)
             {
@@ -64,7 +65,8 @@ public class NewestQuestionsServlet extends HttpServlet
     		if(numOfRowsSet.next())
     			numOfRows = numOfRowsSet.getString("A");
     		int numOfRowsInt = Integer.parseInt(numOfRows);//this is for the descending order later
-            questions = db.executeQuery("SELECT * FROM "+ tableName+ " where answered=false order by time asc "+" offset " + page*20 +" rows"+" FETCH FIRST 20 ROWS ONLY ");
+            
+			questions = db.executeQuery("SELECT * FROM "+ tableName+ " where answered=false order by time asc "+" offset " + page*20 +" rows"+" FETCH FIRST 20 ROWS ONLY ");
             
             
             while (questions.next())

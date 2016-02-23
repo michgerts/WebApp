@@ -7,7 +7,8 @@ app.controller('NewestQuestions',function ($scope, $http, $window)
 		{
 			method: 'post',
 			url: 'newestquestionsservlet',
-			headers: {'Content-Type': 'application/json'}
+			headers: {'Content-Type': 'application/json'},
+			data:  JSON.stringify('0')
 		}).success( function (response)
 		{				
 			for(var i=0; i<response.length; i++)
