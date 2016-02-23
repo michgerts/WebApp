@@ -6,7 +6,6 @@
 #shy
 {
 	font-family: Rancho;
-	margin-top: 150px;
 	text-align: left;
 	
 }
@@ -14,7 +13,7 @@
 {
 	margin-top: 90px;
 	font-family: Tangerine;
-	font-size: 90px;	
+	font-size: 2.1vw;	
 }
 #sign-out 
 {
@@ -24,7 +23,6 @@
 }
 #Hello
 {
-	margin-top: 40px;
 	font-family: Rancho;
 	font-size: 60px;
 	
@@ -33,19 +31,20 @@
 {
 	margin-top: 90px;
 	font-family: Tangerine;
-	font-size: 55px;
 	margin-right: 30px;
+	font-size: 2.8vw;
 }
 #fun
 {
-	font-family: Tangerine;
-	font-size: 55px;
+	font-family: Rancho;
+	font-size: 2.1vw;
 }
 #words, #submit-question, #submit-topic
 {
 	margin-top: 10px;
 	margin-bottom: 15px;
 	margin-left: 35px;
+	font-size: 1.7vw;
 }
 #user-login 
 {
@@ -66,8 +65,8 @@ html
 	background-image: url('../images/corpseBride.jpg');
  	background-repeat: no-repeat;
 	background-size: 100%;
-	font-family: Courier New;
-	height: 625px;
+	font-family: Rancho;
+	height: 1100px;
 }
 .control-label, .btn-default, .btn
 {
@@ -75,10 +74,11 @@ html
 }
 #homePage
 {
-	background-image: url('../images/happywife.png');
+	background-image: url('../images/confused-man1.jpg');
  	background-repeat: no-repeat;
-	background-size: 100%;
+	background-size:190%;
 	font-family: Courier New;
+	height: 2700px;
 	
 }
 #SignUpContainer, #SignInContainer 
