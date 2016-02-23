@@ -16,7 +16,6 @@ import com.google.gson.JsonParser;
 
 // Data types
 import WebAppPkg.User;
- 
 public class LoginServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
