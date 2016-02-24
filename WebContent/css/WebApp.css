@@ -13,7 +13,7 @@
 {
 	margin-top: 90px;
 	font-family: Tangerine;
-	font-size: 2.1vw;	
+	font-size: 4vw;	
 }
 #sign-out 
 {
@@ -31,21 +31,22 @@
 	margin-top: 90px;
 	font-family: Tangerine;
 	margin-right: 30px;
-	font-size: 2.8vw;
+	font-size: 4vw;
+	color:#c3a343;
+	font-weight: 500;
+}
 }
 #fun
 {
-	font-family: Rancho;
-	font-size: 2.1vw;
+	font-family: Tangerine;
+	font-size: 3.4vw;
 }
 #words, #submit-question, #submit-topic
 {
 	margin-top: 10px;
 	margin-bottom: 15px;
 	margin-left: 35px;
-	font-size: 1.7vw;
-	
-	
+	font-size: 1.7vw;	
 }
 #user-login 
 {
@@ -65,7 +66,7 @@ html
 {
 	background-image: url('../images/corpseBride.jpg');
  	background-repeat: no-repeat;
-	background-size: 100%;
+	background-size: 100% 100%;
 	font-family: Rancho;
 	height: 1100px;
 }
@@ -77,7 +78,7 @@ html
 {
 	background-image: url('../images/confused-man1.jpg');
  	background-repeat: no-repeat;
-	background-size:190%;
+	background-size:150% 100%;
 	font-family: Courier New;
 	height: 2700px;
 	
@@ -118,4 +119,16 @@ html
     border: 1px solid #ddd;
     background-color: transparent;
     width: 68%;
+}
+li
+{
+	font-size:1.2vw;
+}
+.control-label
+{
+	font-size: 1.8vw;
+}
+.div
+{
+	position: fixed;
 }
