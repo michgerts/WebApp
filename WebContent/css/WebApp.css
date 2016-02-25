@@ -2,6 +2,7 @@
 .error-list
 {
     color: red;
+	font-family: Courier New;
 }
 #shy
 {
@@ -97,11 +98,11 @@ html
 	font-family: Tangerine;
 	font-size:6vw;
 }
-#MyQuestion, #MyTopic
+#MyQuestion, #MyTopic, #textArea
 {
 	font-family: Rancho;
-	font-size: 33px;
-	text-align: right;
+	font-size: 1.8vw;
+	text-align: left;
 }
 #pleaseProvide
 {
@@ -123,7 +124,7 @@ html
 }
 li
 {
-	font-size:1.2vw;
+	font-size:1.3vw;
 }
 .control-label
 {
