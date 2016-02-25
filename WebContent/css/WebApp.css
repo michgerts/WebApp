@@ -73,6 +73,7 @@ html
 .control-label, .btn-default, .btn
 {
 	font-size: 16.7px;
+	width: 100
 }
 #homePage
 {
@@ -131,4 +132,8 @@ li
 .div
 {
 	position: fixed;
+}
+.pager li
+{
+	float: left;	
 }
