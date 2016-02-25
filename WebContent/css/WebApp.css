@@ -138,3 +138,8 @@ li
 {
 	float: left;	
 }
+
+ul#list-group li
+{
+    display: inline;
+}

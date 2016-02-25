@@ -16,11 +16,15 @@ app.controller('NewestQuestions',function ($scope, $http, $window)
 			      var text = response[i].Text;
 			      var time = response[i].Time;
 			      var likes = response[i].Likes;
+			      var id = response[i].ID;
 			      
-			      
+			      var a = document.createElement("a");
 			      var ul = document.getElementById("newQuestionsList");
 			      var li = document.createElement("li");
-			      li.appendChild(document.createTextNode(text + ' ' + time ));
+			      a.textContent = text + ' ' + time;
+			      a.setAttribute('href', "http://www.msn.com");
+			      li.appendChild(a);
+			      ul.appendChild(li);
 			      li.setAttribute("class", "list-group-item");
 			      var span = document.createElement("span");
 			      span.appendChild(document.createTextNode(likes));
