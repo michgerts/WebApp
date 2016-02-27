@@ -14,9 +14,18 @@
 				
 				 <div id="newestQuestions">
 					<ul id="newQuestionsList" class="list-group">
-					  <li class="list-group-item"><span class="badge"></span> Question's text</li>
-					  <li class="list-group-item"><span class="badge"></span> Time of submission</li> 
-					  <li class="list-group-item"><span class="badge"></span> Rating</li> 
+					  <li class="list-group-item">
+					  <button type="button" class="btn btn-success glyphicon glyphicon-thumbs-down" data-loading-text=" ... "
+					  ng-click="voteDown($event)">
+    					</button>
+					  <button type="button" 
+				        
+				        class="btn btn-success glyphicon glyphicon-thumbs-up" 
+				        data-loading-text=" ... " ng-click="voteUp($event)">
+				    </button>
+					    <span class="badge">0</span> Question's text</li>
+					  <li class="list-group-item"><span class="badge">1</span> Time of submission</li> 
+					  <li class="list-group-item"><span class="badge">2</span> Rating</li> 
 					</ul>
 				</div>
 				<div id = "pagingDiv">
@@ -28,18 +37,8 @@
 					
 				</div>
 				
-					<!--  <ul id = "pagingList" class="pagination" ng-submit='pageClick'>
-					  <li class="active"><a href="#">1</a></li>
-					  <li><a href="#">2</a></li>
-					  <li><a href="#">3</a></li>
-					  <li><a href="#">4</a></li>
-					  <li><a href="#">5</a></li>
-					</ul>-->
-				<input type="text" class="form-control" name="answer"
-					ng-model='answer'>
-				<form class="form-horizontal" ng-submit='answer()'>
-					<button type="submit" class="btn btn-primary">answer</button>
-				</form>
+
+				
 			</div>
 		</div>
 	</div>

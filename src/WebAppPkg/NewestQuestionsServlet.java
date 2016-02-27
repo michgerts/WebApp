@@ -2,8 +2,11 @@ package WebAppPkg;
  
 import java.io.BufferedReader;
 import java.io.IOException;
+
 // SQL
 import WebAppPkg.WebAppDB;
+import jdk.nashorn.internal.parser.JSONParser;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 // JSON
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -29,7 +33,7 @@ public class NewestQuestionsServlet extends HttpServlet
     @SuppressWarnings("deprecation")
 	@Override
    
-   public void doPost (HttpServletRequest request, HttpServletResponse response)
+   public void doGet (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {    	
     	try
@@ -43,30 +47,13 @@ public class NewestQuestionsServlet extends HttpServlet
             BufferedReader br = request.getReader();
             StringBuffer requestURL = request.getRequestURL();
             String str;
-        	page = (int) request.getSession().getValue("numOfPage");
             while ((str = br.readLine()) != null)
             {
                 sb.append(str);
             }
 
-    		String nextOrPrev = new Gson().fromJson(sb.toString(),String.class);
-    		
-    		if(nextOrPrev != null && !nextOrPrev.isEmpty())
-    		{
-    			if(nextOrPrev.equals("0") && page>0)
-    				request.getSession().putValue("numOfPage", --page);
-        		else
-        			if(nextOrPrev.equals("1"))
-        				request.getSession().putValue("numOfPage", ++page);
-    		}
-    		
-    		ResultSet numOfRowsSet = db.executeQuery("select count(*) as A from QUESTIONS");
-    		String numOfRows = "";
-    		if(numOfRowsSet.next())
-    			numOfRows = numOfRowsSet.getString("A");
-    		int numOfRowsInt = Integer.parseInt(numOfRows);//this is for the descending order later
-            
-			questions = db.executeQuery("SELECT * FROM "+ tableName+ " where answered=false order by time asc "+" offset " + page*20 +" rows"+" FETCH FIRST 20 ROWS ONLY ");
+    		   
+			questions = db.executeQuery("SELECT * FROM "+ tableName+ " where answered=false order by time desc");
             
             
             while (questions.next())
@@ -88,4 +75,71 @@ public class NewestQuestionsServlet extends HttpServlet
 			e.printStackTrace();
 		} 
     }
+    
+	@Override
+	   
+	   public void doPost (HttpServletRequest request, HttpServletResponse response)
+	 		   throws IOException, ServletException
+	    {    	
+	    	try
+	    	{
+	    		WebAppDB db = new WebAppDB();
+	    		ResultSet questions;
+	    		db.createConnection(); 
+	    		List<Question> questionsToPresent = new ArrayList<Question>();
+	    	
+	    		StringBuilder sb = new StringBuilder();
+	            BufferedReader br = request.getReader();
+	            String str;
+	            String upVotestr = null;
+	            String idstr = null;
+	            while ((str = br.readLine()) != null)
+	            	sb.append(str);
+	            
+	            
+	            String data = new Gson().fromJson(sb.toString(),String.class);
+	            upVotestr = data.substring(1, 2);
+	            idstr = data.substring(3, data.length()-1);
+	            
+	            Integer id = Integer.parseInt(idstr);
+	            Integer upVote = Integer.parseInt(upVotestr);
+	            
+	            ResultSet numOfLikesSet = db.executeQuery("select Likes as A from QUESTIONS where ID = "+ id.intValue());
+	    		String numOfLikesStr = "";
+	    		if(numOfLikesSet.next())
+	    			numOfLikesStr = numOfLikesSet.getString("A");
+	    		int numOfLikesInt = Integer.parseInt(numOfLikesStr);//numOfLikesInt contains the number of likes at the current moment
+	    		
+	    		if(upVote == 1)
+	    			numOfLikesInt++;
+	    		else if(upVote == 0)
+	    			numOfLikesInt--;
+	    		
+    			if(upVote != null && id != null)
+    			{
+    				db.executeUpdate("update QUESTIONS set likes ="+ numOfLikesInt +"where id = " + id.intValue());
+    			}
+            
+    			
+    			questions = db.executeQuery("SELECT * FROM "+ tableName+ " where answered=false order by time desc");
+                
+                while (questions.next())
+        		{
+                		Question question = new Question( Integer.parseInt(questions.getString("ID")), questions.getString("Text"),
+                        		questions.getString("Time"), questions.getString("Asker"), Integer.parseInt(questions.getString("Likes")) , 
+                        		Boolean.parseBoolean(questions.getString("Answered")) );
+                        questionsToPresent.add(question);
+        		}
+	                
+	            String categoriesJson = new Gson().toJson(questionsToPresent);
+	            response.setContentType("application/json");
+		    	response.setCharacterEncoding("UTF-8");
+	            response.getWriter().write(categoriesJson);
+				response.getWriter().close();
+				}
+	    	catch (IOException | SQLException e)
+	    	{
+				e.printStackTrace();
+			} 
+	    }
 }
