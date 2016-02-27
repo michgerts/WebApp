@@ -73,6 +73,11 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	
 	$scope.next = function()
 	{
+		var options = 
+	    {
+			    weekday: "long", year: "numeric", month: "short",
+			    day: "numeric", hour: "2-digit", minute: "2-digit"
+	    };
 		var retrievedPage = localStorage.getItem('pageNum');
 		var retrievedResponse = localStorage.getItem('response');
 		
@@ -135,6 +140,11 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	
 	$scope.prev = function()
 	{
+		var options = 
+	    {
+			    weekday: "long", year: "numeric", month: "short",
+			    day: "numeric", hour: "2-digit", minute: "2-digit"
+	    };
 		var retrievedPage = localStorage.getItem('pageNum');
 		var retrievedResponse = localStorage.getItem('response');
 		
@@ -196,7 +206,11 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	}
 	
 	$scope.voteUp = function ($event) {
-	    
+		var options = 
+	    {
+			    weekday: "long", year: "numeric", month: "short",
+			    day: "numeric", hour: "2-digit", minute: "2-digit"
+	    };
 	    var retrievedPage = localStorage.getItem('pageNum');
 		
 		var pageNumberStr = JSON.parse(retrievedPage);
@@ -220,21 +234,17 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	    				for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
 	    				{
 	    				      var text = response[i].Text;
-				var d= new Date(response[i].Time);
-				  var time = d.toLocaleTimeString("en-us", options);
-			      
-			      var likes = response[i].Likes;
-				 var id = response[i].ID;
-			      
-			      var a = document.createElement("a");
-			      
-			      
-			      
-			      
-			      var li = document.createElement("li");
-			      a.textContent = text + ' ' + time;
-			      a.setAttribute('href', "./#/home/questions/" + id);
-			      li.appendChild(a);
+							var d= new Date(response[i].Time);
+							  var time = d.toLocaleTimeString("en-us", options);
+						      
+						      var likes = response[i].Likes;
+							 var id = response[i].ID;					      
+						      var a = document.createElement("a");
+
+						      var li = document.createElement("li");
+						      a.textContent = text + ' ' + time;
+						      a.setAttribute('href', "./#/home/questions/" + id);
+						      li.appendChild(a);
 	    				      
 	    				      li.setAttribute("class", "list-group-item");
 	    				      li.setAttribute("id", response[i].ID);
@@ -268,6 +278,11 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	 }
 
 	$scope.voteDown = function ($event) {
+		var options = 
+	    {
+			    weekday: "long", year: "numeric", month: "short",
+			    day: "numeric", hour: "2-digit", minute: "2-digit"
+	    };
 		var retrievedPage = localStorage.getItem('pageNum');
 		
 		var pageNumberStr = JSON.parse(retrievedPage);
@@ -291,22 +306,18 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	    				ul.innerHTML = "";	
 	    				for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
 	    				{
-	    				      var text = response[i].Text;
-				var d= new Date(response[i].Time);
-				  var time = d.toLocaleTimeString("en-us", options);
-			      
-			      var likes = response[i].Likes;
-				 var id = response[i].ID;
-			      
-			      var a = document.createElement("a");
-			      
-			      
-			      
-			      
-			      var li = document.createElement("li");
-			      a.textContent = text + ' ' + time;
-			      a.setAttribute('href', "./#/home/questions/" + id);
-			      li.appendChild(a);
+	    					var text = response[i].Text;
+							var d= new Date(response[i].Time);
+							  var time = d.toLocaleTimeString("en-us", options);
+						      
+						      var likes = response[i].Likes;
+							 var id = response[i].ID;					      
+						      var a = document.createElement("a");
+
+						      var li = document.createElement("li");
+						      a.textContent = text + ' ' + time;
+						      a.setAttribute('href', "./#/home/questions/" + id);
+						      li.appendChild(a);
 	    				      li.setAttribute("class", "list-group-item");
 	    				      li.setAttribute("id", response[i].ID);
 
