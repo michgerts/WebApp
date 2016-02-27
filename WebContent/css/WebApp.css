@@ -2,23 +2,24 @@
 .error-list
 {
     color: red;
+	font-family: Courier New;
 }
 #shy
 {
 	font-family: Rancho;
 	text-align: left;
+	color: red;
 	
 }
 #intro
 {
 	margin-top: 90px;
 	font-family: Tangerine;
-	font-size: 2.1vw;	
+	font-size: 4vw;	
 }
-#sign-out 
+#signOut 
 {
-	margin-top: 20px;
-    float: left;
+	margin-left: 25px;
     
 }
 #Hello
@@ -31,21 +32,22 @@
 	margin-top: 90px;
 	font-family: Tangerine;
 	margin-right: 30px;
-	font-size: 2.8vw;
+	font-size: 4vw;
+	color:#c3a343;
+	font-weight: 400;
+}
 }
 #fun
 {
-	font-family: Rancho;
-	font-size: 2.1vw;
+	font-family: Tangerine;
+	font-size: 3.4vw;
 }
 #words, #submit-question, #submit-topic
 {
 	margin-top: 10px;
 	margin-bottom: 15px;
 	margin-left: 35px;
-	font-size: 1.7vw;
-	
-	
+	font-size: 1.7vw;	
 }
 #user-login 
 {
@@ -65,19 +67,20 @@ html
 {
 	background-image: url('../images/corpseBride.jpg');
  	background-repeat: no-repeat;
-	background-size: 100%;
+	background-size: 100% 100%;
 	font-family: Rancho;
 	height: 1100px;
 }
 .control-label, .btn-default, .btn
 {
 	font-size: 16.7px;
+	width: 100
 }
 #homePage
 {
 	background-image: url('../images/confused-man1.jpg');
  	background-repeat: no-repeat;
-	background-size:190%;
+	background-size:150% 100%;
 	font-family: Courier New;
 	height: 2700px;
 	
@@ -86,20 +89,17 @@ html
 {
     height: 625px;
 }
-#SignOut
-{
-	text-align: right;
-}
 #happy
 {
 	font-family: Tangerine;
 	font-size:6vw;
+	color:#c3a343;
 }
-#MyQuestion, #MyTopic
+#MyQuestion, #MyTopic, #textArea
 {
 	font-family: Rancho;
-	font-size: 33px;
-	text-align: right;
+	font-size: 1.8vw;
+	text-align: left;
 }
 #pleaseProvide
 {
@@ -118,4 +118,34 @@ html
     border: 1px solid #ddd;
     background-color: transparent;
     width: 68%;
+}
+li
+{
+	font-size:1.3vw;
+}
+.control-label
+{
+	font-size: 1.8vw;
+}
+.div
+{
+	position: fixed;
+}
+.pager li
+{
+	float: left;	
+}
+
+ul#list-group li
+{
+    display: inline;
+}
+.invisible
+{
+    display: none;
+    visibility: hidden;
+}
+.row
+{
+	display: inline;
 }

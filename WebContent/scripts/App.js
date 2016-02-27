@@ -26,6 +26,14 @@ app.controller('RouteConroller',function ($scope, $http, $window)
 			{
 			$window.location = './#/';
 			}
+			else
+				{
+					var homeView= next.split("/")[6];
+					if (homeView == "questions")
+						{
+							$scope.view=homeView;
+						}				
+				}
 		}
 	});
 });

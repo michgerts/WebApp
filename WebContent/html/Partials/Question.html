@@ -17,7 +17,7 @@
 				   		<textarea class="form-control" name="user-topic" placeholder="Topic/s" ng-model='topic.Text' id="textArea" ng-init='topic.Text=""'></textarea>
 			  	 	</div>
 			  	 	<div class='col-md-9' id="pleaseProvide">
-			  	 		<h3><strong>please provide each topic under 50 chars and separate them by ","</strong></h3>	
+			  	 		<h3>please provide each topic under 50 chars and separate them by "," and keep your question under 300 chars, thanks!</h3>	
 			  	 	</div>
 			  	 </div>
 				 <button type="submit" class="btn btn-primary" id="submitBtn">Submit my question</button>
@@ -32,6 +32,8 @@
 							</ul>
 						</div>
 					</div>
+				</div>
+				<div class="error-list" id="questionLength">
 				</div>
 			</div>
 			</div>

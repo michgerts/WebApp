@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="windows-1255">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class='container' id="SignInContainer">
+	<div ng-controller='HomeController'>
+		<header>
+			<div class="container-fluid" id="home">
+				<div class='row'>
+					<div class='col-lg-8'>
+						<h2 id="Hello">Hello {{currentUser.NickName}}, please remember:</h2>
+						<h1 id="happy">Happy Wife = Happy Life!</h1>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div ng-controller='AnswerController'>
+			<h2>{{question.Text}}</h2>
+			<h3>{{question.Asker}} asked this question at {{question.Time}} and received {{question.Likes}} Likes</h3>
+			<h2>These are the answers they got so far:</h2>
+		</div>
+		<div class='row'>				
+					<p>
+					<img  title="Sign Out" alt="signOut" src= './images/Exit-48.png' width="70" height="62" ng-click='signout()'/>
+					<a href="./#/home">
+					<img title="Home" alt="home" src= './images/Home-48.png' width="70" height="62">
+					</a>
+					</p>
+		</div>
+	</div>
+</div>
