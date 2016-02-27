@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet
 	private static final long serialVersionUID = 1L;
     private String tableName = "USERS";
     @SuppressWarnings("deprecation")
-    
+
 	@Override
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
