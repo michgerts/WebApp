@@ -39,7 +39,7 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 				j++;				
 			}
 		}
-		if ($scope.question.Text.length > 3)
+		if ($scope.question.Text.length > 300)
 			m++;
 		if (j == 0 && m==0)
 		{
