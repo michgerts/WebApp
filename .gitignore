@@ -47,5 +47,6 @@ $RECYCLE.BIN/
 *.apdisk
 
 #class files
+*WebAppDB.java
 *.class
 *.bck

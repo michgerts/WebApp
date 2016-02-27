@@ -14,15 +14,15 @@
 				
 				 <div id="newestQuestions">
 					<ul id="newQuestionsList" class="list-group">
-					  <li class="list-group-item"><span class="badge"></span> Question's text</li>
-					  <li class="list-group-item"><span class="badge"></span> Time of submission</li> 
-					  <li class="list-group-item"><span class="badge"></span> Rating</li> 
+					  <li class="list-group-item"><span class="badge" id="group-item"></span>Question's text</li>
+					  <li class="list-group-item"><span class="badge" id="group-item"></span>Time of submission</li> 
+					  <li class="list-group-item"><span class="badge" id="group-item"></span>Rating</li> 
 					</ul>
 				</div>
 				<div id = "pagingDiv">
 				
 				<ul class="pager" >
-				  <li class="previous" ><a href="" ng-click="prev()" >Previous</a></li>
+				  <li class="previous" ><a href="" ng-click="prev()" >Prev</a></li>
 				  <li class="next" ><a href="" ng-click="next()" >Next</a></li>
 				</ul>
 					
@@ -35,11 +35,6 @@
 					  <li><a href="#">4</a></li>
 					  <li><a href="#">5</a></li>
 					</ul>-->
-				<input type="text" class="form-control" name="answer"
-					ng-model='answer'>
-				<form class="form-horizontal" ng-submit='answer()'>
-					<button type="submit" class="btn btn-primary">answer</button>
-				</form>
 			</div>
 		</div>
 	</div>
