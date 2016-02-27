@@ -51,9 +51,21 @@ public class Question
 	{
 		Likes=likes;
 	}
-	public void setAnswered ()
+	public void setAnswered (boolean ans)
 	{
-		Answered=true;
+		Answered=ans;
+	}
+	public void setText (String text)
+	{
+		Text= text;
+	}
+	public void setTime (String time)
+	{
+		Time= time;
+	}
+	public void setAsker (String asker)
+	{
+		Asker=asker;
 	}
 }
 

@@ -10,11 +10,17 @@ app.controller('NewestQuestions',function ($scope, $http, $window)
 			headers: {'Content-Type': 'application/json'},
 			data:  JSON.stringify('0')
 		}).success( function (response)
-		{				
+		{	
+		    var options = 
+		    {
+				    weekday: "long", year: "numeric", month: "short",
+				    day: "numeric", hour: "2-digit", minute: "2-digit"
+		    };
 			for(var i=0; i<response.length; i++)
 			{
 			      var text = response[i].Text;
-			      var time = response[i].Time;
+			      var d= new Date(response[i].Time);
+				  var time = d.toLocaleTimeString("en-us", options);
 			      var likes = response[i].Likes;
 			      var id = response[i].ID;
 			      
@@ -22,7 +28,7 @@ app.controller('NewestQuestions',function ($scope, $http, $window)
 			      var ul = document.getElementById("newQuestionsList");
 			      var li = document.createElement("li");
 			      a.textContent = text + ' ' + time;
-			      a.setAttribute('href', "http://www.msn.com");
+			      a.setAttribute('href', "./#/home/questions/" + id);
 			      li.appendChild(a);
 			      ul.appendChild(li);
 			      li.setAttribute("class", "list-group-item");

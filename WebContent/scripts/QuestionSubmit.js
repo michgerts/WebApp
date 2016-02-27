@@ -29,6 +29,7 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 		}
 		topicsArray = res;
 		var j=0;
+		var m=0;
 		$scope.errorArray=[];
 		for (var k=0; k<topicsArray.length; k++)
 		{
@@ -38,7 +39,9 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 				j++;				
 			}
 		}
-		if (j == 0)
+		if ($scope.question.Text.length > 3)
+			m++;
+		if (j == 0 && m==0)
 		{
 			$http(
 			{
@@ -64,12 +67,19 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 			});
 		}
 		else
-		{	
-			$('ul.error-list li').remove();
-				for (var l=0; l<$scope.errorArray.length; l++)
+		{	if (j != 0)
+			{
+				$('ul.error-list li').remove();
+					for (var l=0; l<$scope.errorArray.length; l++)
+					{
+	
+						$('ul.error-list').append('<li>' + $scope.errorArray[l] + '</li>');				
+					}
+			}
+			else if (m !=0)
 				{
-
-					$('ul.error-list').append('<li>' + $scope.errorArray[l] + '</li>');				
+				$('#questionLength h4').remove();
+				$('#questionLength').append('<h4>Your question is longer then 300 chars :(</h4>');
 				}
 
 		}	
