@@ -62,7 +62,7 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 			table = $("#newQuestionsList > tbody:last-child");
 			listItem(response[i], table);
 		}
-		$compile(ul)($scope);
+		$compile(table)($scope);
 		var pageNum = { "pageNumber": pageNummberInt };
 		// Put the object into storage
 		localStorage.setItem('pageNum', JSON.stringify(pageNum));

@@ -78,11 +78,25 @@ function formatDate(oldDate)
 {
 	oldDate= new Date(oldDate);
 	var day=oldDate.getDate();
+	day = leftPad(day, 2);
 	var month=oldDate.getMonth() + 1;
+	month = leftPad(month, 2);
 	var year=oldDate.getFullYear();
+	year = leftPad(year, 4);
 	var hour=oldDate.getHours();
+	hour = leftPad(hour, 2);
 	var minute=oldDate.getMinutes();
+	minute = leftPad(minute, 2);
 	var second=oldDate.getSeconds();
+	second = leftPad(second, 2);
 	var newDate= day +'/' + month + '/' + year + " " + hour + ":" + minute + ":" + second;
 	return newDate;
+}
+
+function leftPad(number, targetLength) {
+    var output = number + '';
+    while (output.length < targetLength) {
+        output = '0' + output;
+    }
+    return output;
 }
