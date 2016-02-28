@@ -62,6 +62,7 @@ html
   font-family: Courier New;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  background-color: #E6E6FA;
 }
 #indexPage, #signUpPage 
 {
@@ -78,11 +79,13 @@ html
 }
 #homePage
 {
-	background-image: url('../images/confused-man1.jpg');
- 	background-repeat: no-repeat;
-	background-size:150% 100%;
+	/*background-image: url('../images/wood-texture-background-1366920330luN.jpg');*/
+ 	/*background-repeat: no-repeat;*/
+ 	background-color: #E6E6FA;
+	/*background-size:240% 100%;*/
+	/*opacity: 0.4;*/
 	font-family: Courier New;
-	height: 2700px;
+	/*height: 3500px;*/
 	
 }
 #SignUpContainer, #SignInContainer 
@@ -155,4 +158,10 @@ td
 	word-break: break-word;
 	width: 680px;
 	max-width: 680px;
+}
+#familyGuy
+{
+	display: block;
+	margin-left: auto;
+    margin-right: auto;
 }
