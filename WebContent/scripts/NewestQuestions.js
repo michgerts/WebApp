@@ -1,6 +1,7 @@
 // Front end js
 app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 {
+	var table = $("#newQuestionsList > tbody");
 	$scope.init = function ()
 	{
 		$http(
@@ -14,31 +15,33 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 			// Put the object into storage
 			localStorage.setItem('pageNum', JSON.stringify(pageNum));
 			localStorage.setItem('response', JSON.stringify(response));
-			var ul = document.getElementById("newQuestionsList");
 			for(var i=0; i<20; i++)
 			{
-				listItem(response[i], ul);
+				table = $("#newQuestionsList > tbody:last-child");
+				listItem(response[i], table);
 			}
-			$compile(ul)($scope);
-			
+			$compile(table)($scope);		
 		});
 	}
 	
 	$scope.next = function()
 	{
+		table = $("#newQuestionsList > tbody");
 		var retrievedPage = localStorage.getItem('pageNum');
 		var retrievedResponse = localStorage.getItem('response');
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
 		pageNummberInt++;
 		var response = JSON.parse(retrievedResponse);
-		var ul = document.getElementById("newQuestionsList");
-		ul.innerHTML = "";	
+		table.empty();
+		table = $("#newQuestionsList > tbody:last-child");
+		tableHeaders(table);
 		for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
 		{
-			listItem(response[i], ul);
+			table = $("#newQuestionsList > tbody:last-child");
+			listItem(response[i], table);
 		}
-		$compile(ul)($scope);
+		$compile(table)($scope);
 		var pageNum = { "pageNumber": pageNummberInt };
 		// Put the object into storage
 		localStorage.setItem('pageNum', JSON.stringify(pageNum));
@@ -51,11 +54,13 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 		var pageNummberInt = pageNumberStr.pageNumber;
 		pageNummberInt--;
 		var response = JSON.parse(retrievedResponse);
-		var ul = document.getElementById("newQuestionsList");
-		ul.innerHTML = "";	
+		table.empty();
+		table = $("#newQuestionsList > tbody:last-child");
+		tableHeaders(table);
 		for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
 		{
-			listItem(response[i], ul);
+			table = $("#newQuestionsList > tbody:last-child");
+			listItem(response[i], table);
 		}
 		$compile(ul)($scope);
 		var pageNum = { "pageNumber": pageNummberInt };
@@ -67,8 +72,11 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	    var retrievedPage = localStorage.getItem('pageNum');		
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;	
-		var questionId = angular.element($event.currentTarget).parent('li').attr("id");//$(this );
-	    var data =  JSON.stringify("1,"+ questionId);  
+		var questionId = angular.element($event.currentTarget).parent().parent('tr').attr("id");//$(this );
+	    var data =  JSON.stringify("1,"+ questionId);
+	    var questionAsker =angular.element($event.currentTarget).parent().parent('tr').attr("class");
+	    if (getCookie("id") != questionAsker)
+	    {
 	    	$http(
 	    			{
 	    				method: 'POST',
@@ -78,23 +86,27 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	    			}).success( function (response)
 	    			{	
 	    				localStorage.setItem('response', JSON.stringify(response));
-	    				
-	    				var ul = document.getElementById("newQuestionsList");
-	    				ul.innerHTML = "";	
+	    				table.empty();
+	    				table = $("#newQuestionsList > tbody:last-child");
+	    				tableHeaders(table);
 	    				for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
 	    				{
-	    					listItem(response[i], ul);
+	    					table = $("#newQuestionsList > tbody:last-child");
+	    					listItem(response[i], table);
 	    				}
-	    				$compile(ul)($scope);
-	    			});        
+	    				$compile(table)($scope);
+	    			});
+	    }
 	 }
 	$scope.voteDown = function ($event) {
 		var retrievedPage = localStorage.getItem('pageNum');
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
-		var questionId = angular.element($event.currentTarget).parent('li').attr("id");//$(this ).parent().attr("id");
-	    //var data = { "upVote":0 , "questionID" : questionId};
+		var questionId = angular.element($event.currentTarget).parent().parent('tr').attr("id");
 		var data =  JSON.stringify("0,"+ questionId);
+		var questionAsker =angular.element($event.currentTarget).parent().parent('tr').attr("class");
+		if (getCookie("id") != questionAsker)
+		{
 	    	$http(
 	    			{
 	    				method: 'POST',
@@ -104,51 +116,67 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	    			}).success( function (response)
 	    			{	
 	    				localStorage.setItem('response', JSON.stringify(response));
-	    				var ul = document.getElementById("newQuestionsList");
-	    				ul.innerHTML = "";	
+	    				table.empty();
+	    				table = $("#newQuestionsList > tbody:last-child");
+	    				tableHeaders(table);
 	    				for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
 	    				{
-	    					listItem(response[i], ul);
+	    					table = $("#newQuestionsList > tbody:last-child");
+	    					listItem(response[i], table);
 	    				}
-	    				$compile(ul)($scope);
-	    			});
-	    
-	    
-	 }
+	    				$compile(table)($scope);
+	    			});  
+		}
+	}
 	
 	
 });
 
-function listItem(response, ul)
+function listItem(response, table)
 {
     var text = response.Text;
 	var time = formatDate(response.Time);	      
     var likes = response.Likes;
     var id = response.ID;   
     var a = document.createElement("a");
-    var li = document.createElement("li");
+    var tr = document.createElement("tr");
+    var td = document.createElement("td");
     a.textContent = text;
     a.setAttribute('href', "./#/home/questions/" + id);
-    li.appendChild(a);
-    li.setAttribute("class", "list-group-item");
-    li.setAttribute("id", response.ID);  
+    td.appendChild(a);
+    //td.setAttribute("class", "list-group-item");
+    tr.setAttribute("id", response.ID);
+    tr.setAttribute("class", response.Asker);
+    tr.appendChild(td);
+    td = document.createElement("td");
+    td.appendChild(document.createTextNode(' ' + time ));
+    tr.appendChild(td);
+    td = document.createElement("td");
     var span = document.createElement("span");
     span.appendChild(document.createTextNode(likes));
     span.setAttribute("class", "badge");
-    li.appendChild(span);
-    li.appendChild(document.createTextNode(' ' + time ));
+    td.appendChild(span);
+    tr.appendChild(td);
     var button = document.createElement("button");
     button.setAttribute("type", "buton");
     button.setAttribute("class", "btn btn-success glyphicon glyphicon-thumbs-down");
     button.setAttribute("data-loading-text", " ... ");
     button.setAttribute("ng-click", "voteDown($event)");
-    li.appendChild(button);  
+    td = document.createElement("td");
+    td.appendChild(button);  
+    tr.appendChild(td);
     var button = document.createElement("button");
     button.setAttribute("type", "buton");
     button.setAttribute("class", "btn btn-success glyphicon glyphicon-thumbs-up");
     button.setAttribute("data-loading-text", " ... ");
     button.setAttribute("ng-click", "voteUp($event)");
-    li.appendChild(button);
-    ul.appendChild(li);
+    td.appendChild(button);  
+    tr.appendChild(td);
+    table.append(tr);
+}
+
+function tableHeaders(table)
+{
+	 table.append( "<th>Question's text</th><th>Time of submission</th><th>Rating</th><th></th>");
 }
 

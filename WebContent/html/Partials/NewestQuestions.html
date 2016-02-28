@@ -13,26 +13,12 @@
 				</div>-->
 				
 				 <div id="newestQuestions">
-					<ul id="newQuestionsList" class="list-group">
-
-					  <li class="list-group-item">
-					  <button type="button" class="btn btn-success glyphicon glyphicon-thumbs-down" data-loading-text=" ... "
-					  ng-click="voteDown($event)">
-    					</button>
-					  <button type="button" 
-				        
-				        class="btn btn-success glyphicon glyphicon-thumbs-up" 
-				        data-loading-text=" ... " ng-click="voteUp($event)">
-				    </button>
-					    <span class="badge">0</span> Question's text</li>
-					  <li class="list-group-item"><span class="badge">1</span> Time of submission</li> 
-					  <li class="list-group-item"><span class="badge">2</span> Rating</li> 
-
-					  <li class="list-group-item"><span class="badge" id="group-item"></span>Question's text</li>
-					  <li class="list-group-item"><span class="badge" id="group-item"></span>Time of submission</li> 
-					  <li class="list-group-item"><span class="badge" id="group-item"></span>Rating</li> 
-
-					</ul>
+					<table id="newQuestionsList" class="table">
+					  <th>Question's text</th>
+					  <th>Time of submission</th> 
+					  <th>Rating</th> 
+					  <th></th>
+					</table>
 				</div>
 				<div id = "pagingDiv">
 				

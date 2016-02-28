@@ -149,3 +149,10 @@ ul#list-group li
 {
 	display: inline;
 }
+td
+{
+	word-break: break-all;
+	word-break: break-word;
+	width: 680px;
+	max-width: 680px;
+}

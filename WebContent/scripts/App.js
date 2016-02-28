@@ -78,7 +78,7 @@ function formatDate(oldDate)
 {
 	oldDate= new Date(oldDate);
 	var day=oldDate.getDate();
-	var month=oldDate.getMonth();
+	var month=oldDate.getMonth() + 1;
 	var year=oldDate.getFullYear();
 	var hour=oldDate.getHours();
 	var minute=oldDate.getMinutes();
