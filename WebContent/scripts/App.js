@@ -74,3 +74,15 @@ function getCookie(cname)
     }
     return "";
 }
+function formatDate(oldDate)
+{
+	oldDate= new Date(oldDate);
+	var day=oldDate.getDate();
+	var month=oldDate.getMonth();
+	var year=oldDate.getFullYear();
+	var hour=oldDate.getHours();
+	var minute=oldDate.getMinutes();
+	var second=oldDate.getSeconds();
+	var newDate= day +'/' + month + '/' + year + " " + hour + ":" + minute + ":" + second;
+	return newDate;
+}
