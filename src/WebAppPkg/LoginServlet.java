@@ -74,6 +74,7 @@ public class LoginServlet extends HttpServlet
         	response.setCharacterEncoding("UTF-8");
         	response.getWriter().write(json);
         	response.getWriter().close();
+        	db.closeConnection();
 		}
         catch (SQLException e)
         {

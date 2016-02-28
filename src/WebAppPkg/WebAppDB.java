@@ -1,10 +1,17 @@
 package WebAppPkg;
 
-import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import java.sql.Connection;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
+
 
 public class WebAppDB
 {
@@ -19,10 +26,13 @@ public class WebAppDB
     {
     	try
     	{
-    		String dbURL= "jdbc:derby://localhost:1527/C:/Program Files/Derby/db-derby-10.12.1.1-bin/bin/MyDbTest";
-    		Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-    		//Get a connection
-    		conn = DriverManager.getConnection(dbURL); 
+    		//obtain CustomerDB data source from Tomcat's context
+    		Context context = new InitialContext();
+    		BasicDataSource ds =(BasicDataSource)context.lookup("java:comp/env/jdbc/webAppDataSource");
+    		conn = ds.getConnection();
+    		//use connection as you wish…but close after usage! (this
+    		//is important for correct connection pool management
+    		//within Tomcat
     	}
     	catch (Exception except)
     	{
@@ -58,6 +68,15 @@ public class WebAppDB
     	{
     		sqlExcept.printStackTrace();
     	}
+    }
+    public void closeConnection()
+    {
+    	try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
 	
