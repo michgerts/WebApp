@@ -4,11 +4,12 @@
     color: red;
 	font-family: Courier New;
 }
-#shy
+#shy,  #user, #time, #likes, #dearuser
 {
 	font-family: Rancho;
 	text-align: left;
 	color: red;
+	font-size: 2.7vw;
 	
 }
 #intro
@@ -77,7 +78,7 @@ html
 	font-size: 16.7px;
 	width: 100
 }
-#homePage
+#homePage, #questions
 {
 	/*background-image: url('../images/wood-texture-background-1366920330luN.jpg');*/
  	/*background-repeat: no-repeat;*/
@@ -98,7 +99,7 @@ html
 	font-size:6vw;
 	color:#c3a343;
 }
-#MyQuestion, #MyTopic, #textArea
+#MyQuestion, #MyTopic, #textArea, #questionText, #MyAnswer
 {
 	font-family: Rancho;
 	font-size: 1.8vw;
@@ -152,14 +153,22 @@ ul#list-group li
 {
 	display: inline;
 }
-td
+td, #questionText
 {
 	word-break: break-all;
 	word-break: break-word;
 	width: 680px;
 	max-width: 680px;
 }
-#familyGuy
+#questionText
+{
+	word-break: break-all;
+	word-break: break-word;
+	width: 1100px;
+	max-width: 1100px;
+	
+}
+#familyGuy, #submitBtnAns
 {
 	display: block;
 	margin-left: auto;

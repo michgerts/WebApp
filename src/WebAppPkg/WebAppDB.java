@@ -63,6 +63,7 @@ public class WebAppDB
     	{
     		stmt = conn.createStatement();
     		stmt.executeUpdate(SQLQuuery);
+    		//conn.commit();
     	}
     	catch (SQLException sqlExcept)
     	{
@@ -73,6 +74,15 @@ public class WebAppDB
     {
     	try {
 			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    public void commit()
+    {
+    	try {
+			conn.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

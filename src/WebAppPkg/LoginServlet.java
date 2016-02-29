@@ -26,7 +26,6 @@ public class LoginServlet extends HttpServlet
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {
-    	request.getSession().putValue("numOfPage", 0);
     	WebAppDB db = new WebAppDB();
 		ResultSet users;
 		db.createConnection(); 
