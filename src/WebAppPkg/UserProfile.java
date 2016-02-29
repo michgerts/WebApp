@@ -78,7 +78,14 @@ public class UserProfile implements Comparable
 	public int compareTo(Object userP) {
 		float compareage=((UserProfile)userP).getRating();
 
-        return (int)(this.rating-compareage);
+		if((this.rating - compareage)> 0)
+			return -1;
+		else
+			if ((this.rating - compareage)< 0)
+				return 1;
+			else
+				return 0;
+
 	}
 }
 
