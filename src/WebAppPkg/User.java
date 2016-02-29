@@ -18,6 +18,11 @@ public class User
 		Description = desc;
 		Pic = pic;
 	}
+	
+	public User()
+	{
+		
+	}
 	public int getID ()
 	{
 		return ID;
@@ -42,5 +47,20 @@ public class User
 	{
 		return Pic;
 	}
+	
+	public void setNickName (String nick)
+	{
+		 NickName = nick;
+	}
+	public void setPic(String pic)
+	{
+		Pic = pic;
+	}
+	
+	public void setName(String name)
+	{
+		Name = name;
+	}
+	
 }
 

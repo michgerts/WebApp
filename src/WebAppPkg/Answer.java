@@ -3,23 +3,30 @@ package WebAppPkg;
 public class Answer
 {
 	private int QID;//question ID
-	private int UID;//User's ID
+	private String UID;//User's ID
 	private String Text;//Answer's text
+	private String Time;
+	private int Likes;
 
 	
-	public Answer (int Qid, int Uid, String text)
+	public Answer (int Qid, String Uid, String text)
 	{
 		QID = Qid;
 		UID = Uid;
 		Text = text;
+		Likes= 0;
+		Time = "";		
 	}
 	
 	public int getQID ()
 	{
 		return QID;
 	}
-	
-	public int getUID()
+	public int getLikes ()
+	{
+		return Likes;
+	}
+	public String getUID()
 	{
 		return UID;
 	}
@@ -28,20 +35,31 @@ public class Answer
 	{
 		return Text;
 	}
+	public String getTime()
+	{
+		return Time;
+	}
 	
 	public void setQID(int Qid)
 	{
 		QID = Qid;
 	}
 	
-	public void setUID(int Uid)
+	public void setUID(String Uid)
 	{
 		UID = Uid;
 	}
 	
-	public void setUID(String text)
+	public void setText(String text)
 	{
 		Text = text;
 	}
+	public void setTime(String time)
+	{
+		Time = time;
+	}
+	public void setLikes(int likes)
+	{
+		Likes = likes;
+	}
 }
-

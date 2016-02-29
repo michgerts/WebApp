@@ -77,7 +77,7 @@ html
 	font-size: 16.7px;
 	width: 100
 }
-#homePage
+#homePage, #leaderboardPage
 {
 	/*background-image: url('../images/wood-texture-background-1366920330luN.jpg');*/
  	/*background-repeat: no-repeat;*/
@@ -164,4 +164,15 @@ td
 	display: block;
 	margin-left: auto;
     margin-right: auto;
+}
+
+#leaderboardTitle
+{
+	font-family: Rancho;
+	font-size: 50px;
+}
+
+.profilePics{
+	width: 100px;
+	height: 100px;
 }

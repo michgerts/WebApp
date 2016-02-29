@@ -72,7 +72,7 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	    var retrievedPage = localStorage.getItem('pageNum');		
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;	
-		var questionId = angular.element($event.currentTarget).parent().parent('tr').attr("id");//$(this );
+		var questionId = angular.element($event.currentTarget).parent().parent('tr').attr("id");
 	    var data =  JSON.stringify("1,"+ questionId);
 	    var questionAsker =angular.element($event.currentTarget).parent().parent('tr').attr("class");
 	    if (getCookie("id") != questionAsker)
