@@ -120,6 +120,7 @@ public class LeaderboardServlet extends HttpServlet
 	    	response.setCharacterEncoding("UTF-8");
             response.getWriter().write(categoriesJson);
 			response.getWriter().close();
+			db.closeConnection();
 			}
     	catch (IOException | NumberFormatException | SQLException e)
     	{
