@@ -34,6 +34,10 @@
       <servlet-name>ShowQuestionServlet</servlet-name>
       <servlet-class>WebAppPkg.ShowQuestionServlet</servlet-class>
    </servlet>
+      <servlet>
+      <servlet-name>ASubmitServlet</servlet-name>
+      <servlet-class>WebAppPkg.AnswerSubmitServlet</servlet-class>
+   </servlet>
  
    <!-- Note: All <servlet> elements MUST be grouped together and
          placed IN FRONT of the <servlet-mapping> elements -->
@@ -65,7 +69,11 @@
       <servlet-mapping>
       <servlet-name>ShowQuestionServlet</servlet-name>
       <url-pattern>/showquestionservlet</url-pattern>
-   </servlet-mapping>      
+   </servlet-mapping>  
+   <servlet-mapping>
+      <servlet-name>ASubmitServlet</servlet-name>
+      <url-pattern>/asubmitservlet</url-pattern>
+   </servlet-mapping>    
    
    <welcome-file-list>
     	<welcome-file>./html/Index.html</welcome-file>
