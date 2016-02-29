@@ -8,7 +8,7 @@ app.controller('RouteConroller',function ($scope, $http, $window)
 	{
 		var siteView = next.split('/#');
 		siteView = siteView[1];
-		var views = ["signup", "home"];
+		var views = ["signup", "home", "leaderboard"];
 		siteView = siteView.split('/')[1];
 		var params = next.split('/#/')[1];
 		$scope.username = params.split('/')[1];
@@ -35,6 +35,11 @@ app.controller('RouteConroller',function ($scope, $http, $window)
 						}				
 				}
 		}
+		else 
+			if(siteView == "leaderboard")
+				{
+				$scope.view=siteView;
+				}
 	});
 });
 

@@ -34,9 +34,13 @@
       <servlet-name>ShowQuestionServlet</servlet-name>
       <servlet-class>WebAppPkg.ShowQuestionServlet</servlet-class>
    </servlet>
-      <servlet>
+	<servlet>
       <servlet-name>ASubmitServlet</servlet-name>
       <servlet-class>WebAppPkg.AnswerSubmitServlet</servlet-class>
+   </servlet>
+   <servlet>
+      <servlet-name>LeaderboardServlet</servlet-name>
+      <servlet-class>WebAppPkg.LeaderboardServlet</servlet-class>
    </servlet>
  
    <!-- Note: All <servlet> elements MUST be grouped together and
@@ -66,10 +70,14 @@
       <servlet-name>TopicsServlet</servlet-name>
       <url-pattern>/topicsservlet</url-pattern>
    </servlet-mapping>
-      <servlet-mapping>
+    <servlet-mapping>
       <servlet-name>ShowQuestionServlet</servlet-name>
       <url-pattern>/showquestionservlet</url-pattern>
    </servlet-mapping>  
+   <servlet-mapping>
+      <servlet-name>LeaderboardServlet</servlet-name>
+      <url-pattern>/leaderboardservlet</url-pattern>
+   </servlet-mapping>    
    <servlet-mapping>
       <servlet-name>ASubmitServlet</servlet-name>
       <url-pattern>/asubmitservlet</url-pattern>
@@ -78,6 +86,7 @@
    <welcome-file-list>
     	<welcome-file>./html/Index.html</welcome-file>
    </welcome-file-list>
+         
    <resource-ref>
 	<!--
 	CustomerDatasource: the name of the datasource that
@@ -88,5 +97,4 @@
 	<res-type>javax.sql.DataSource</res-type>
 	<res-auth>Container</res-auth>
 	</resource-ref>
-   
 </web-app>

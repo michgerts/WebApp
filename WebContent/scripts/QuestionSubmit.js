@@ -84,6 +84,10 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 
 		}	
 	}
+	
+	$scope.goToLeaderboard  = function ($event) {
+		$window.location = './#/leaderboard';
+	}
 });
 function commaSep (InputText)
 {

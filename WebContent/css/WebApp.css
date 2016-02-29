@@ -78,7 +78,7 @@ html
 	font-size: 16.7px;
 	width: 100
 }
-#homePage, #questions
+#homePage, #leaderboardPage
 {
 	/*background-image: url('../images/wood-texture-background-1366920330luN.jpg');*/
  	/*background-repeat: no-repeat;*/
@@ -99,7 +99,7 @@ html
 	font-size:6vw;
 	color:#c3a343;
 }
-#MyQuestion, #MyTopic, #textArea, #questionText, #MyAnswer
+#MyQuestion, #MyTopic, #textArea
 {
 	font-family: Rancho;
 	font-size: 1.8vw;
@@ -153,24 +153,27 @@ ul#list-group li
 {
 	display: inline;
 }
-td, #questionText
+td
 {
 	word-break: break-all;
 	word-break: break-word;
 	width: 680px;
 	max-width: 680px;
 }
-#questionText
-{
-	word-break: break-all;
-	word-break: break-word;
-	width: 1100px;
-	max-width: 1100px;
-	
-}
-#familyGuy, #submitBtnAns
+#familyGuy
 {
 	display: block;
 	margin-left: auto;
     margin-right: auto;
+}
+
+#leaderboardTitle
+{
+	font-family: Rancho;
+	font-size: 50px;
+}
+
+.profilePics{
+	width: 100px;
+	height: 100px;
 }

@@ -15,7 +15,7 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 			// Put the object into storage
 			localStorage.setItem('pageNum', JSON.stringify(pageNum));
 			localStorage.setItem('response', JSON.stringify(response));
-			for(var i=0; i<20; i++)
+			for(var i=0; i<20 && i<response.length; i++)
 			{
 				table = $("#newQuestionsList > tbody:last-child");
 				listItem(response[i], table);
@@ -72,7 +72,7 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	    var retrievedPage = localStorage.getItem('pageNum');		
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;	
-		var questionId = angular.element($event.currentTarget).parent().parent('tr').attr("id");//$(this );
+		var questionId = angular.element($event.currentTarget).parent().parent('tr').attr("id");
 	    var data =  JSON.stringify("1,"+ questionId);
 	    var questionAsker =angular.element($event.currentTarget).parent().parent('tr').attr("class");
 	    if (getCookie("id") != questionAsker)

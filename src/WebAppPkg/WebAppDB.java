@@ -63,7 +63,6 @@ public class WebAppDB
     	{
     		stmt = conn.createStatement();
     		stmt.executeUpdate(SQLQuuery);
-    		//conn.commit();
     	}
     	catch (SQLException sqlExcept)
     	{
