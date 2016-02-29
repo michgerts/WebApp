@@ -62,9 +62,7 @@ public class Answer
 	{
 		Likes = likes;
 	}
-<<<<<<< HEAD
-}
-=======
+
 }
 
->>>>>>> 3ece6ff7bcc457a1f1661c1ec2faad19bf8cfd03
+
