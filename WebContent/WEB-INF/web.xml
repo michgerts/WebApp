@@ -78,6 +78,10 @@
       <servlet-name>LeaderboardServlet</servlet-name>
       <url-pattern>/leaderboardservlet</url-pattern>
    </servlet-mapping>    
+   <servlet-mapping>
+      <servlet-name>ASubmitServlet</servlet-name>
+      <url-pattern>/asubmitservlet</url-pattern>
+   </servlet-mapping>    
    
    <welcome-file-list>
     	<welcome-file>./html/Index.html</welcome-file>

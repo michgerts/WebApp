@@ -15,7 +15,7 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 			// Put the object into storage
 			localStorage.setItem('pageNum', JSON.stringify(pageNum));
 			localStorage.setItem('response', JSON.stringify(response));
-			for(var i=0; i<20; i++)
+			for(var i=0; i<20 && i<response.length; i++)
 			{
 				table = $("#newQuestionsList > tbody:last-child");
 				listItem(response[i], table);
