@@ -4,11 +4,12 @@
     color: red;
 	font-family: Courier New;
 }
-#shy
+#shy,  #user, #time, #likes, #dearuser
 {
 	font-family: Rancho;
 	text-align: left;
 	color: red;
+	font-size: 2.7vw;
 	
 }
 #intro

@@ -11,9 +11,20 @@
 			</div>
 		</header>
 		<div ng-controller='AnswerController'>
-			<h2>{{question.Text}}</h2>
-			<h3>{{question.Asker}} asked this question at {{question.Time}} and received {{question.Likes}} Likes</h3>
+			<h2 id="questionText">{{question.Text}}</h2>
+			<h3><span id="user">{{question.Asker}}</span> asked this question at <span id="time">{{question.Time}}</span> and received <span id="likes">{{question.Likes}}</span> Likes</h3>
 			<h2>These are the answers they got so far:</h2>
+			<form class="form-horizontal" ng-submit='ask()'>
+				<h2 id="dearuser">Dear {{currentUser.NickName}} please submit your answer here:</h2>
+					<div class="form-group has-feedback " id="submit-answer">
+						   		<label class='control-label col-md-3 text-center' for="user-answer" id="MyAnswer">My Answer</label>
+						   		<div class='col-md-9' id="texting">
+							   		<textarea class="form-control" name="user-answer" placeholder="Answer" ng-model='answer.Text' id="textArea" ></textarea>
+						  	 	</div>
+					</div>
+					 <button type="submit" class="btn btn-primary" id="submitBtnAns" ng-click='ask()'>Submit my answer</button>
+			</form>
+			<div class="error-list" id="answerLength"></div>
 		</div>
 		<div class='row'>				
 					<p>

@@ -34,6 +34,10 @@
       <servlet-name>ShowQuestionServlet</servlet-name>
       <servlet-class>WebAppPkg.ShowQuestionServlet</servlet-class>
    </servlet>
+	<servlet>
+      <servlet-name>ASubmitServlet</servlet-name>
+      <servlet-class>WebAppPkg.AnswerSubmitServlet</servlet-class>
+   </servlet>
    <servlet>
       <servlet-name>LeaderboardServlet</servlet-name>
       <servlet-class>WebAppPkg.LeaderboardServlet</servlet-class>

@@ -78,6 +78,15 @@ public class WebAppDB
 			e.printStackTrace();
 		}
     }
+    public void commit()
+    {
+    	try {
+			conn.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
     
 	
 }
