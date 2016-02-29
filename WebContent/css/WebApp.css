@@ -65,7 +65,7 @@ html
   -webkit-text-size-adjust: 100%;
   background-color: #E6E6FA;
 }
-#indexPage, #signUpPage 
+#indexPage, #signUpPage, #questionsDesign 
 {
 	background-image: url('../images/corpseBride.jpg');
  	background-repeat: no-repeat;
@@ -78,7 +78,7 @@ html
 	font-size: 16.7px;
 	width: 100
 }
-#homePage, #leaderboardPage
+#homePage, #leaderboardPage, #questions
 {
 	/*background-image: url('../images/wood-texture-background-1366920330luN.jpg');*/
  	/*background-repeat: no-repeat;*/
@@ -173,7 +173,8 @@ td
 	font-size: 50px;
 }
 
-.profilePics{
+.profilePics
+{
 	width: 100px;
 	height: 100px;
 }
