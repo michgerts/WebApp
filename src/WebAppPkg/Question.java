@@ -18,6 +18,9 @@ public class Question
 		Likes = likes;
 		Answered = answered;
 	}
+	public Question() {
+		
+	}
 	public int getID ()
 	{
 		return ID;

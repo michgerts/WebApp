@@ -61,6 +61,11 @@ public class User
 	{
 		Name = name;
 	}
+
+	public void setDescription(String description2) {
+		Description = description2;
+		
+	}
 	
 }
 

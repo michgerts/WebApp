@@ -98,8 +98,28 @@ public class LeaderboardServlet extends HttpServlet
         		}
             	
             	userP.setTopFiveTopics(fiveTopTopics);
+            	
+            	
+            	//setting 5 last asked questions
+            	ResultSet userAskedQuestions = db.executeQuery("select Q.Time, Q.Text, Q.Likes from QUESTIONS as Q where Q.Asker   = '"+userName+"' order by Time desc");
+            	List<Question> askedQuestions = new ArrayList<Question>(); 
+            	Question question = new Question();
+            	String time, text, likes;
+            	int k=0;
+            	while(userExpertise.next() && k<5)
+        		{
+            		time = userExpertise.getString("Time");
+            		text = userExpertise.getString("Text");
+            		likes = userExpertise.getString("Likes");
+            		question.setText(text);
+            		question.setTime(time);
+            		question.setLikes(Integer.parseInt(likes));
+            		askedQuestions.add(question);
+            		k++;
+        		}
+            	
+            	userP.setAskedQuestions(askedQuestions);
             	usersProfiles.add(userP);
-
     		}
     		
     		//add all other users that have no rating (didn't answer or ask anything)
@@ -111,12 +131,14 @@ public class LeaderboardServlet extends HttpServlet
     			{
     				String picture = allUsers.getString("Pic");
             		String nickname = allUsers.getString("Nickname");
+            		String description = allUsers.getString("Description");
 
     				UserProfile userProfile = new UserProfile();
     				User user = new User();
                 	user.setName(userName);
                 	user.setNickName(nickname);
                 	user.setPic(picture);
+                	user.setDescription(description);
                 	userProfile.setUser(user);
                 	usersProfiles.add(userProfile);
     			}
