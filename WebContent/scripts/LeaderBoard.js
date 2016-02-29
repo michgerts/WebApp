@@ -12,7 +12,7 @@ app.controller('LeaderboardController',function ($scope, $http, $window, $compil
 		}).success( function (response)
 		{			
 			//localStorage.setItem('response', JSON.stringify(response));
-			for(var i=0; i<20; i++)
+			for(var i=0; i<20 && i<response.length; i++)
 			{
 				table = $("#leaderboardTable > tbody:last-child");
 				listItem(response[i], table);
@@ -44,10 +44,17 @@ app.controller('LeaderboardController',function ($scope, $http, $window, $compil
 	    tr.appendChild(td);
 	    
 	    var td = document.createElement("td");
-	    var span = document.createElement("span");
-	    span.appendChild(document.createTextNode('1'));
-	    span.setAttribute("class", "label label-default");
-	    td.appendChild(span);
+	    var i=0;
+	    while(i<response.fiveTopTopics.length)
+    	{
+	    	var span = document.createElement("span");
+		    span.appendChild(document.createTextNode(response.fiveTopTopics[i]));
+		    span.setAttribute("class", "label label-default");
+		    td.appendChild(span);
+		    i++;
+    	}
+	    
+	    
 	    tr.appendChild(td);
 	    
 	    table.append(tr);

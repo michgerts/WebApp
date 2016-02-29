@@ -52,10 +52,6 @@ public class LeaderboardServlet extends HttpServlet
     		ArrayList<UserProfile> usersProfiles = new ArrayList<UserProfile>();
     	
 
-    		//ResultSet avgLikesPerUser =  db.executeQuery("select QUES.Name, ANS.AVGALIKES, QUES.AVGQLIKES from "
-    		//		+ "(SELECT Avg( Cast (Q.Likes AS DOUBLE PRECISION)) as AVGQLIKES,  U.Name  FROM QUESTIONS as Q, USERS as U where U.Name = Q.Asker group by U.Name order by avgQLikes) as QUES left outer join "
-    		//		+ "(SELECT Avg(A.Likes) as AVGALIKES,  A.UID FROM ANSWERS as A, USERS as U where U.Name = A.UID group by A.UID order by AVGALIKES) as ANS on ANS.UID = QUES.Name");
-
     		ResultSet avgLikesPerUser =  db.executeQuery("select QUES.Name, ANS.AVGALIKES, QUES.AVGQLIKES from (SELECT Avg( Cast (Q.Likes AS DOUBLE PRECISION)) as AVGQLIKES,  U.Name  FROM QUESTIONS as Q, USERS as U where U.Name = Q.Asker group by U.Name order by avgQLikes) as QUES left outer join (SELECT Avg(A.Likes) as AVGALIKES,  A.UID FROM ANSWERS as A, USERS as U where U.Name = A.UID group by A.UID order by AVGALIKES) as ANS on ANS.UID = QUES.Name");
     				
     		while (avgLikesPerUser.next())
@@ -89,6 +85,19 @@ public class LeaderboardServlet extends HttpServlet
             	user.setPic(pic);
             	userP.setUser(user);
             	
+            	//setting the expertise
+            	ResultSet userExpertise = db.executeQuery("select A.QID, A.UID, A.Likes, T.Topic from ANSWERS as A, TOPICS as T where A.QID = T.QID and A.UID = '"+userName+"' order by Likes desc");
+            	String topic;
+            	List<String> fiveTopTopics = new ArrayList<String>(); 
+            	int j=0;
+            	while(userExpertise.next() && j<5)
+        		{
+            		topic = userExpertise.getString("Topic");
+            		fiveTopTopics.add(topic);
+            		j++;
+        		}
+            	
+            	userP.setTopFiveTopics(fiveTopTopics);
             	usersProfiles.add(userP);
 
     		}
@@ -120,7 +129,7 @@ public class LeaderboardServlet extends HttpServlet
 	    	response.setCharacterEncoding("UTF-8");
             response.getWriter().write(categoriesJson);
 			response.getWriter().close();
-			db.closeConnection();
+			//db.closeConnection();
 			}
     	catch (IOException | NumberFormatException | SQLException e)
     	{
