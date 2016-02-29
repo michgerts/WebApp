@@ -1,5 +1,5 @@
 //Front end js
-app.controller('AnswerController',function ($scope, $http, $window, $compile)
+app.controller('LeaderboardController',function ($scope, $http, $window, $compile)
 {
 	var table = $("#leaderboardTable > tbody");
 	$scope.init = function ()
@@ -7,7 +7,7 @@ app.controller('AnswerController',function ($scope, $http, $window, $compile)
 		$http(
 		{
 			method: 'get',
-			url: 'newestquestionsservlet',
+			url: 'leaderboardservlet',
 			headers: {'Content-Type': 'application/json'}
 		}).success( function (response)
 		{			
@@ -23,7 +23,7 @@ app.controller('AnswerController',function ($scope, $http, $window, $compile)
 	
 	function listItem(response, table)
 	{
-	    var pic = response.user.pic;
+	    var pic = response.user.Pic;
 	    var nick = response.user.NickName;
 	    var rating = response.rating;
 
@@ -36,16 +36,16 @@ app.controller('AnswerController',function ($scope, $http, $window, $compile)
 	    tr.appendChild(td);
 	    
 	    var td = document.createElement("td");
-	    td.appendChild(nick);
+	    td.appendChild(document.createTextNode(nick));
 	    tr.appendChild(td);
 	    
 	    var td = document.createElement("td");
-	    td.appendChild(rating);
+	    td.appendChild(document.createTextNode(rating));
 	    tr.appendChild(td);
 	    
 	    var td = document.createElement("td");
 	    var span = document.createElement("span");
-	    span.appendChild('1');
+	    span.appendChild(document.createTextNode('1'));
 	    span.setAttribute("class", "label label-default");
 	    td.appendChild(span);
 	    tr.appendChild(td);

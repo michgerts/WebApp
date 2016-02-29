@@ -10,6 +10,8 @@ import WebAppPkg.WebAppDB;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,7 +36,7 @@ public class LeaderboardServlet extends HttpServlet
     private String TTableName = "TOPICS ";
     private String ATableName = "ANSWERS ";
     private int page=0;
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
    
    public void doGet (HttpServletRequest request, HttpServletResponse response)
@@ -50,20 +52,20 @@ public class LeaderboardServlet extends HttpServlet
     		ResultSet avgLikesPerUser =  db.executeQuery("select ANS.UID, ANS.AVGALIKES, QUES.AVGQLIKES from "
     				+ "(SELECT Avg(Q.Likes) as AVGQLIKES,  U.Name  FROM QUESTIONS as Q, USERS as U where U.Name = Q.Asker group by U.Name order by avgQLikes) as QUES "
     				+ "left outer join (SELECT Avg(A.Likes) as AVGALIKES,  A.UID FROM ANSWERS as A, USERS as U where U.Name = A.UID group by A.UID order by AVGALIKES)"
-    				+ " as ANS on ANS.UID = QUES.Name;");
+    				+ " as ANS on ANS.UID = QUES.Name");
     		
     		while (avgLikesPerUser.next())
     		{
     			UserProfile userP = new UserProfile();
-    			int avgA = Integer.parseInt(avgLikesPerUser.getString("AVGALIKES"));//Average likes of answers this user answered
+    			String avgA = avgLikesPerUser.getString("AVGALIKES");//Average likes of answers this user answered
     			int avgQ = Integer.parseInt(avgLikesPerUser.getString("AVGQLIKES"));//Average likes of Questions this user asked
             	String userName = avgLikesPerUser.getString("UID");
             	
-            	float rating = (float) (0.2*avgQ +0.8*avgA);
+            	float rating = (float) (0.2*avgQ +0.8*Integer.parseInt(avgA));
             	
             	userP.setRating(rating);
             	
-            	ResultSet userInfo = db.executeQuery("select Pic, Nickname from USERS where Name = "+userName);//get user's picture and nickname
+            	ResultSet userInfo = db.executeQuery("select Pic, Nickname from USERS where Name = '"+userName+"'");//get user's picture and nickname
         		String pic = "";
         		String nick = "";
         		if(userInfo.next())
@@ -102,7 +104,8 @@ public class LeaderboardServlet extends HttpServlet
     			}
     		}
     		
-            
+            Collections.sort(usersProfiles);//(questionsToPresent);
+    		
             String categoriesJson = new Gson().toJson(usersProfiles);
             response.setContentType("application/json");
 	    	response.setCharacterEncoding("UTF-8");
@@ -182,6 +185,8 @@ public class LeaderboardServlet extends HttpServlet
                         		Boolean.parseBoolean(questions.getString("Answered")) );
                         questionsToPresent.add(question);
         		}
+                
+                
 	                
 	            String categoriesJson = new Gson().toJson(questionsToPresent);
 	            response.setContentType("application/json");

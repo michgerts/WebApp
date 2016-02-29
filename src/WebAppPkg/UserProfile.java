@@ -2,7 +2,7 @@ package WebAppPkg;
 
 import java.util.List;
 
-public class UserProfile
+public class UserProfile implements Comparable
 {
 	private User user;
 	private List<Question> askedQuestions;
@@ -72,6 +72,13 @@ public class UserProfile
 	public void setTopFiveTopics(List<String> fiveTopTopics)
 	{
 		 this.fiveTopTopics = fiveTopTopics;
+	}
+
+	@Override
+	public int compareTo(Object userP) {
+		float compareage=((UserProfile)userP).getRating();
+
+        return (int)(this.rating-compareage);
 	}
 }
 
