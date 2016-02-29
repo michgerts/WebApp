@@ -11,7 +11,6 @@ app.controller('LeaderboardController',function ($scope, $http, $window, $compil
 			headers: {'Content-Type': 'application/json'}
 		}).success( function (response)
 		{			
-			//localStorage.setItem('response', JSON.stringify(response));
 			for(var i=0; i<20 && i<response.length; i++)
 			{
 				table = $("#leaderboardTable > tbody:last-child");

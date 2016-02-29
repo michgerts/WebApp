@@ -177,3 +177,14 @@ td
 	width: 100px;
 	height: 100px;
 }
+
+
+#leaderboardDiv{
+	height: 600px;
+	overflow-y: scroll;
+}
+
+#newestQuestions{
+	height: 300px;
+	overflow-y: scroll;
+}
