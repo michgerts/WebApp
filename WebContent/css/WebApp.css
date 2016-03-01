@@ -12,7 +12,7 @@
 	font-size: 2.7vw;
 	
 }
-#intro
+#intro,  #firstA
 {
 	margin-top: 90px;
 	font-family: Tangerine;
@@ -65,7 +65,7 @@ html
   -webkit-text-size-adjust: 100%;
   background-color: #E6E6FA;
 }
-#indexPage, #signUpPage, #questionsDesign 
+#indexPage, #signUpPage
 {
 	background-image: url('../images/corpseBride.jpg');
  	background-repeat: no-repeat;
@@ -78,7 +78,7 @@ html
 	font-size: 16.7px;
 	width: 100
 }
-#homePage, #leaderboardPage, #questions
+#homePage, #leaderboardPage, #questions,  #questionsDesign 
 {
 	/*background-image: url('../images/wood-texture-background-1366920330luN.jpg');*/
  	/*background-repeat: no-repeat;*/
@@ -189,3 +189,19 @@ td
 	height: 300px;
 	overflow-y: scroll;
 }
+.wrapper
+{
+	 text-align: center;
+}
+.button 
+{
+    position: absolute;
+   top: 50%;
+}
+#textHigh
+{
+	background-color: yellow;
+	font-family: Rancho;
+	font-size: 1.8vw;
+	
+ } 

@@ -13,18 +13,18 @@ import javax.servlet.http.*;
 import com.google.gson.Gson;
 
 // Data types
-import WebAppPkg.User;
+import WebAppPkg.Question;
  
-public class UserServlet extends HttpServlet
+public class ShowAnswerServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
-    private String tableName = "USERS";
+    private String tableName = "ANSWERS";
     @Override
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {
     	WebAppDB db = new WebAppDB();
-		ResultSet users;
+		ResultSet answer;
 		db.createConnection(); 
 	
         StringBuilder sb = new StringBuilder();
@@ -34,26 +34,30 @@ public class UserServlet extends HttpServlet
         {
             sb.append(str);
         }
-		User userData = new Gson().fromJson(sb.toString(), User.class);
-        users = db.executeQuery("select * from " + tableName + " WHERE NAME='"+userData.getName()+"'");
+		int qid = new Gson().fromJson(sb.toString(), int.class);
+        answer = db.executeQuery("select * from " + tableName + " WHERE QID=" + qid);
         try
         {
-            String json = null;
-            users.next();
-            userData = new User(users.getInt(1),users.getString(2),"",
-            						users.getString(4), users.getString(5), users.getString(6));
-
-            json = new Gson().toJson(userData);
+        	Answer Q = new Answer(-1,"","");
+        	if (answer.next())
+    		{
+            	// there is such an answer
+        		Q.setQID(qid);
+        		Q.setText(answer.getString("Text"));
+        		Q.setTime(answer.getString("Time"));
+        		Q.setUID(answer.getString("UID"));
+        		Q.setLikes(answer.getInt("Likes"));      		       		
+    		}
+        	String json = new Gson().toJson(Q);
         	response.setContentType("application/json");
         	response.setCharacterEncoding("UTF-8");
         	response.getWriter().write(json);
         	response.getWriter().close();
-        	//db.closeConnection();
+        	db.closeConnection();
 		}
         catch (SQLException e)
         {
 			e.printStackTrace();
 		}
     }
-
 }
