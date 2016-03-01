@@ -56,7 +56,7 @@ app.controller('LeaderboardController',function ($scope, $http, $window, $compil
     	{
 	    	var span = document.createElement("span");
 		    span.appendChild(document.createTextNode(response.fiveTopTopics[i]));
-		    span.setAttribute("class", "label label-default");
+		    span.setAttribute("class", "label label-default topicLabels");
 		    td.appendChild(span);
 		    i++;
     	}
@@ -92,6 +92,7 @@ app.controller('LeaderboardController',function ($scope, $http, $window, $compil
 	    	var text = userToPresent.askedQuestions[j].Text;
 			var time = formatDate(userToPresent.askedQuestions[j].Time);	      
 		    var likes = userToPresent.askedQuestions[j].Likes;
+		    var topics = userToPresent.askedQuestions[j].Topics;
 		    
 	    	var tr = document.createElement("tr");
 		    var td = document.createElement("td");
@@ -100,9 +101,17 @@ app.controller('LeaderboardController',function ($scope, $http, $window, $compil
 		    td = document.createElement("td");
 		    td.appendChild(document.createTextNode(' ' + text ));
 		    tr.appendChild(td);
+		    
 		    td = document.createElement("td");
-		    td.appendChild(document.createTextNode(' topic' ));
+		    for(var h=0; h<topics.length; h++)
+			{
+		    	var span = document.createElement("span");
+			    span.appendChild(document.createTextNode(topics[h]));
+			    span.setAttribute("class", "label label-default topicLabels");
+			    td.appendChild(span);
+			}
 		    tr.appendChild(td);
+		    
 		    td = document.createElement("td");
 		    td.appendChild(document.createTextNode(' '+ likes));
 		    tr.appendChild(td);
