@@ -26,6 +26,9 @@ public class LoginServlet extends HttpServlet
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {
+    	HttpSession sessions = request.getSession();
+    	sessions.setAttribute("userID", 1);
+    	
     	WebAppDB db = new WebAppDB();
 		ResultSet users;
 		db.createConnection(); 

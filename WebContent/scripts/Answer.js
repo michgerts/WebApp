@@ -1,34 +1,59 @@
 //Front end js
-app.controller('AnswerController',function ($scope, $http, $window)
+app.controller('AnswerController',function ($scope, $http, $window, $compile)
 {
 	var path = $window.location.href;
 	var QID=  path.split("/")[7];
-	$http(
+	var list;
+	$scope.listLength=0;
+	$scope.init = function ()
 	{
-		method: 'POST',
-		url: 'showquestionservlet',
-		headers: {'Content-Type': 'application/json'},
-		data:  JSON.stringify(QID)
-	}).success( function (response)
-	{
-		$scope.question = response;
-		if ($scope.question.ID == -1)
+		$http(
 			{
-			$window.location = './#/home';
-			}
-		else
+				method: 'POST',
+				url: 'showquestionservlet',
+				headers: {'Content-Type': 'application/json'},
+				data:  JSON.stringify(QID)
+			}).success( function (response)
 			{
-				var d= new Date($scope.question.Time);
-				var options = {
-					    weekday: "long", year: "numeric", month: "short",
-					    day: "numeric", hour: "2-digit", minute: "2-digit"
-					};
-				$scope.question.Time = d.toLocaleTimeString("en-us", options);
+				$scope.question = response;
+				if ($scope.question.ID == -1)
+					{
+					$window.location = './#/home';
+					}
+				else
+					{
+						var d= new Date($scope.question.Time);
+						var options = {
+							    weekday: "long", year: "numeric", month: "short",
+							    day: "numeric", hour: "2-digit", minute: "2-digit"
+							};
+						$scope.question.Time = d.toLocaleTimeString("en-us", options);
+					}
+		});
+	
+		$http(
+		{
+			method: 'POST',
+			url: 'showanswerservlet',
+			headers: {'Content-Type': 'application/json'},
+			data:  JSON.stringify(QID)
+		}).success( function (response)
+		{
+			$scope.listLength= response.length;
+			list = $("#answersList");
+			list.empty();
+			for(var i=0; i<response.length; i++)
+			{
+				list = $("#answersList");
+				listAnswerItem(response[i], list, $scope);
 			}
-	});
-	$scope.ask = function ()
+			$compile(list)($scope);				
+		});
+	}
+	$scope.submitAnswer = function ()
 	{
 		/*Handels answer submit*/
+		$scope.answer.AID= -1;
 		$scope.answer.Time= new Date();
 		$scope.answer.UID = $scope.currentUser.Name;
 		$scope.answer.QID=QID
@@ -59,6 +84,38 @@ app.controller('AnswerController',function ($scope, $http, $window)
 
 		}	
 	}
+
+	$scope.expandAnswer = function($event)
+	{
+		var li=  angular.element($event.currentTarget).parent('li');
+		var answerId = li.attr("id");
+		var div= angular.element($event.currentTarget).siblings('div');
+		div.addClass("visible");
+		div.removeClass("hidden");
+		var image = angular.element($event.currentTarget)
+		image.remove();
+		var image= document.createElement("img");
+		image.setAttribute('src', "./images/Minus-48.png");
+		//li.prepend(image);
+		image.setAttribute('ng-click', "collapseAnswer($event)");
+		li.prepend(image);
+	}
+	
+	$scope.collapseAnswer = function($event)
+	{
+		//var li=  angular.element($event.currentTarget).parent('li');
+		var div= angular.element($event.currentTarget).siblings('div');
+		div.addClass("hidden");
+		div.removeClass("visible");
+		var image = angular.element($event.currentTarget)
+		image.remove();
+		var image= document.createElement("img");
+		image.setAttribute('src', "./images/plus-48.png");
+		//li.prepend(image);
+		image.setAttribute('ng-click', "expandAnswer($event)");
+		li.prepend(image);
+	}
+
 });
 function commaSep (InputText)
 {
@@ -71,4 +128,37 @@ function commaSep (InputText)
 		}
 	res+=(Text[Text.length-1]);
 	return res;
+}
+
+function listAnswerItem(ans, list, $scope)
+{
+    var text = ans.Text;
+    var aid = ans.AID;
+	var time = formatDate(ans.Time);	      
+    var likes = ans.Likes;
+    var uid = ans.UID;  
+    var li= document.createElement("li");
+    li.setAttribute('id', aid);
+    var image = document.createElement("img");
+    var div= document.createElement("div");
+    div.setAttribute('class', "hidden");
+    div.appendChild(document.createTextNode(text));
+    var button = document.createElement("button");
+    button.setAttribute("type", "buton");
+    button.setAttribute("class", "btn btn-success glyphicon glyphicon-thumbs-down");
+    button.setAttribute("data-loading-text", " ... ");
+    button.setAttribute("ng-click", "voteDownAnswer($event)");
+    div.appendChild(button);  
+    var button = document.createElement("button");
+    button.setAttribute("type", "buton");
+    button.setAttribute("class", "btn btn-success glyphicon glyphicon-thumbs-up");
+    button.setAttribute("data-loading-text", " ... ");
+    button.setAttribute("ng-click", "voteUpAnswer($event)");
+    div.appendChild(button);  
+    image.setAttribute('src', "./images/plus-48.png");
+    image.setAttribute('ng-click', "expandAnswer($event)");
+    li.appendChild(image);
+    li.appendChild(document.createTextNode(uid + " answered this question at " + time + " and got " + likes + " likes"));
+    li.appendChild(div);
+    list.append(li);
 }

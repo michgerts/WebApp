@@ -70,19 +70,22 @@ public class LeaderboardServlet extends HttpServlet
             	
             	userP.setRating(rating);
             	
-            	ResultSet userInfo = db.executeQuery("select Pic, Nickname from USERS where Name = '"+userName+"'");//get user's picture and nickname
+            	ResultSet userInfo = db.executeQuery("select Pic, Nickname, Description from USERS where Name = '"+userName+"'");//get user's picture and nickname
         		String pic = "";
         		String nick = "";
+        		String desc = "";
         		if(userInfo.next())
         		{
         			pic = userInfo.getString("Pic");
         			nick = userInfo.getString("Nickname");
+        			desc = userInfo.getString("Description");
         		}
         			
         		User user = new User();
             	user.setName(userName);
             	user.setNickName(nick);
             	user.setPic(pic);
+            	user.setDescription(desc);
             	userP.setUser(user);
             	
             	//setting the expertise
@@ -106,11 +109,11 @@ public class LeaderboardServlet extends HttpServlet
             	Question question = new Question();
             	String time, text, likes;
             	int k=0;
-            	while(userExpertise.next() && k<5)
+            	while(userAskedQuestions.next() && k<5)
         		{
-            		time = userExpertise.getString("Time");
-            		text = userExpertise.getString("Text");
-            		likes = userExpertise.getString("Likes");
+            		time = userAskedQuestions.getString("Time");
+            		text = userAskedQuestions.getString("Text");
+            		likes = userAskedQuestions.getString("Likes");
             		question.setText(text);
             		question.setTime(time);
             		question.setLikes(Integer.parseInt(likes));

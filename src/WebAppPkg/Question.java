@@ -1,5 +1,7 @@
 package WebAppPkg;
 
+import java.util.List;
+
 public class Question
 {
 	private int ID;
@@ -8,6 +10,7 @@ public class Question
 	private String Asker;
 	private int Likes;	
 	private boolean Answered;
+	private List<String> Topics;
 	
 	public Question (int id, String text, String time, String asker, int likes, boolean answered)
 	{
@@ -50,6 +53,11 @@ public class Question
 	{
 		ID=id;
 	}
+	
+	public List<String> getTopics()
+	{
+		return Topics;
+	}
 	public void setLikes (int likes)
 	{
 		Likes=likes;
@@ -69,6 +77,11 @@ public class Question
 	public void setAsker (String asker)
 	{
 		Asker=asker;
+	}
+	
+	public void setTopics (List<String> topics)
+	{
+		Topics = topics;
 	}
 }
 
