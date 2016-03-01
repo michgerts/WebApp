@@ -98,12 +98,14 @@ app.controller('AnswerController',function ($scope, $http, $window, $compile)
 		image.setAttribute('src', "./images/Minus-48.png");
 		//li.prepend(image);
 		image.setAttribute('ng-click', "collapseAnswer($event)");
+		$compile(image)($scope)
 		li.prepend(image);
+		
 	}
 	
 	$scope.collapseAnswer = function($event)
 	{
-		//var li=  angular.element($event.currentTarget).parent('li');
+		var li=  angular.element($event.currentTarget).parent('li');
 		var div= angular.element($event.currentTarget).siblings('div');
 		div.addClass("hidden");
 		div.removeClass("visible");
@@ -113,10 +115,67 @@ app.controller('AnswerController',function ($scope, $http, $window, $compile)
 		image.setAttribute('src', "./images/plus-48.png");
 		//li.prepend(image);
 		image.setAttribute('ng-click', "expandAnswer($event)");
+		$compile(image)($scope)
 		li.prepend(image);
+	}
+	
+	$scope.voteUpAnswer = function ($event) {	
+		var li=  angular.element($event.currentTarget).parent().parent('li');
+		var answerId = li.attr("id");
+	    var data =  JSON.stringify("1,"+ answerId);
+	    var replier =li.attr("class");
+	    if (getCookie("id") != replier)
+	    {
+	    	$http(
+	    			{
+	    				method: 'POST',
+	    				url: 'voteanswerservlet',
+	    				headers: {'Content-Type': 'application/json'},
+	    				data:  JSON.stringify(data)
+	    			}).success( function (response)
+	    			{	
+	    				$scope.listLength= response.length;
+	    				list = $("#answersList");
+	    				list.empty();
+	    				for(var i=0; i<response.length; i++)
+	    				{
+	    					list = $("#answersList");
+	    					listAnswerItem(response[i], list, $scope);
+	    				}
+	    				$compile(list)($scope);
+	    			});
+	    }
+	 }
+	$scope.voteDownAnswer = function ($event) {
+		var li=  angular.element($event.currentTarget).parent().parent('li');
+		var answerId = li.attr("id");
+	    var data =  JSON.stringify("0,"+ answerId);
+	    var replier =li.attr("class");
+	    if (getCookie("id") != replier)
+	    {
+	    	$http(
+	    			{
+	    				method: 'POST',
+	    				url: 'voteanswerservlet',
+	    				headers: {'Content-Type': 'application/json'},
+	    				data:  JSON.stringify(data)
+	    			}).success( function (response)
+	    			{	
+	    				$scope.listLength= response.length;
+	    				list = $("#answersList");
+	    				list.empty();
+	    				for(var i=0; i<response.length; i++)
+	    				{
+	    					list = $("#answersList");
+	    					listAnswerItem(response[i], list, $scope);
+	    				}
+	    				$compile(list)($scope);
+	    			});
+	    }
 	}
 
 });
+
 function commaSep (InputText)
 {
 	var Text =InputText.split("'");
@@ -139,6 +198,7 @@ function listAnswerItem(ans, list, $scope)
     var uid = ans.UID;  
     var li= document.createElement("li");
     li.setAttribute('id', aid);
+    li.setAttribute("class", uid);
     var image = document.createElement("img");
     var div= document.createElement("div");
     div.setAttribute('class', "hidden");

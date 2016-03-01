@@ -6,6 +6,10 @@ app.controller('SignUpController',function ($scope, $http, $window)
 	{
 		if ($('.required.has-success').length>2)
 		{
+			if ($scope.user.Pic.length==0)
+				{
+					$scope.user.Pic="http://4.bp.blogspot.com/-0ox-AuwXsJk/VWyZt0PB81I/AAAAAAAABE4/2-CJXNHD25c/s1600/tho%2Bcb.jpg";
+				}
 			$http(
 			{
 				method: 'POST',

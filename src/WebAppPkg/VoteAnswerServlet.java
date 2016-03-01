@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 // Data types
 import WebAppPkg.Question;
  
-public class ShowAnswerServlet extends HttpServlet
+public class VoteAnswerServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
     private String tableName = "ANSWERS";
@@ -37,16 +37,38 @@ public class ShowAnswerServlet extends HttpServlet
         {
             sb.append(str);
         }
-		int qid = new Gson().fromJson(sb.toString(), int.class);
-		List<Answer> answersToPresent = new ArrayList<Answer>();
-        answer = db.executeQuery("select * from " + tableName + " WHERE QID=" + qid + " order by Likes desc, Time asc");
-        try
-        {
+        String data = new Gson().fromJson(sb.toString(),String.class);
+        String upVotestr = data.substring(1, 2);
+        String idstr = data.substring(3, data.length()-1);
+        Integer id = Integer.parseInt(idstr);
+        Integer upVote = Integer.parseInt(upVotestr);
+        ResultSet numOfLikesSet = db.executeQuery("select Likes as A from ANSWERS where AID = "+ id.intValue());
+        ResultSet QIDSet = db.executeQuery("select QID as A from ANSWERS where AID = "+ id.intValue());
+		String numOfLikesStr = "";
+		String QIDStr = "";
+		try
+		{
+			if(numOfLikesSet.next())
+				numOfLikesStr = numOfLikesSet.getString("A");
+			if(QIDSet.next())
+				QIDStr = QIDSet.getString("A");
+			int numOfLikesInt = Integer.parseInt(numOfLikesStr);//numOfLikesInt contains the number of likes at the current moment
+			if(upVote == 1)
+				numOfLikesInt++;
+			else if(upVote == 0)
+				numOfLikesInt--;
+			if(upVote != null && id != null)
+			{
+				db.executeUpdate("update ANSWERS set likes ="+ numOfLikesInt +"where AID = " + id.intValue());
+			}
+			List<Answer> answersToPresent = new ArrayList<Answer>();
+	        answer = db.executeQuery("select * from " + tableName + " WHERE QID=" + QIDStr + " order by Likes desc, Time asc");
+	       
         	while (answer.next())
     		{
             	// there is such an answer
         		Answer A = new Answer(-1,-1,"","");
-        		A.setQID(qid);
+        		A.setQID(Integer.parseInt(QIDStr));
         		A.setText(answer.getString("Text"));
         		A.setTime(answer.getString("Time"));
         		A.setUID(answer.getString("UID"));
