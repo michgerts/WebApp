@@ -1,5 +1,6 @@
 package WebAppPkg;
 
+import java.util.Collections;
 import java.util.List;
 
 public class UserProfile implements Comparable
@@ -21,7 +22,11 @@ public class UserProfile implements Comparable
 		
 	}
 	
-	public UserProfile() {
+	public UserProfile() 
+	{		
+		this.fiveTopTopics = Collections.emptyList();
+		this.askedQuestions= Collections.emptyList();
+		this.userAnswers=  Collections.emptyList();
 	}
 
 	public User getUser()

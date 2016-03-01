@@ -106,11 +106,11 @@ public class LeaderboardServlet extends HttpServlet
             	Question question = new Question();
             	String time, text, likes;
             	int k=0;
-            	while(userExpertise.next() && k<5)
+            	while(userAskedQuestions.next() && k<5)
         		{
-            		time = userExpertise.getString("Time");
-            		text = userExpertise.getString("Text");
-            		likes = userExpertise.getString("Likes");
+            		time = userAskedQuestions.getString("Time");
+            		text = userAskedQuestions.getString("Text");
+            		likes = userAskedQuestions.getString("Likes");
             		question.setText(text);
             		question.setTime(time);
             		question.setLikes(Integer.parseInt(likes));
