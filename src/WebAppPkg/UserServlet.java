@@ -48,7 +48,7 @@ public class UserServlet extends HttpServlet
         	response.setCharacterEncoding("UTF-8");
         	response.getWriter().write(json);
         	response.getWriter().close();
-        	db.closeConnection();
+        	//db.closeConnection();
 		}
         catch (SQLException e)
         {
