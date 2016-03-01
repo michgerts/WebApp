@@ -40,24 +40,44 @@ public class AnswerSubmitServlet extends HttpServlet
         {
             sb.append(str);
         }
-		Answer answerData = new Gson().fromJson(sb.toString(), Answer.class);
-		db.executeUpdate("INSERT INTO " + tableName +
-				 "(QID, UID, TEXT, TIME, LIKES) " +
-				 "VALUES ("+answerData.getQID()+",'"+answerData.getUID()+
+        Answer answerData = new Gson().fromJson(sb.toString(), Answer.class);
+		ResultSet answers;
+		answers = db.executeQuery("select max(AID) AS AID from " + tableName);
+		try
+        {
+        	answers.next();
+        	String temp= answers.getString("AID");
+        	if (temp == null)
+    		{
+            	// this is the 1st answer
+        		answerData.setAID(1);
+    		}
+        	else
+        	{
+        		
+        		int newAID=Integer.parseInt(temp) + 1;
+        		answerData.setAID(newAID);
+        	}
+        	db.executeUpdate("INSERT INTO " + tableName +
+				 "(AID, QID, UID, TEXT, TIME, LIKES) " +
+				 "VALUES ("+answerData.getAID() +"," +answerData.getQID()+",'"+answerData.getUID()+
 				 "','"+answerData.getText()+"','"+answerData.getTime()+
 				 "',"+answerData.getLikes()+")");
-		//db.commit();
-		db.executeUpdate("UPDATE QUESTIONS SET " +
+        	db.executeUpdate("UPDATE QUESTIONS SET " +
 				 "ANSWERED='TRUE' " +
 				 "WHERE ID="+answerData.getQID());
-		//db.commit();
-    	JsonParser parser = new JsonParser();
-    	JsonObject o = parser.parse("{\"msg\":"+answerData.getQID() +"}").getAsJsonObject();
-    	String json = new Gson().toJson(o);
-    	response.setContentType("application/json");
-    	response.setCharacterEncoding("UTF-8");
-    	response.getWriter().write(json);
-    	response.getWriter().close();
-    	db.closeConnection();
-	}
+	    	JsonParser parser = new JsonParser();
+	    	JsonObject o = parser.parse("{\"msg\":"+answerData.getQID() +"}").getAsJsonObject();
+	    	String json = new Gson().toJson(o);
+	    	response.setContentType("application/json");
+	    	response.setCharacterEncoding("UTF-8");
+	    	response.getWriter().write(json);
+	    	response.getWriter().close();
+	    	db.closeConnection();
+        }
+        catch (SQLException e)
+        {
+			e.printStackTrace();
+		}
+    }
 }

@@ -45,14 +45,17 @@ public class QSubmitServlet extends HttpServlet
         questions = db.executeQuery("select max(ID) AS ID from " + tableName);
         try
         {
-        	if (!questions.next())
+        	questions.next();
+        	String temp= questions.getString("ID");
+        	if (temp == null)
     		{
             	// this is the 1st question
+        		
         		questionData.setID(1);
     		}
         	else
         	{
-        		int newID=questions.getInt(1) + 1;
+        		int newID=Integer.parseInt(temp) + 1;
         		questionData.setID(newID);
         	}
     		db.executeUpdate("INSERT INTO " + tableName +

@@ -6,6 +6,9 @@ import java.io.IOException;
 import WebAppPkg.WebAppDB;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 // Servlet
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -35,20 +38,23 @@ public class ShowAnswerServlet extends HttpServlet
             sb.append(str);
         }
 		int qid = new Gson().fromJson(sb.toString(), int.class);
-        answer = db.executeQuery("select * from " + tableName + " WHERE QID=" + qid);
+		List<Answer> answersToPresent = new ArrayList<Answer>();
+        answer = db.executeQuery("select * from " + tableName + " WHERE QID=" + qid + " order by Likes desc");
         try
         {
-        	Answer Q = new Answer(-1,"","");
-        	if (answer.next())
+        	while (answer.next())
     		{
             	// there is such an answer
-        		Q.setQID(qid);
-        		Q.setText(answer.getString("Text"));
-        		Q.setTime(answer.getString("Time"));
-        		Q.setUID(answer.getString("UID"));
-        		Q.setLikes(answer.getInt("Likes"));      		       		
+        		Answer A = new Answer(-1,-1,"","");
+        		A.setQID(qid);
+        		A.setText(answer.getString("Text"));
+        		A.setTime(answer.getString("Time"));
+        		A.setUID(answer.getString("UID"));
+        		A.setAID(answer.getInt("AID"));
+        		A.setLikes(answer.getInt("Likes"));    
+        		answersToPresent.add(A);
     		}
-        	String json = new Gson().toJson(Q);
+        	String json = new Gson().toJson(answersToPresent);
         	response.setContentType("application/json");
         	response.setCharacterEncoding("UTF-8");
         	response.getWriter().write(json);

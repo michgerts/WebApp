@@ -10,13 +10,16 @@
 				</div>
 			</div>
 		</header>
-		<div ng-controller='AnswerController'>
+		<div ng-controller='AnswerController' ng-init="init()">
 			<div class="panel panel-default">
 				  <div class="panel-body" id="textHigh">{{question.Text}}</div>
 			</div>
 			<h3><span id="user">{{question.Asker}}</span> asked this question at <span id="time">{{question.Time}}</span> and received <span id="likes">{{question.Likes}}</span> Likes</h3>
-			<span id="firstA">You are the first to answer this question! what an honor :)</span>
-			<form class="form-horizontal" ng-submit='ask()'>
+			<div ng-if="listLength==0">
+				<span id="firstA">You are the first to answer this question! what an honor :)</span>
+			</div>
+			<ul id="answersList"></ul>
+			<form class="form-horizontal" ng-submit='submitAnswer()'>
 				<h2 id="dearuser">Dear {{currentUser.NickName}} please submit your answer here:</h2>
 					<div class="form-group has-feedback " id="submit-answer">
 						   		<label class='control-label col-md-3 text-center' for="user-answer" id="MyAnswer">My Answer</label>

@@ -2,6 +2,7 @@ package WebAppPkg;
 
 public class Answer
 {
+	private int AID;
 	private int QID;//question ID
 	private String UID;//User's ID
 	private String Text;//Answer's text
@@ -9,15 +10,19 @@ public class Answer
 	private int Likes;
 
 	
-	public Answer (int Qid, String Uid, String text)
+	public Answer (int aid, int Qid, String Uid, String text)
 	{
+		AID= aid;
 		QID = Qid;
 		UID = Uid;
 		Text = text;
 		Likes= 0;
 		Time = "";		
 	}
-	
+	public int getAID ()
+	{
+		return AID;
+	}
 	public int getQID ()
 	{
 		return QID;
@@ -44,6 +49,10 @@ public class Answer
 	{
 		QID = Qid;
 	}
+	public void setAID(int aid)
+	{
+		AID = aid;
+	}
 	
 	public void setUID(String Uid)
 	{
@@ -64,5 +73,3 @@ public class Answer
 	}
 
 }
-
-
