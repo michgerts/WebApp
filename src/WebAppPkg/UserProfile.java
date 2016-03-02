@@ -7,16 +7,16 @@ public class UserProfile implements Comparable
 {
 	private User user;
 	private List<Question> askedQuestions;
-	private List<Answer> userAnswers;
+	private List<UserAnsweredQuestion> userAnsweredQuestions;
 	private float rating;
 	private List<String> fiveTopTopics;
 	
 	
-	public UserProfile(User user, List<Question> askedQuestions, List<Answer> userAnswers, int rating, List<String> fiveTopTopics)
+	public UserProfile(User user, List<Question> askedQuestions, List<Answer> userAnswers, int rating, List<String> fiveTopTopics, List<UserAnsweredQuestion> userAnsweredQuestions)
 	{
 		this.user = user;
 		this.askedQuestions = askedQuestions;
-		this.userAnswers = userAnswers;
+		this.userAnsweredQuestions = userAnsweredQuestions;
 		this.rating = rating;
 		this.fiveTopTopics = fiveTopTopics;
 		
@@ -26,7 +26,7 @@ public class UserProfile implements Comparable
 	{		
 		this.fiveTopTopics = Collections.emptyList();
 		this.askedQuestions= Collections.emptyList();
-		this.userAnswers=  Collections.emptyList();
+		this.userAnsweredQuestions=  Collections.emptyList();
 	}
 
 	public User getUser()
@@ -39,9 +39,9 @@ public class UserProfile implements Comparable
 		return askedQuestions;
 	}
 	
-	public List<Answer> getUserAnswers()
+	public List<UserAnsweredQuestion> getUserAnsweredQuestions()
 	{
-		return userAnswers;
+		return userAnsweredQuestions;
 	}
 	
 	public float getRating()
@@ -64,9 +64,9 @@ public class UserProfile implements Comparable
 		this.askedQuestions = askedQuestions;
 	}
 	
-	public void setUserAnswers(List<Answer> userAnswers)
+	public void setUserAnsweredQuestions(List<UserAnsweredQuestion> userAnsweredQuestions)
 	{
-		this.userAnswers = userAnswers;
+		this.userAnsweredQuestions = userAnsweredQuestions;
 	}
 	
 	public void setRating(float rating)

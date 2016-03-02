@@ -82,6 +82,7 @@ app.controller('LeaderboardController',function ($scope, $http, $window, $compil
 		
 		$scope.thisUser = {Pic: userToPresent.user.Pic,Nickname: userToPresent.user.NickName,Description: userToPresent.user.Description,Rating: userToPresent.rating,Expertise: userToPresent.fiveTopTopics,FiveLastQuestions: userToPresent.askedQuestions, Name: userToPresent.user.Name};
 		//UserLastFiveQuestions
+		
 		var fiveQuestionTable = $("#UserLastFiveQuestions");
 		
 		
@@ -130,9 +131,59 @@ app.controller('LeaderboardController',function ($scope, $http, $window, $compil
 		    userExpertise.append(span);
 		}
 	    
-	    //td.setAttribute("class", "list-group-item");
-	    //tr.setAttribute("id", response.ID);
-	    //tr.setAttribute("class", response.Asker);
+	    
+	    var thisUserFiveLastAnswers = userToPresent.userAnsweredQuestions;
+	    
+	    var userAnsTable = $("#userAnswersTable");
+		
+	    //var id = response.ID;   
+	    
+	    for(var p=0; p<thisUserFiveLastAnswers.length; p++)
+		{
+	    	var question = thisUserFiveLastAnswers[p].Question;
+	    	var Qtext = question.Text;
+	    	var Qtime = formatDate(question.Time);
+	    	var Qrating = question.Likes;
+	    	var Qtopics = thisUserFiveLastAnswers[p].Topics;
+	    	var Atext = thisUserFiveLastAnswers[p].UserAnswerText;
+	    	var Arating = thisUserFiveLastAnswers[p].UserAnswerRating;
+	    	
+	    	var tr = document.createElement("tr");
+		    var td = document.createElement("td");
+		    td.appendChild(document.createTextNode(' ' + Qtime ));
+		    tr.appendChild(td);
+		    td = document.createElement("td");
+		    td.appendChild(document.createTextNode(' ' + Qtext ));
+		    tr.appendChild(td);
+		    
+		    td = document.createElement("td");
+		    for(var h=0; h<topics.length; h++)
+			{
+		    	var span = document.createElement("span");
+			    span.appendChild(document.createTextNode(Qtopics[h]));
+			    span.setAttribute("class", "label label-default topicLabels");
+			    td.appendChild(span);
+			}
+		    tr.appendChild(td);
+		    
+		    td = document.createElement("td");
+		    td.appendChild(document.createTextNode(' '+ Qrating));
+		    tr.appendChild(td);
+		    userAnsTable.append(tr);
+		    
+		    //setting user's answer details
+		    var tr = document.createElement("tr");
+		    var td = document.createElement("td");
+		    td.setAttribute("colspan", "3");
+		    td.appendChild(document.createTextNode("User's answer: " + Atext ));
+		    tr.appendChild(td);
+		    var td = document.createElement("td");
+		    td.setAttribute("colspan", "1");
+		    td.appendChild(document.createTextNode("Answer rating " + Arating ));
+		    tr.appendChild(td);
+		    
+		    userAnsTable.append(tr);
+		}
 
 	}
 	
