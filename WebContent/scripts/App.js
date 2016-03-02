@@ -21,19 +21,30 @@ app.controller('RouteConroller',function ($scope, $http, $window)
 		$scope.view = siteView;
 		if (siteView == "home") 
 		{
-			var x = getCookie("id");	
-			if (x == "")
-			{
-			$window.location = './#/';
-			}
-			else
-				{
-					var homeView= next.split("/")[6];
-					if (homeView == "questions")
+			var x;
+			$http(
+					{
+						method: 'get',
+						url: 'useridservlet',
+						headers: {'Content-Type': 'application/json'}
+					}).success( function (response)
+					{		
+						x = response;
+
+						//var x = getCookie("id");	
+						if (x == "")
 						{
-							$scope.view=homeView;
-						}				
-				}
+						$window.location = './#/';
+						}
+						else
+							{
+								var homeView= next.split("/")[6];
+								if (homeView == "questions")
+									{
+										$scope.view=homeView;
+									}				
+							}
+					});
 		}
 		else 
 			if(siteView == "leaderboard")
@@ -48,6 +59,8 @@ app.controller('RouteConroller',function ($scope, $http, $window)
 					$scope.view=siteView;
 				}
 	});
+	
+	
 });
 
 app.factory('dataService', function()
@@ -111,3 +124,4 @@ function leftPadZeros(number, targetLength) {
     }
     return output;
 }
+

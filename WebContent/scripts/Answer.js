@@ -22,12 +22,12 @@ app.controller('AnswerController',function ($scope, $http, $window, $compile)
 					}
 				else
 					{
-						var d= new Date($scope.question.Time);
-						var options = {
+						var d= formatDate(new Date($scope.question.Time));
+						/*var options = {
 							    weekday: "long", year: "numeric", month: "short",
 							    day: "numeric", hour: "2-digit", minute: "2-digit"
-							};
-						$scope.question.Time = d.toLocaleTimeString("en-us", options);
+							};*/
+						$scope.question.Time = d;
 					}
 		});
 	
@@ -45,7 +45,11 @@ app.controller('AnswerController',function ($scope, $http, $window, $compile)
 			for(var i=0; i<response.length; i++)
 			{
 				list = $("#answersList");
-				listAnswerItem(response[i], list, $scope);
+				if(i == 0)
+					listAnswerItem(response[i], list, $scope, "true");
+				else
+					listAnswerItem(response[i], list, $scope, "false");
+									
 			}
 			$compile(list)($scope);				
 		});
@@ -124,7 +128,26 @@ app.controller('AnswerController',function ($scope, $http, $window, $compile)
 		var answerId = li.attr("id");
 	    var data =  JSON.stringify("1,"+ answerId);
 	    var replier =li.attr("class");
-	    if (getCookie("id") != replier)
+	    $scope.openListItems=[];
+	    for(var j=0; j<$('li div.visible').length; j++)
+	    {
+	    	var temp= $('li div.visible')[j];
+	    	$scope.openListItems.push(parseInt(temp.parentElement.getAttribute("id")));
+	    }
+	    	
+	    var userId;
+	    $http(
+				{
+					method: 'get',
+					url: 'useridservlet',
+					headers: {'Content-Type': 'application/json'}
+				}).success( function (response)
+				{			
+					userId = response;
+				});
+	    
+	    //if (getCookie("id") != replier)
+	    if (userId != replier)
 	    {
 	    	$http(
 	    			{
@@ -140,7 +163,14 @@ app.controller('AnswerController',function ($scope, $http, $window, $compile)
 	    				for(var i=0; i<response.length; i++)
 	    				{
 	    					list = $("#answersList");
-	    					listAnswerItem(response[i], list, $scope);
+	    					if ($scope.openListItems.indexOf(response[i].AID) == -1)
+	    					{
+	    						listAnswerItem(response[i], list, $scope, "false");   						
+	    					}
+	    					else
+	    					{
+	    						listAnswerItem(response[i], list, $scope, "true");
+	    					}
 	    				}
 	    				$compile(list)($scope);
 	    			});
@@ -151,7 +181,26 @@ app.controller('AnswerController',function ($scope, $http, $window, $compile)
 		var answerId = li.attr("id");
 	    var data =  JSON.stringify("0,"+ answerId);
 	    var replier =li.attr("class");
-	    if (getCookie("id") != replier)
+	    $scope.openListItems=[];
+	    for(var j=0; j<$('li div.visible').length; j++)
+	    {
+	    	var temp= $('li div.visible')[j];
+	    	$scope.openListItems.push(parseInt(temp.parentElement.getAttribute("id")));
+	    }
+	    	    
+	    var userId;
+	    $http(
+				{
+					method: 'get',
+					url: 'useridservlet',
+					headers: {'Content-Type': 'application/json'}
+				}).success( function (response)
+				{			
+					userId = response;
+				});
+	    
+	    //if (getCookie("id") != replier)
+	    if (userId != replier)
 	    {
 	    	$http(
 	    			{
@@ -167,7 +216,14 @@ app.controller('AnswerController',function ($scope, $http, $window, $compile)
 	    				for(var i=0; i<response.length; i++)
 	    				{
 	    					list = $("#answersList");
-	    					listAnswerItem(response[i], list, $scope);
+	    					if ($scope.openListItems.indexOf(response[i].AID) == -1)
+	    					{
+	    						listAnswerItem(response[i], list, $scope, "false");   						
+	    					}
+	    					else
+	    					{
+	    						listAnswerItem(response[i], list, $scope, "true");
+	    					}
 	    				}
 	    				$compile(list)($scope);
 	    			});
@@ -189,8 +245,9 @@ function commaSep (InputText)
 	return res;
 }
 
-function listAnswerItem(ans, list, $scope)
+function listAnswerItem(ans, list, $scope, show)
 {
+	
     var text = ans.Text;
     var aid = ans.AID;
 	var time = formatDate(ans.Time);	      
@@ -201,11 +258,10 @@ function listAnswerItem(ans, list, $scope)
     li.setAttribute("class", uid);
     var image = document.createElement("img");
     var div= document.createElement("div");
-    div.setAttribute('class', "hidden");
     div.appendChild(document.createTextNode(text));
     var button = document.createElement("button");
     button.setAttribute("type", "buton");
-    button.setAttribute("class", "btn btn-success glyphicon glyphicon-thumbs-down");
+    button.setAttribute("class", "btn btn-success glyphicon glyphicon-thumbs-down move");
     button.setAttribute("data-loading-text", " ... ");
     button.setAttribute("ng-click", "voteDownAnswer($event)");
     div.appendChild(button);  
@@ -214,9 +270,21 @@ function listAnswerItem(ans, list, $scope)
     button.setAttribute("class", "btn btn-success glyphicon glyphicon-thumbs-up");
     button.setAttribute("data-loading-text", " ... ");
     button.setAttribute("ng-click", "voteUpAnswer($event)");
+    
     div.appendChild(button);  
-    image.setAttribute('src', "./images/plus-48.png");
-    image.setAttribute('ng-click', "expandAnswer($event)");
+    if (show == "false")
+    {
+	    div.setAttribute('class', "hidden");
+	    image.setAttribute('src', "./images/plus-48.png");
+	    image.setAttribute('ng-click', "expandAnswer($event)");
+    }
+    else
+    {
+    	div.setAttribute('class', "visible");
+ 	    image.setAttribute('src', "./images/Minus-48.png");
+ 	    image.setAttribute('ng-click', "collapseAnswer($event)");
+    	
+    }
     li.appendChild(image);
     li.appendChild(document.createTextNode(uid + " answered this question at " + time + " and got " + likes + " likes"));
     li.appendChild(div);

@@ -1,8 +1,6 @@
 package WebAppPkg;
-
 import java.util.Collections;
 import java.util.List;
-
 public class UserProfile implements Comparable
 {
 	private User user;
@@ -28,7 +26,6 @@ public class UserProfile implements Comparable
 		this.askedQuestions= Collections.emptyList();
 		this.userAnsweredQuestions=  Collections.emptyList();
 	}
-
 	public User getUser()
 	{
 		return user;
@@ -78,11 +75,9 @@ public class UserProfile implements Comparable
 	{
 		 this.fiveTopTopics = fiveTopTopics;
 	}
-
 	@Override
 	public int compareTo(Object userP) {
 		float compareage=((UserProfile)userP).getRating();
-
 		if((this.rating - compareage)> 0)
 			return -1;
 		else
@@ -90,7 +85,5 @@ public class UserProfile implements Comparable
 				return 1;
 			else
 				return 0;
-
 	}
 }
-

@@ -50,6 +50,10 @@
       <servlet-name>VoteAnswerServlet</servlet-name>
       <servlet-class>WebAppPkg.VoteAnswerServlet</servlet-class>
    </servlet>
+   <servlet>
+      <servlet-name>UserIDServlet</servlet-name>
+      <servlet-class>WebAppPkg.UserIDServlet</servlet-class>
+   </servlet>
  
    <!-- Note: All <servlet> elements MUST be grouped together and
          placed IN FRONT of the <servlet-mapping> elements -->
@@ -97,6 +101,10 @@
      <servlet-mapping>
       <servlet-name>VoteAnswerServlet</servlet-name>
       <url-pattern>/voteanswerservlet</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+   <servlet-name>UserIDServlet</servlet-name>
+      <url-pattern>/useridservlet</url-pattern>
    </servlet-mapping>
    
    <welcome-file-list>

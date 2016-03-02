@@ -21,8 +21,18 @@ app.controller('SignUpController',function ($scope, $http, $window)
 				msg = msg.msg; 
 				if (!msg.length)
 				{
-					setCookie("id", $scope.user.Name, 1);
-					$window.location = './#/home';
+					$http(
+							{
+								method: 'post',
+								url: 'useridservlet',
+								headers: {'Content-Type': 'application/json'},
+								data:  JSON.stringify($scope.user.Name)
+							}).success( function (response)
+							{		
+								$window.location = './#/home';
+							});
+					//setCookie("id", $scope.user.Name, 1);
+					
 				}
 				if ($('ul.error-list').children().length)
 				{

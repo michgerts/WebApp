@@ -75,28 +75,44 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 		var questionId = angular.element($event.currentTarget).parent().parent('tr').attr("id");
 	    var data =  JSON.stringify("1,"+ questionId);
 	    var questionAsker =angular.element($event.currentTarget).parent().parent('tr').attr("class");
-	    if (getCookie("id") != questionAsker)
-	    {
-	    	$http(
-	    			{
-	    				method: 'POST',
-	    				url: 'newestquestionsservlet',
-	    				headers: {'Content-Type': 'application/json'},
-	    				data:  JSON.stringify(data)
-	    			}).success( function (response)
-	    			{	
-	    				localStorage.setItem('response', JSON.stringify(response));
-	    				table.empty();
-	    				table = $("#newQuestionsList > tbody:last-child");
-	    				tableHeaders(table);
-	    				for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
-	    				{
-	    					table = $("#newQuestionsList > tbody:last-child");
-	    					listItem(response[i], table);
-	    				}
-	    				$compile(table)($scope);
-	    			});
-	    }
+	    
+	    var userIdFromSession;
+	    $http(
+				{
+					method: 'get',
+					url: 'useridservlet',
+					headers: {'Content-Type': 'application/json'}
+				}).success( function (response)
+				{
+					userIdFromSession = response;
+					//$scope.userIDFromSession = userId;
+				
+		
+	    
+				    //if (getCookie("id") != questionAsker)
+				    if(userIdFromSession != questionAsker)
+				    {
+				    	$http(
+				    			{
+				    				method: 'POST',
+				    				url: 'newestquestionsservlet',
+				    				headers: {'Content-Type': 'application/json'},
+				    				data:  JSON.stringify(data)
+				    			}).success( function (response)
+				    			{	
+				    				localStorage.setItem('response', JSON.stringify(response));
+				    				table.empty();
+				    				table = $("#newQuestionsList > tbody:last-child");
+				    				tableHeaders(table);
+				    				for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
+				    				{
+				    					table = $("#newQuestionsList > tbody:last-child");
+				    					listItem(response[i], table);
+				    				}
+				    				$compile(table)($scope);
+				    			});
+				    }
+				});
 	 }
 	$scope.voteDown = function ($event) {
 		var retrievedPage = localStorage.getItem('pageNum');
@@ -105,28 +121,41 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 		var questionId = angular.element($event.currentTarget).parent().parent('tr').attr("id");
 		var data =  JSON.stringify("0,"+ questionId);
 		var questionAsker =angular.element($event.currentTarget).parent().parent('tr').attr("class");
-		if (getCookie("id") != questionAsker)
-		{
-	    	$http(
-	    			{
-	    				method: 'POST',
-	    				url: 'newestquestionsservlet',
-	    				headers: {'Content-Type': 'application/json'},
-	    				data:  JSON.stringify(data)
-	    			}).success( function (response)
-	    			{	
-	    				localStorage.setItem('response', JSON.stringify(response));
-	    				table.empty();
-	    				table = $("#newQuestionsList > tbody:last-child");
-	    				tableHeaders(table);
-	    				for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
-	    				{
-	    					table = $("#newQuestionsList > tbody:last-child");
-	    					listItem(response[i], table);
-	    				}
-	    				$compile(table)($scope);
-	    			});  
-		}
+		
+		var userIDFROMSession;
+		$http(
+				{
+					method: 'get',
+					url: 'useridservlet',
+					headers: {'Content-Type': 'application/json'}
+				}).success( function (response)
+				{			
+					userIDFROMSession = response;
+		
+					//if (getCookie("id") != questionAsker)
+					if (userIDFROMSession != questionAsker)
+					{
+				    	$http(
+				    			{
+				    				method: 'POST',
+				    				url: 'newestquestionsservlet',
+				    				headers: {'Content-Type': 'application/json'},
+				    				data:  JSON.stringify(data)
+				    			}).success( function (response)
+				    			{	
+				    				localStorage.setItem('response', JSON.stringify(response));
+				    				table.empty();
+				    				table = $("#newQuestionsList > tbody:last-child");
+				    				tableHeaders(table);
+				    				for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
+				    				{
+				    					table = $("#newQuestionsList > tbody:last-child");
+				    					listItem(response[i], table);
+				    				}
+				    				$compile(table)($scope);
+				    			});  
+					}
+				});
 	}
 	
 	

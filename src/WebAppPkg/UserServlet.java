@@ -23,6 +23,8 @@ public class UserServlet extends HttpServlet
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {
+    	try
+        {
     	WebAppDB db = new WebAppDB();
 		ResultSet users;
 		db.createConnection(); 
@@ -34,10 +36,14 @@ public class UserServlet extends HttpServlet
         {
             sb.append(str);
         }
-		User userData = new Gson().fromJson(sb.toString(), User.class);
+        HttpSession sessions = request.getSession();
+    	Object userID = sessions.getAttribute("userID");
+    	
+		//User userData = new Gson().fromJson(sb.toString(), User.class);
+    	User userData = new User();
+    	userData.setName((String)userID);
         users = db.executeQuery("select * from " + tableName + " WHERE NAME='"+userData.getName()+"'");
-        try
-        {
+        
             String json = null;
             users.next();
             userData = new User(users.getInt(1),users.getString(2),"",
@@ -48,7 +54,8 @@ public class UserServlet extends HttpServlet
         	response.setCharacterEncoding("UTF-8");
         	response.getWriter().write(json);
         	response.getWriter().close();
-        	db.closeConnection();
+        	if(db!=null)
+        		db.closeConnection();
 		}
         catch (SQLException e)
         {

@@ -18,7 +18,7 @@
 	font-family: Tangerine;
 	font-size: 4vw;	
 }
-#signOut 
+#signOut
 {
 	margin-left: 25px;
     
@@ -36,7 +36,6 @@
 	font-size: 4vw;
 	color:#c3a343;
 	font-weight: 400;
-}
 }
 #fun
 {
@@ -185,7 +184,11 @@ td
 	overflow-y: scroll;
 }
 
+
 #newestQuestions, #UserProfileInfo{
+
+
+
 	height: 300px;
 	overflow-y: scroll;
 }
@@ -193,9 +196,9 @@ td
 {
 	 text-align: center;
 }
-.button 
+.button
 {
-    position: absolute;
+   position: absolute;
    top: 50%;
 }
 #textHigh
@@ -204,7 +207,22 @@ td
 	font-family: Rancho;
 	font-size: 1.8vw;
 	
+
  } 
+
+ .visible 
+ {
+ 	font-family: Rancho;
+	font-size: 2.8vw;
+	color: green;
+	margin-left: 58px;
+ 
+ }
+ .move
+ {
+ margin-left: 58px;
+ }
+
  #userImage
  {
 	 width:100%;
@@ -243,4 +261,8 @@ td
  	
 .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: #E8DFD7;
+
 }
+
+
+

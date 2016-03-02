@@ -3,9 +3,22 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 {
 	$scope.ask = function ()
 	{
+		var userIdFromSession;
+		$http(
+				{
+					method: 'get',
+					url: 'useridservlet',
+					headers: {'Content-Type': 'application/json'}
+				}).success( function (response)
+				{			
+					userIdFromSession = response;
+					//$scope.userIDFromSession = userId;
+				
+		
+		
 		/*Handels questions submit*/
 		$scope.question.Time= new Date();
-		$scope.question.Asker = getCookie("id");
+		$scope.question.Asker = userIdFromSession;
 		$scope.question.ID=0;
 		$scope.question.Likes=0;
 		$scope.question.Answered=false;
@@ -83,6 +96,7 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 				}
 
 		}	
+				});
 	}
 	
 	$scope.goToLeaderboard  = function ($event) {
@@ -100,4 +114,22 @@ function commaSep (InputText)
 		}
 	res+=(Text[Text.length-1]);
 	return res;
+}
+
+function formatDate(oldDate)
+{
+	oldDate= new Date(oldDate);
+	var day=oldDate.getDate();
+	day = leftPadZeros(day, 2);
+	var month=oldDate.getMonth() + 1;
+	month = leftPadZeros(month, 2);
+	var year=oldDate.getFullYear();
+	var hour=oldDate.getHours();
+	hour = leftPadZeros(hour, 2);
+	var minute=oldDate.getMinutes();
+	minute = leftPadZeros(minute, 2);
+	var second=oldDate.getSeconds();
+	second = leftPadZeros(second, 2);
+	var newDate= day +'/' + month + '/' + year + " " + hour + ":" + minute + ":" + second;
+	return newDate;
 }
