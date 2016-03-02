@@ -14,14 +14,9 @@ import java.util.List;
 
 // Servlet
 import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 // JSON
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 // Data types
 import WebAppPkg.Question;
  
