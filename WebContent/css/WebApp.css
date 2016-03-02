@@ -204,4 +204,12 @@ td
 	font-family: Rancho;
 	font-size: 1.8vw;
 	
- } 
+ }
+ .visible 
+ {
+ 	font-family: Rancho;
+	font-size: 2.8vw;
+	color: green;
+	margin-left: 58px;
+ 
+ }
