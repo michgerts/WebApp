@@ -1,4 +1,5 @@
-<div ng-controller='NewestQuestions' data-ng-init="init()">
+<!DOCTYPE html>
+<div ng-controller='NewestQuestions' data-ng-init="initNewest()">
 	<div >
 		<div>
 			<div>
@@ -12,11 +13,10 @@
 					</table>
 				</div>
 				<div id = "pagingDiv">
-				
-				<ul class="pager" >
-				  <li class="previous" ><a href="" ng-click="prev()" >Prev</a></li>
-				  <li class="next" ><a href="" ng-click="next()" >Next</a></li>
-				</ul>
+					<ul class="pager" >
+					  <li class="previous" ><a href="" ng-click="prev()" >Prev</a></li>
+					  <li class="next" ><a href="" ng-click="next()" >Next</a></li>
+					</ul>
 					
 				</div>
 			</div>

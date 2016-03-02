@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <div class='container' id="SignInContainer">
 	<div ng-controller='HomeController'>
 		<header>
@@ -17,10 +18,17 @@
 		<div>
 			<ng-include src="'./html/Partials/NewestQuestions.html'"></ng-include>
 		</div>
+		<div>
+			<ng-include src="'./html/Partials/AllQuestions.html'"></ng-include>
+		</div>
 		<div class='row'>
 					<div class='col-lg-12' id="SignOut">
-						<img title="Sign Out" alt="SignOut" src= './images/Exit-48.png' width="70" height="62" ng-click='signout()'>
+						<img class="fixed" title="Sign Out" alt="SignOut" src= './images/Exit-48.png' ng-click='signout()'>
+						<a href="./#/leaderboard">
+						<img class= "fixed" title="LeaderBoard" alt="LeaderBoard" src= './images/Superman-48.png'>
+						</a>
 					</div>
+					
 		</div>
 	</div>
 </div>

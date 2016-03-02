@@ -1,13 +1,13 @@
 // Front end js
-app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
+app.controller('AllQuestions',function ($scope, $http, $window, $compile)
 {
-	var table = $("#newQuestionsList > tbody");
-	$scope.initNewest = function ()
+	var table = $("#allQuestionsList > tbody");
+	$scope.init = function ()
 	{
 		$http(
 		{
 			method: 'get',
-			url: 'newestquestionsservlet',
+			url: 'allquestionsservlet',
 			headers: {'Content-Type': 'application/json'}
 		}).success( function (response)
 		{			
@@ -17,16 +17,16 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 			localStorage.setItem('response', JSON.stringify(response));
 			for(var i=0; i<20 && i<response.length; i++)
 			{
-				table = $("#newQuestionsList > tbody:last-child");
-				listItem(response[i], table);
+				table = $("#allQuestionsList > tbody:last-child");
+				listItemAll(response[i], table);
 			}
 			$compile(table)($scope);		
 		});
 	}
 	
-	$scope.next = function()
+	$scope.nextAll = function()
 	{
-		table = $("#newQuestionsList > tbody");
+		table = $("#allQuestionsList > tbody");
 		var retrievedPage = localStorage.getItem('pageNum');
 		var retrievedResponse = localStorage.getItem('response');
 		var pageNumberStr = JSON.parse(retrievedPage);
@@ -34,19 +34,19 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 		pageNummberInt++;
 		var response = JSON.parse(retrievedResponse);
 		table.empty();
-		table = $("#newQuestionsList > tbody:last-child");
+		table = $("#allQuestionsList > tbody:last-child");
 		tableHeaders(table);
 		for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
 		{
-			table = $("#newQuestionsList > tbody:last-child");
-			listItem(response[i], table);
+			table = $("#allQuestionsList > tbody:last-child");
+			listItemAll(response[i], table);
 		}
 		$compile(table)($scope);
 		var pageNum = { "pageNumber": pageNummberInt };
 		// Put the object into storage
 		localStorage.setItem('pageNum', JSON.stringify(pageNum));
 	}
-	$scope.prev = function()
+	$scope.prevAll = function()
 	{
 		var retrievedPage = localStorage.getItem('pageNum');
 		var retrievedResponse = localStorage.getItem('response');
@@ -55,12 +55,12 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 		pageNummberInt--;
 		var response = JSON.parse(retrievedResponse);
 		table.empty();
-		table = $("#newQuestionsList > tbody:last-child");
+		table = $("#allQuestionsList > tbody:last-child");
 		tableHeaders(table);
 		for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
 		{
-			table = $("#newQuestionsList > tbody:last-child");
-			listItem(response[i], table);
+			table = $("#allQuestionsList > tbody:last-child");
+			listItemAll(response[i], table);
 		}
 		$compile(table)($scope);
 		var pageNum = { "pageNumber": pageNummberInt };
@@ -68,7 +68,7 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 		localStorage.setItem('pageNum', JSON.stringify(pageNum));
 	}
 	
-	$scope.voteUp = function ($event) {
+	$scope.voteUpAll = function ($event) {
 	    var retrievedPage = localStorage.getItem('pageNum');		
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;	
@@ -80,25 +80,25 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	    	$http(
 	    			{
 	    				method: 'POST',
-	    				url: 'newestquestionsservlet',
+	    				url: 'allquestionsservlet',
 	    				headers: {'Content-Type': 'application/json'},
 	    				data:  JSON.stringify(data)
 	    			}).success( function (response)
 	    			{	
 	    				localStorage.setItem('response', JSON.stringify(response));
 	    				table.empty();
-	    				table = $("#newQuestionsList > tbody:last-child");
+	    				table = $("#allQuestionsList > tbody:last-child");
 	    				tableHeaders(table);
 	    				for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
 	    				{
-	    					table = $("#newQuestionsList > tbody:last-child");
-	    					listItem(response[i], table);
+	    					table = $("#allQuestionsList > tbody:last-child");
+	    					listItemAll(response[i], table);
 	    				}
 	    				$compile(table)($scope);
 	    			});
 	    }
 	 }
-	$scope.voteDown = function ($event) {
+	$scope.voteDownAll = function ($event) {
 		var retrievedPage = localStorage.getItem('pageNum');
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
@@ -110,19 +110,19 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	    	$http(
 	    			{
 	    				method: 'POST',
-	    				url: 'newestquestionsservlet',
+	    				url: 'allquestionsservlet',
 	    				headers: {'Content-Type': 'application/json'},
 	    				data:  JSON.stringify(data)
 	    			}).success( function (response)
 	    			{	
 	    				localStorage.setItem('response', JSON.stringify(response));
 	    				table.empty();
-	    				table = $("#newQuestionsList > tbody:last-child");
+	    				table = $("#allQuestionsList > tbody:last-child");
 	    				tableHeaders(table);
 	    				for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
 	    				{
-	    					table = $("#newQuestionsList > tbody:last-child");
-	    					listItem(response[i], table);
+	    					table = $("#allQuestionsList > tbody:last-child");
+	    					listItemAll(response[i], table);
 	    				}
 	    				$compile(table)($scope);
 	    			});  
@@ -132,7 +132,7 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	
 });
 
-function listItem(response, table)
+function listItemAll(response, table)
 {
     var text = response.Text;
 	var time = formatDate(response.Time);	      
@@ -161,7 +161,7 @@ function listItem(response, table)
     button.setAttribute("type", "buton");
     button.setAttribute("class", "btn btn-success glyphicon glyphicon-thumbs-down");
     button.setAttribute("data-loading-text", " ... ");
-    button.setAttribute("ng-click", "voteDown($event)");
+    button.setAttribute("ng-click", "voteDownAll($event)");
     td = document.createElement("td");
     td.appendChild(button);  
     tr.appendChild(td);
@@ -169,13 +169,13 @@ function listItem(response, table)
     button.setAttribute("type", "buton");
     button.setAttribute("class", "btn btn-success glyphicon glyphicon-thumbs-up");
     button.setAttribute("data-loading-text", " ... ");
-    button.setAttribute("ng-click", "voteUp($event)");
+    button.setAttribute("ng-click", "voteUpAll($event)");
     td.appendChild(button);  
     tr.appendChild(td);
     table.append(tr);
 }
 
-function tableHeaders(table)
+function tableHeadersAll(table)
 {
 	 table.append( "<th>Question's text</th><th>Time of submission</th><th>Rating</th><th></th>");
 }

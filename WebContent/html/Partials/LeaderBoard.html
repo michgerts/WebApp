@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <div class='container'>
 	<div ng-controller='LeaderboardController' data-ng-init="init()">
 		<header>
@@ -22,9 +23,11 @@
 		
 		<div class='row'>				
 					<p>
-					<img  title="Sign Out" alt="signOut" src= './images/Exit-48.png' width="70" height="62" ng-click='signout()'/>
+					<a href="./#/">
+					<img class="fixed" title="Sign Out" alt="signOut" src= './images/Exit-48.png'>
+					</a>
 					<a href="./#/home">
-					<img title="Home" alt="home" src= './images/Home-48.png' width="70" height="62">
+					<img class="fixed" title="Home" alt="home" src= './images/Home-48.png'>
 					</a>
 					</p>
 		</div>

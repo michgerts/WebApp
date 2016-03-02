@@ -252,12 +252,14 @@ function listAnswerItem(ans, list, $scope, show)
     {
 	    div.setAttribute('class', "hidden");
 	    image.setAttribute('src', "./images/plus-48.png");
+	    image.setAttribute('alt', "Expand");
 	    image.setAttribute('ng-click', "expandAnswer($event)");
     }
     else
     {
     	div.setAttribute('class', "visible");
  	    image.setAttribute('src', "./images/Minus-48.png");
+ 	   image.setAttribute('alt', "Collapse");
  	    image.setAttribute('ng-click', "collapseAnswer($event)");
     	
     }
