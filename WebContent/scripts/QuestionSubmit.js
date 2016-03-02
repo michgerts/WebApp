@@ -4,7 +4,7 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 	$scope.ask = function ()
 	{
 		/*Handels questions submit*/
-		$scope.question.Time= formatDate(new Date());
+		$scope.question.Time= new Date();
 		$scope.question.Asker = getCookie("id");
 		$scope.question.ID=0;
 		$scope.question.Likes=0;

@@ -18,7 +18,7 @@
 	font-family: Tangerine;
 	font-size: 4vw;	
 }
-#signOut 
+#signOut
 {
 	margin-left: 25px;
     
@@ -36,7 +36,6 @@
 	font-size: 4vw;
 	color:#c3a343;
 	font-weight: 400;
-}
 }
 #fun
 {
@@ -193,9 +192,9 @@ td
 {
 	 text-align: center;
 }
-.button 
+.button
 {
-    position: absolute;
+   position: absolute;
    top: 50%;
 }
 #textHigh
