@@ -29,7 +29,6 @@ app.controller('LeaderboardController',function ($scope, $http, $window, $compil
 	    var pic = response.user.Pic;
 	    var nick = response.user.NickName;
 	    var rating = response.rating;
-
 	    var tr = document.createElement("tr");
 	    var td = document.createElement("td");
 	    var img = document.createElement("img");
@@ -184,7 +183,6 @@ app.controller('LeaderboardController',function ($scope, $http, $window, $compil
 		    
 		    userAnsTable.append(tr);
 		}
-
 	}
 	
 	
