@@ -26,6 +26,9 @@ public class LoginServlet extends HttpServlet
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {
+    	HttpSession sessions = request.getSession();
+    	sessions.setAttribute("userID", 1);
+    	
     	WebAppDB db = new WebAppDB();
 		ResultSet users;
 		db.createConnection(); 
@@ -73,7 +76,7 @@ public class LoginServlet extends HttpServlet
         	response.setCharacterEncoding("UTF-8");
         	response.getWriter().write(json);
         	response.getWriter().close();
-        	db.closeConnection();
+        	//db.closeConnection();
 		}
         catch (SQLException e)
         {

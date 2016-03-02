@@ -70,19 +70,22 @@ public class LeaderboardServlet extends HttpServlet
             	
             	userP.setRating(rating);
             	
-            	ResultSet userInfo = db.executeQuery("select Pic, Nickname from USERS where Name = '"+userName+"'");//get user's picture and nickname
+            	ResultSet userInfo = db.executeQuery("select Pic, Nickname, Description from USERS where Name = '"+userName+"'");//get user's picture and nickname
         		String pic = "";
         		String nick = "";
+        		String desc = "";
         		if(userInfo.next())
         		{
         			pic = userInfo.getString("Pic");
         			nick = userInfo.getString("Nickname");
+        			desc = userInfo.getString("Description");
         		}
         			
         		User user = new User();
             	user.setName(userName);
             	user.setNickName(nick);
             	user.setPic(pic);
+            	user.setDescription(desc);
             	userP.setUser(user);
             	
             	//setting the expertise
@@ -101,7 +104,7 @@ public class LeaderboardServlet extends HttpServlet
             	
             	
             	//setting 5 last asked questions
-            	ResultSet userAskedQuestions = db.executeQuery("select Q.Time, Q.Text, Q.Likes from QUESTIONS as Q where Q.Asker   = '"+userName+"' order by Time desc");
+            	ResultSet userAskedQuestions = db.executeQuery("select Q.ID, Q.Time, Q.Text, Q.Likes from QUESTIONS as Q where Q.Asker   = '"+userName+"' order by Time desc");
             	List<Question> askedQuestions = new ArrayList<Question>(); 
             	Question question = new Question();
             	String time, text, likes;
@@ -111,10 +114,24 @@ public class LeaderboardServlet extends HttpServlet
             		time = userAskedQuestions.getString("Time");
             		text = userAskedQuestions.getString("Text");
             		likes = userAskedQuestions.getString("Likes");
+            		int qid = Integer.parseInt(userAskedQuestions.getString("ID"));
             		question.setText(text);
             		question.setTime(time);
             		question.setLikes(Integer.parseInt(likes));
-            		askedQuestions.add(question);
+            		
+            		
+            		//get all of this question's topics
+            		ResultSet questionTopics = db.executeQuery("select * from TOPICS as T where T.QID = "+qid);
+                	List<String> qTopics = new ArrayList<String>(); 
+                	String qTopic;
+                	while(questionTopics.next())
+            		{
+                		qTopic = questionTopics.getString("Topic");
+                		qTopics.add(qTopic);
+            		}
+                	
+                	question.setTopics(qTopics);
+                	askedQuestions.add(question);
             		k++;
         		}
             	

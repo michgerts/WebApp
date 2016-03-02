@@ -40,7 +40,7 @@ public class AnswerSubmitServlet extends HttpServlet
         {
             sb.append(str);
         }
-        Answer answerData = new Gson().fromJson(sb.toString(), Answer.class);
+		Answer answerData = new Gson().fromJson(sb.toString(), Answer.class);
 		ResultSet answers;
 		answers = db.executeQuery("select max(AID) AS AID from " + tableName);
 		try
@@ -63,21 +63,24 @@ public class AnswerSubmitServlet extends HttpServlet
 				 "VALUES ("+answerData.getAID() +"," +answerData.getQID()+",'"+answerData.getUID()+
 				 "','"+answerData.getText()+"','"+answerData.getTime()+
 				 "',"+answerData.getLikes()+")");
-        	db.executeUpdate("UPDATE QUESTIONS SET " +
+		//db.commit();
+		db.executeUpdate("UPDATE QUESTIONS SET " +
 				 "ANSWERED='TRUE' " +
 				 "WHERE ID="+answerData.getQID());
-	    	JsonParser parser = new JsonParser();
-	    	JsonObject o = parser.parse("{\"msg\":"+answerData.getQID() +"}").getAsJsonObject();
-	    	String json = new Gson().toJson(o);
-	    	response.setContentType("application/json");
-	    	response.setCharacterEncoding("UTF-8");
-	    	response.getWriter().write(json);
-	    	response.getWriter().close();
-	    	db.closeConnection();
-        }
-        catch (SQLException e)
-        {
-			e.printStackTrace();
+		//db.commit();
+    	JsonParser parser = new JsonParser();
+    	JsonObject o = parser.parse("{\"msg\":"+answerData.getQID() +"}").getAsJsonObject();
+    	String json = new Gson().toJson(o);
+    	response.setContentType("application/json");
+    	response.setCharacterEncoding("UTF-8");
+    	response.getWriter().write(json);
+    	response.getWriter().close();
+    	//db.closeConnection();
+	}
+		catch(Exception e)
+		{
+			
 		}
-    }
 }
+}
+
