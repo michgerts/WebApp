@@ -106,11 +106,12 @@ public class LeaderboardServlet extends HttpServlet
             	//setting 5 last asked questions
             	ResultSet userAskedQuestions = db.executeQuery("select Q.ID, Q.Time, Q.Text, Q.Likes from QUESTIONS as Q where Q.Asker   = '"+userName+"' order by Time desc");
             	List<Question> askedQuestions = new ArrayList<Question>(); 
-            	Question question = new Question();
+
             	String time, text, likes;
             	int k=0;
             	while(userAskedQuestions.next() && k<5)
         		{
+            		Question question = new Question();
             		time = userAskedQuestions.getString("Time");
             		text = userAskedQuestions.getString("Text");
             		likes = userAskedQuestions.getString("Likes");
@@ -141,11 +142,11 @@ public class LeaderboardServlet extends HttpServlet
             	//setting 5 last answers and their questions
             	ResultSet userAnsweredQuestionsSQL = db.executeQuery("select A.Time as ATIME, A.Text as ATEXT, A.Likes as ALIKES, Q.Time as QTIME, Q.Text as QTEXT, Q.Likes as QLIKES, Q.ID as QID from ANSWERS as A join QUESTIONS as Q on A.QID = Q.ID where A.UID  = '"+userName+"' order by A.Time desc");
             	List<UserAnsweredQuestion> userAnsweredQuestions = new ArrayList<UserAnsweredQuestion>();
-            	UserAnsweredQuestion userAnsweredQInfo = new UserAnsweredQuestion();
             	Question userAnsweredQ;
             	int t=0;
             	while(userAnsweredQuestionsSQL.next() && t<5)
         		{
+            		UserAnsweredQuestion userAnsweredQInfo = new UserAnsweredQuestion();
             		userAnsweredQInfo.setUserAnswerText(userAnsweredQuestionsSQL.getString("ATEXT"));
             		userAnsweredQInfo.setUserAnswerRating(Integer.parseInt(userAnsweredQuestionsSQL.getString("ALIKES")));
             		userAnsweredQ = new Question();

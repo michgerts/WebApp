@@ -210,7 +210,7 @@ td
 	 width:100%;
 	 height:100%;
  }
-#userFiveQuestionsPanel, #userExpertisePanel
+#userFiveQuestionsPanel, #userExpertisePanel, #userAnswersPanel
  {
  	background-color: #E7BDE9;
  	font-family: Rancho;
@@ -218,9 +218,9 @@ td
 	overflow: auto;
  }
  
- #userFiveQuestionsPanelTitle, #userFiveQuestionsPanelHeading, #userExpertisePanelHead
+ #userFiveQuestionsPanelTitle, #userFiveQuestionsPanelHeading, #userExpertisePanelHead, #userAnswersHeading, #userAnswersTitle
  {
- 	background-color: #DAC6C6;
+ 	background-color: #B5ACA9;
  	font-family: Rancho;
 	font-size: 1.6vw;
  }
@@ -241,3 +241,6 @@ td
 	overflow-y: scroll;
  }
  	
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #E8DFD7;
+}
