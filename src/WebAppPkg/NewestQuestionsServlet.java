@@ -29,6 +29,7 @@ public class NewestQuestionsServlet extends HttpServlet
 {//this will submit an answer -- need to change the name
 	private static final long serialVersionUID = 1L;
     private String tableName = "QUESTIONS";
+
 	@Override
    
    public void doGet (HttpServletRequest request, HttpServletResponse response)
@@ -43,7 +44,6 @@ public class NewestQuestionsServlet extends HttpServlet
     	
             StringBuilder sb = new StringBuilder();
             BufferedReader br = request.getReader();
-            //StringBuffer requestURL = request.getRequestURL();
             String str;
             while ((str = br.readLine()) != null)
             {
