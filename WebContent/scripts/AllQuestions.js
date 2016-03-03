@@ -13,8 +13,8 @@ app.controller('AllQuestions',function ($scope, $http, $window, $compile)
 		{			
 			var pageNum = { "pageNumber": 0 };
 			// Put the object into storage
-			localStorage.setItem('pageNum', JSON.stringify(pageNum));
-			localStorage.setItem('response', JSON.stringify(response));
+			$scope.pageNumS = JSON.stringify(pageNum);
+			$scope.responseS = JSON.stringify(response);
 			for(var i=0; i<20 && i<response.length; i++)
 			{
 				table = $("#allQuestionsList > tbody:last-child");
@@ -27,49 +27,62 @@ app.controller('AllQuestions',function ($scope, $http, $window, $compile)
 	$scope.nextAll = function()
 	{
 		table = $("#allQuestionsList > tbody");
-		var retrievedPage = localStorage.getItem('pageNum');
-		var retrievedResponse = localStorage.getItem('response');
+		var retrievedPage = $scope.pageNumS;
+		var retrievedResponse = $scope.responseS;
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
 		pageNummberInt++;
 		var response = JSON.parse(retrievedResponse);
-		table.empty();
-		table = $("#allQuestionsList > tbody:last-child");
-		tableHeaders(table);
-		for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
+		if(pageNummberInt*20< response.length)
 		{
+			table.empty();
 			table = $("#allQuestionsList > tbody:last-child");
-			listItemAll(response[i], table);
+			tableHeaders(table);
+			for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
+			{
+				table = $("#allQuestionsList > tbody:last-child");
+				listItemAll(response[i], table);
+			}
 		}
+		else
+			pageNummberInt--;
+		
 		$compile(table)($scope);
 		var pageNum = { "pageNumber": pageNummberInt };
-		// Put the object into storage
-		localStorage.setItem('pageNum', JSON.stringify(pageNum));
+
+		$scope.pageNumS = JSON.stringify(pageNum);
 	}
 	$scope.prevAll = function()
 	{
-		var retrievedPage = localStorage.getItem('pageNum');
-		var retrievedResponse = localStorage.getItem('response');
+		var retrievedPage = $scope.pageNumS;
+		var retrievedResponse = $scope.responseS; 
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
 		pageNummberInt--;
 		var response = JSON.parse(retrievedResponse);
-		table.empty();
-		table = $("#allQuestionsList > tbody:last-child");
-		tableHeaders(table);
-		for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
+		if(pageNummberInt >=0)
 		{
+			table.empty();
 			table = $("#allQuestionsList > tbody:last-child");
-			listItemAll(response[i], table);
+			tableHeaders(table);
+			for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
+			{
+				table = $("#allQuestionsList > tbody:last-child");
+				listItemAll(response[i], table);
+			}
 		}
+		else 
+			pageNummberInt = 0;
+		
 		$compile(table)($scope);
 		var pageNum = { "pageNumber": pageNummberInt };
 		// Put the object into storage
-		localStorage.setItem('pageNum', JSON.stringify(pageNum));
+
+		$scope.pageNumS = JSON.stringify(pageNum); 
 	}
 	
 	$scope.voteUpAll = function ($event) {
-	    var retrievedPage = localStorage.getItem('pageNum');		
+	    var retrievedPage = $scope.pageNumS;	
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;	
 		var questionId = angular.element($event.currentTarget).parent().parent('tr').attr("id");
@@ -96,7 +109,7 @@ app.controller('AllQuestions',function ($scope, $http, $window, $compile)
 		    				data:  JSON.stringify(data)
 		    			}).success( function (response)
 		    			{	
-		    				localStorage.setItem('response', JSON.stringify(response));
+		    				$scope.responseS = JSON.stringify(response);
 		    				table.empty();
 		    				table = $("#allQuestionsList > tbody:last-child");
 		    				tableHeaders(table);
@@ -112,7 +125,7 @@ app.controller('AllQuestions',function ($scope, $http, $window, $compile)
 		});
 	 }
 	$scope.voteDownAll = function ($event) {
-		var retrievedPage = localStorage.getItem('pageNum');
+		var retrievedPage = $scope.pageNumS;
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
 		var questionId = angular.element($event.currentTarget).parent().parent('tr').attr("id");
@@ -139,7 +152,7 @@ app.controller('AllQuestions',function ($scope, $http, $window, $compile)
 		    				data:  JSON.stringify(data)
 		    			}).success( function (response)
 		    			{	
-		    				localStorage.setItem('response', JSON.stringify(response));
+		    				$scope.responseS = JSON.stringify(response);
 		    				table.empty();
 		    				table = $("#allQuestionsList > tbody:last-child");
 		    				tableHeaders(table);

@@ -13,7 +13,7 @@ app.controller('LeaderboardController',function ($scope, $http, $window, $compil
 			headers: {'Content-Type': 'application/json'}
 		}).success( function (response)
 		{			
-			//localStorage.setItem('leaderboard', JSON.stringify(response));
+
 			$scope.leaderboardS = JSON.stringify(response);
 			for(var i=0; i<20 && i<response.length; i++)
 			{
@@ -34,7 +34,7 @@ app.controller('LeaderboardController',function ($scope, $http, $window, $compil
 			headers: {'Content-Type': 'application/json'}
 		}).success( function (response)
 		{			
-			//localStorage.setItem('leaderboard', JSON.stringify(response));
+
 			$scope.leaderboardS = JSON.stringify(response);
 			for(var i=0; i<20 && i<response.length; i++)
 			{

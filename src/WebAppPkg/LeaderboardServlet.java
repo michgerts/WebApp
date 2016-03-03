@@ -96,8 +96,13 @@ public class LeaderboardServlet extends HttpServlet
             	while(userExpertise.next() && j<5)
         		{
             		topic = userExpertise.getString("Topic");
-            		fiveTopTopics.add(topic);
-            		j++;
+            		if(!topicExistsInExpertise(topic, (ArrayList<String>)fiveTopTopics))
+            		{
+            			fiveTopTopics.add(topic);
+            			j++;
+            		}
+            			
+            		
         		}
             	
             	userP.setTopFiveTopics(fiveTopTopics);
@@ -222,6 +227,19 @@ public class LeaderboardServlet extends HttpServlet
         	}
         }
 		return true;
+    	
+    }
+    
+    private boolean topicExistsInExpertise(String name, ArrayList<String> topics)
+    {
+    	Iterator<String> iterator = topics.iterator();
+        while (iterator.hasNext()) {
+        	String currTopic = iterator.next();
+            if (currTopic.equals(name)) {
+            	return true;
+        	}
+        }
+		return false;
     	
     }
     
