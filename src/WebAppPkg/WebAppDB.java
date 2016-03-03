@@ -74,7 +74,7 @@ public class WebAppDB
     public void closeConnection()
     {
     	try {
-    		if(conn == null || !conn.isClosed())
+    		if(conn != null && !conn.isClosed())
     			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
