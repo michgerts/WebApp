@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Collections;
 // Servlet
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
@@ -59,9 +59,10 @@ public class NewestQuestionsServlet extends HttpServlet
             		Question question = new Question( Integer.parseInt(questions.getString("ID")), questions.getString("Text"),
                     		questions.getString("Time"), questions.getString("Asker"), Integer.parseInt(questions.getString("Likes")) , 
                     		Boolean.parseBoolean(questions.getString("Answered")) );
-                    questionsToPresent.add(question);
+	            	float rating = (float) 0.2*question.getLikes();
+	            	question.setRating(rating);
+	            	questionsToPresent.add(question);
     		}
-            
             String categoriesJson = new Gson().toJson(questionsToPresent);
             response.setContentType("application/json");
 	    	response.setCharacterEncoding("UTF-8");
@@ -127,7 +128,9 @@ public class NewestQuestionsServlet extends HttpServlet
                 		Question question = new Question( Integer.parseInt(questions.getString("ID")), questions.getString("Text"),
                         		questions.getString("Time"), questions.getString("Asker"), Integer.parseInt(questions.getString("Likes")) , 
                         		Boolean.parseBoolean(questions.getString("Answered")) );
-                        questionsToPresent.add(question);
+    	            	float rating = (float) 0.2*question.getLikes();
+    	            	question.setRating(rating);
+                		questionsToPresent.add(question);
         		}
 	                
 	            String categoriesJson = new Gson().toJson(questionsToPresent);

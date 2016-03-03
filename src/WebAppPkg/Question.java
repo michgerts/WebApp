@@ -1,8 +1,9 @@
 package WebAppPkg;
 
 import java.util.List;
+import java.util.Collections;
 
-public class Question
+public class Question implements Comparable<Question>
 {
 	private int ID;
 	private String Text;
@@ -10,6 +11,7 @@ public class Question
 	private String Asker;
 	private int Likes;	
 	private boolean Answered;
+	private float Rating;
 	private List<String> Topics;
 	
 	public Question (int id, String text, String time, String asker, int likes, boolean answered)
@@ -20,6 +22,7 @@ public class Question
 		Asker = asker;
 		Likes = likes;
 		Answered = answered;
+		Rating = 0;
 	}
 	public Question() {
 		
@@ -36,6 +39,10 @@ public class Question
 	public String getTime ()
 	{
 		return Time;
+	}
+	public float getRating ()
+	{
+		return Rating;
 	}
 	public String getAsker ()
 	{
@@ -82,6 +89,22 @@ public class Question
 	public void setTopics (List<String> topics)
 	{
 		Topics = topics;
+	}
+	public void setRating (float rating)
+	{
+		Rating = rating;
+	}
+	@Override
+	public int compareTo(Question comparestq)
+	{
+	        float comparerate=((Question)comparestq).getRating();
+	        /* For Ascending order*/
+	        if (this.Rating>comparerate)
+	        	return -1;
+	        else if (this.Rating<comparerate)
+	        	return 1;
+	        else
+	        	return 0;
 	}
 }
 

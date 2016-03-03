@@ -10,6 +10,7 @@ import WebAppPkg.WebAppDB;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 // Servlet
@@ -54,9 +55,18 @@ public class AllQuestionsServlet extends HttpServlet
             		Question question = new Question( Integer.parseInt(questions.getString("ID")), questions.getString("Text"),
                     		questions.getString("Time"), questions.getString("Asker"), Integer.parseInt(questions.getString("Likes")) , 
                     		Boolean.parseBoolean(questions.getString("Answered")) );
-                    questionsToPresent.add(question);
+            		ResultSet likesSet= db.executeQuery("SELECT AVG(Likes) AS Likes FROM Answers Where QID="+question.getID());
+	            	int likes = 0;
+	            	String numLikesStr = null;
+	            	if(likesSet.next())
+	            		numLikesStr = likesSet.getString("Likes");
+	            		if  (numLikesStr!=null)
+	            			likes = Integer.parseInt(likesSet.getString("Likes"));
+	            	float rating = (float) (0.2*question.getLikes()+0.8*likes);
+	            	question.setRating(rating);
+            		questionsToPresent.add(question);
     		}
-            
+            Collections.sort(questionsToPresent);
             String categoriesJson = new Gson().toJson(questionsToPresent);
             response.setContentType("application/json");
 	    	response.setCharacterEncoding("UTF-8");
@@ -115,16 +125,25 @@ public class AllQuestionsServlet extends HttpServlet
     			}
             
     			
-    			questions = db.executeQuery("SELECT * FROM "+ tableName+ " where answered=false order by time desc");
+    			questions = db.executeQuery("SELECT * FROM "+ tableName+ " order by time desc");
                 
                 while (questions.next())
         		{
                 		Question question = new Question( Integer.parseInt(questions.getString("ID")), questions.getString("Text"),
                         		questions.getString("Time"), questions.getString("Asker"), Integer.parseInt(questions.getString("Likes")) , 
                         		Boolean.parseBoolean(questions.getString("Answered")) );
-                        questionsToPresent.add(question);
+                		ResultSet likesSet= db.executeQuery("SELECT AVG(Likes) AS Likes FROM Answers Where QID="+question.getID());
+    	            	int likes = 0;
+    	            	String numLikesStr = null;
+    	            	if(likesSet.next())
+    	            		numLikesStr = likesSet.getString("Likes");
+    	            		if  (numLikesStr!=null)
+    	            			likes = Integer.parseInt(likesSet.getString("Likes"));
+    	            	float rating = (float) (0.2*question.getLikes()+0.8*likes);
+    	            	question.setRating(rating);
+                		questionsToPresent.add(question);
         		}
-	                
+                Collections.sort(questionsToPresent);
 	            String categoriesJson = new Gson().toJson(questionsToPresent);
 	            response.setContentType("application/json");
 		    	response.setCharacterEncoding("UTF-8");

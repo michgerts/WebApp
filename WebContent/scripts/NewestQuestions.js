@@ -86,9 +86,6 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 				{
 					userIdFromSession = response;
 					//$scope.userIDFromSession = userId;
-				
-		
-	    
 				    //if (getCookie("id") != questionAsker)
 				    if(userIdFromSession != questionAsker)
 				    {
@@ -110,6 +107,7 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 				    					listItem(response[i], table);
 				    				}
 				    				$compile(table)($scope);
+				    				$scope.$emit("UpdateFromNew");
 				    			});
 				    }
 				});
@@ -153,11 +151,17 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 				    					listItem(response[i], table);
 				    				}
 				    				$compile(table)($scope);
+				    				$scope.$emit("UpdateFromNew");
 				    			});  
 					}
 				});
 	}
-	
+	$scope.$on("UpdateFromAllB", function (event, args)
+	{
+		table = $("#newQuestionsList > tbody"); 
+		table.empty();
+		$scope.initNewest();
+	});
 	
 });
 
@@ -165,7 +169,7 @@ function listItem(response, table)
 {
     var text = response.Text;
 	var time = formatDate(response.Time);	      
-    var likes = response.Likes;
+    var likes = response.Rating;
     var id = response.ID;   
     var a = document.createElement("a");
     var tr = document.createElement("tr");
