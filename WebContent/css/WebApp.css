@@ -92,23 +92,28 @@ html
 {
     height: 625px;
 }
-#happy
+#happy, .lead
 {
 	font-family: Tangerine;
-	font-size:6vw;
+	font-size: 6vw;
 	color:#c3a343;
 }
-#MyQuestion, #MyTopic, #textArea, #leaderboardTable
+#leadBtn
+{
+	font-family: Tangerine;
+	font-size: 3.2vw;
+}
+#MyQuestion, #MyTopic, .textArea, #leaderboardTable
 {
 	font-family: Rancho;
 	font-size: 1.8vw;
 	text-align: left;
 }
-#pleaseProvide, #userProfileHeadline
+
+#pleaseProvide, .userProfileHeadline
 {
 	font-family: Rancho;
 	text-align: center;
-
 }
 #topicErrors
 {
@@ -184,11 +189,8 @@ td
 	overflow-y: scroll;
 }
 
-
-#newestQuestions, #UserProfileInfo{
-
-
-
+#newestQuestions,  #UserProfileInfo, #allQuestions
+{
 	height: 300px;
 	overflow-y: scroll;
 }
@@ -208,7 +210,7 @@ td
 	font-size: 1.8vw;
 	
 
- } 
+} 
 
  .visible 
  {
@@ -259,10 +261,18 @@ td
 	overflow-y: scroll;
  }
  	
-.table-striped>tbody>tr:nth-of-type(odd) {
+.table-striped>tbody>tr:nth-of-type(odd) 
+{
     background-color: #E8DFD7;
-
 }
 
-
-
+.fixed
+{
+	width: 70px;
+	height: 62px;
+}
+#newestQuestions
+{
+	
+	margin-bottom: 40px;
+}

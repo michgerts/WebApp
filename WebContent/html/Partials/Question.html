@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <div ng-controller='QuestionSubmit'>
 	<div class='container'>
 		<div class='row'>
@@ -7,23 +7,24 @@
 				<img class = "img-rounded" id="familyGuy" alt="peter" src= './images/family_guy_internet.jpeg' width="300" height="250">
 				<form class="form-horizontal" ng-submit='ask()'>
 				<div class="form-group has-feedback " id="submit-question">
-			   		<label class='control-label col-md-3 text-center' for="user-question" id="MyQuestion">My Question</label>
-			   		<div class='col-md-9' id="texting">
-				   		<textarea class="form-control" name="user-question" placeholder="Question" ng-model='question.Text' id="textArea" ></textarea>
+			   		<label class='control-label col-md-3 text-center' id="MyQuestion">My Question:</label>
+			   		<div class='col-md-9'>
+				   		<textarea class="form-control textArea" name="user-question" placeholder="Question" ng-model='question.Text' ></textarea>
 			  	 	</div>
 			  	</div>		
 				<div class="form-group has-feedback" id="submit-topic">
-			   			<label class='control-label col-md-3 text-center' for="user-topic" id="MyTopic">The topic\s:</label>	   			
+			   			<label class='control-label col-md-3 text-center' id="MyTopic">The topic\s:</label>	   			
 			   		<div class='col-md-9' id="texting">
-				   		<textarea class="form-control" name="user-topic" placeholder="Topic/s" ng-model='topic.Text' id="textArea" ng-init='topic.Text=""'></textarea>
+				   		<textarea class="form-control textArea" name="user-topic" placeholder="Topic/s" ng-model='topic.Text' ng-init='topic.Text=""'></textarea>
 			  	 	</div>
 			  	 	<div class='col-md-9' id="pleaseProvide">
 			  	 		<h3>please provide each topic under 50 chars and separate them by "," and keep your question under 300 chars, thanks!</h3>	
 			  	 	</div>
 			  	 </div>
 				 <button type="submit" class="btn btn-primary center-block" id="submitBtn">Submit my question</button>
-				 <button type="button" class="btn btn-link" ng-click = "goToLeaderboard()">
-				 	<span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>Leaderboard</button>
+				 <br>
+				 <button type="button" class="btn btn-link center-block" id="leadBtn" ng-click = "goToLeaderboard()">
+				 	<span class="glyphicon glyphicon-blackboard lead" aria-hidden="true"></span> Take me to the LeaderBoard</button>
 				</form>
 				<div class='container'>
 					<div class = 'row'>
