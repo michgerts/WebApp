@@ -10,22 +10,18 @@ import WebAppPkg.WebAppDB;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collections;
+import java.util.List;
+
 // Servlet
 import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 // JSON
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 // Data types
 import WebAppPkg.Question;
  
-public class NewestQuestionsServlet extends HttpServlet
+public class AllQuestionsServlet extends HttpServlet
 {//this will submit an answer -- need to change the name
 	private static final long serialVersionUID = 1L;
     private String tableName = "QUESTIONS";
@@ -51,7 +47,7 @@ public class NewestQuestionsServlet extends HttpServlet
             }
 
     		   
-			questions = db.executeQuery("SELECT * FROM "+ tableName+ " where answered=false order by time desc");
+			questions = db.executeQuery("SELECT * FROM "+ tableName+ "  order by time desc");
             
             
             while (questions.next())
@@ -59,10 +55,18 @@ public class NewestQuestionsServlet extends HttpServlet
             		Question question = new Question( Integer.parseInt(questions.getString("ID")), questions.getString("Text"),
                     		questions.getString("Time"), questions.getString("Asker"), Integer.parseInt(questions.getString("Likes")) , 
                     		Boolean.parseBoolean(questions.getString("Answered")) );
-	            	float rating = (float) 0.2*question.getLikes();
+            		ResultSet likesSet= db.executeQuery("SELECT AVG(Likes) AS Likes FROM Answers Where QID="+question.getID());
+	            	int likes = 0;
+	            	String numLikesStr = null;
+	            	if(likesSet.next())
+	            		numLikesStr = likesSet.getString("Likes");
+	            		if  (numLikesStr!=null)
+	            			likes = Integer.parseInt(likesSet.getString("Likes"));
+	            	float rating = (float) (0.2*question.getLikes()+0.8*likes);
 	            	question.setRating(rating);
-	            	questionsToPresent.add(question);
+            		questionsToPresent.add(question);
     		}
+            Collections.sort(questionsToPresent);
             String categoriesJson = new Gson().toJson(questionsToPresent);
             response.setContentType("application/json");
 	    	response.setCharacterEncoding("UTF-8");
@@ -121,18 +125,25 @@ public class NewestQuestionsServlet extends HttpServlet
     			}
             
     			
-    			questions = db.executeQuery("SELECT * FROM "+ tableName+ " where answered=false order by time desc");
+    			questions = db.executeQuery("SELECT * FROM "+ tableName+ " order by time desc");
                 
                 while (questions.next())
         		{
                 		Question question = new Question( Integer.parseInt(questions.getString("ID")), questions.getString("Text"),
                         		questions.getString("Time"), questions.getString("Asker"), Integer.parseInt(questions.getString("Likes")) , 
                         		Boolean.parseBoolean(questions.getString("Answered")) );
-    	            	float rating = (float) 0.2*question.getLikes();
+                		ResultSet likesSet= db.executeQuery("SELECT AVG(Likes) AS Likes FROM Answers Where QID="+question.getID());
+    	            	int likes = 0;
+    	            	String numLikesStr = null;
+    	            	if(likesSet.next())
+    	            		numLikesStr = likesSet.getString("Likes");
+    	            		if  (numLikesStr!=null)
+    	            			likes = Integer.parseInt(likesSet.getString("Likes"));
+    	            	float rating = (float) (0.2*question.getLikes()+0.8*likes);
     	            	question.setRating(rating);
                 		questionsToPresent.add(question);
         		}
-	                
+                Collections.sort(questionsToPresent);
 	            String categoriesJson = new Gson().toJson(questionsToPresent);
 	            response.setContentType("application/json");
 		    	response.setCharacterEncoding("UTF-8");

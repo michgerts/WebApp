@@ -23,7 +23,7 @@
 			<form class="form-horizontal" ng-submit='submitAnswer()'>
 				<h2 id="dearuser">Dear {{currentUser.NickName}} please submit your answer here:</h2>
 					<div class="form-group has-feedback " id="submit-answer">
-						   		<label class='control-label col-md-3 text-center' for="user-answer" id="MyAnswer">My Answer</label>
+						   		<label class='control-label col-md-3 text-center' id="MyAnswer">My Answer</label>
 						   		<div class='col-md-9' id="texting">
 							   		<textarea class="form-control" name="user-answer" placeholder="Answer" ng-model='answer.Text' id="textArea" ></textarea>
 						  	 	</div>
@@ -34,9 +34,12 @@
 		</div>
 		<div class='row'>				
 					<p>
-					<img  title="Sign Out" alt="signOut" src= './images/Exit-48.png' width="70" height="62" ng-click='signout()'/>
+					<img class="fixed" title="Sign Out" alt="signOut" src= './images/Exit-48.png' ng-click='signout()'/>
 					<a href="./#/home">
-					<img title="Home" alt="home" src= './images/Home-48.png' width="70" height="62">
+						<img class="fixed" title="Home" alt="home" src= './images/Home-48.png'>
+					</a>
+					<a href="./#/leaderboard">
+						<img class= "fixed" title="LeaderBoard" alt="LeaderBoard" src= './images/Superman-48.png'>
 					</a>
 					</p>
 		</div>

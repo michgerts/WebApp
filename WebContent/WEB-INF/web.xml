@@ -46,13 +46,17 @@
       <servlet-name>ShowAnswerServlet</servlet-name>
       <servlet-class>WebAppPkg.ShowAnswerServlet</servlet-class>
    </servlet>
-      <servlet>
+   <servlet>
       <servlet-name>VoteAnswerServlet</servlet-name>
       <servlet-class>WebAppPkg.VoteAnswerServlet</servlet-class>
    </servlet>
    <servlet>
       <servlet-name>UserIDServlet</servlet-name>
       <servlet-class>WebAppPkg.UserIDServlet</servlet-class>
+   </servlet>
+   <servlet>
+   <servlet-name>AllQuestionsServlet</servlet-name>
+      <servlet-class>WebAppPkg.AllQuestionsServlet</servlet-class>
    </servlet>
  
    <!-- Note: All <servlet> elements MUST be grouped together and
@@ -103,8 +107,13 @@
       <url-pattern>/voteanswerservlet</url-pattern>
    </servlet-mapping>
    <servlet-mapping>
-   <servlet-name>UserIDServlet</servlet-name>
+   	  <servlet-name>UserIDServlet</servlet-name>
       <url-pattern>/useridservlet</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>AllQuestionsServlet</servlet-name>
+      <url-pattern>/allquestionsservlet</url-pattern>
    </servlet-mapping>
    
    <welcome-file-list>
