@@ -69,3 +69,4 @@ public class UserAnsweredQuestion
 		UserAnswerRating = userAnswerRating;
 	}
 }
+

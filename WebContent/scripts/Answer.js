@@ -134,8 +134,20 @@ app.controller('AnswerController',function ($scope, $http, $window, $compile)
 	    	var temp= $('li div.visible')[j];
 	    	$scope.openListItems.push(parseInt(temp.parentElement.getAttribute("id")));
 	    }
-	    	    
-	    if (getCookie("id") != replier)
+	    	
+	    var userId;
+	    $http(
+				{
+					method: 'get',
+					url: 'useridservlet',
+					headers: {'Content-Type': 'application/json'}
+				}).success( function (response)
+				{			
+					userId = response;
+				});
+	    
+	    //if (getCookie("id") != replier)
+	    if (userId != replier)
 	    {
 	    	$http(
 	    			{
@@ -176,7 +188,19 @@ app.controller('AnswerController',function ($scope, $http, $window, $compile)
 	    	$scope.openListItems.push(parseInt(temp.parentElement.getAttribute("id")));
 	    }
 	    	    
-	    if (getCookie("id") != replier)
+	    var userId;
+	    $http(
+				{
+					method: 'get',
+					url: 'useridservlet',
+					headers: {'Content-Type': 'application/json'}
+				}).success( function (response)
+				{			
+					userId = response;
+				});
+	    
+	    //if (getCookie("id") != replier)
+	    if (userId != replier)
 	    {
 	    	$http(
 	    			{

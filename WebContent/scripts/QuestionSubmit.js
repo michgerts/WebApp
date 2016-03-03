@@ -3,9 +3,22 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 {
 	$scope.ask = function ()
 	{
+		var userIdFromSession;
+		$http(
+				{
+					method: 'get',
+					url: 'useridservlet',
+					headers: {'Content-Type': 'application/json'}
+				}).success( function (response)
+				{			
+					userIdFromSession = response;
+					//$scope.userIDFromSession = userId;
+				
+		
+		
 		/*Handels questions submit*/
 		$scope.question.Time= new Date();
-		$scope.question.Asker = getCookie("id");
+		$scope.question.Asker = userIdFromSession;
 		$scope.question.ID=0;
 		$scope.question.Likes=0;
 		$scope.question.Answered=false;
@@ -83,6 +96,7 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 				}
 
 		}	
+				});
 	}
 	
 	$scope.goToLeaderboard  = function ($event) {

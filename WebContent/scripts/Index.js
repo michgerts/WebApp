@@ -15,7 +15,8 @@ app.controller('IndexController',function ($scope, $http, $window)
 			if (!('msg' in response))
 			{
 				$window.location = './#/home';
-				setCookie("id", response.Name, 1);
+
+				//setCookie("id", response.Name, 1);// the session is set in the loginservlet
 			}
 			else
 			{

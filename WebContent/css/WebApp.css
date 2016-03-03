@@ -109,11 +109,11 @@ html
 	font-size: 1.8vw;
 	text-align: left;
 }
+
 #pleaseProvide, .userProfileHeadline
 {
 	font-family: Rancho;
 	text-align: center;
-
 }
 #topicErrors
 {
@@ -209,7 +209,9 @@ td
 	font-family: Rancho;
 	font-size: 1.8vw;
 	
- }
+
+} 
+
  .visible 
  {
  	font-family: Rancho;
@@ -259,9 +261,11 @@ td
 	overflow-y: scroll;
  }
  	
-.table-striped>tbody>tr:nth-of-type(odd) {
+.table-striped>tbody>tr:nth-of-type(odd) 
+{
     background-color: #E8DFD7;
-} 
+}
+
 .fixed
 {
 	width: 70px;
@@ -271,8 +275,4 @@ td
 {
 	
 	margin-bottom: 40px;
-}
-.collapseBTN
-{
-	
 }

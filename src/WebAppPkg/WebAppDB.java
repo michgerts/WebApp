@@ -29,7 +29,8 @@ public class WebAppDB
     		//obtain CustomerDB data source from Tomcat's context
     		Context context = new InitialContext();
     		BasicDataSource ds =(BasicDataSource)context.lookup("java:comp/env/jdbc/webAppDataSource");
-    		conn = ds.getConnection();
+    		if(conn == null || conn.isClosed())
+    			conn = ds.getConnection();
     		//use connection as you wish…but close after usage! (this
     		//is important for correct connection pool management
     		//within Tomcat
@@ -73,7 +74,8 @@ public class WebAppDB
     public void closeConnection()
     {
     	try {
-			conn.close();
+    		if(conn == null || !conn.isClosed())
+    			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
