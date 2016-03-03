@@ -14,7 +14,8 @@ app.controller('LeaderboardController',function ($scope, $http, $window, $compil
 			headers: {'Content-Type': 'application/json'}
 		}).success( function (response)
 		{			
-			localStorage.setItem('leaderboard', JSON.stringify(response));
+			//localStorage.setItem('leaderboard', JSON.stringify(response));
+			$scope.leaderboardS = JSON.stringify(response);
 			for(var i=0; i<20 && i<response.length; i++)
 			{
 				table = $("#leaderboardTable > tbody:last-child");
@@ -70,7 +71,7 @@ app.controller('LeaderboardController',function ($scope, $http, $window, $compil
 	$scope.getUserProfile = function ()
 	{
 		
-		var leaderboardUsers = localStorage.getItem('leaderboard');
+		var leaderboardUsers = $scope.leaderboardS// = localStorage.getItem('leaderboard');
 		var leaderboardUsersJs = JSON.parse(leaderboardUsers);
 		//find this user
 		var userToPresent;
