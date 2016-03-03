@@ -124,110 +124,114 @@ app.controller('AnswerController',function ($scope, $http, $window, $compile)
 	}
 	
 	$scope.voteUpAnswer = function ($event) {	
-		var li=  angular.element($event.currentTarget).parent().parent('li');
-		var answerId = li.attr("id");
-	    var data =  JSON.stringify("1,"+ answerId);
-	    var replier =li.attr("class");
-	    $scope.openListItems=[];
-	    for(var j=0; j<$('li div.visible').length; j++)
-	    {
-	    	var temp= $('li div.visible')[j];
-	    	$scope.openListItems.push(parseInt(temp.parentElement.getAttribute("id")));
-	    }
-	    	
-	    var userId;
-	    $http(
-				{
-					method: 'get',
-					url: 'useridservlet',
-					headers: {'Content-Type': 'application/json'}
-				}).success( function (response)
-				{			
-					userId = response;
-				});
-	    
-	    //if (getCookie("id") != replier)
-	    if (userId != replier)
-	    {
-	    	$http(
-	    			{
-	    				method: 'POST',
-	    				url: 'voteanswerservlet',
-	    				headers: {'Content-Type': 'application/json'},
-	    				data:  JSON.stringify(data)
-	    			}).success( function (response)
-	    			{	
-	    				$scope.listLength= response.length;
-	    				list = $("#answersList");
-	    				list.empty();
-	    				for(var i=0; i<response.length; i++)
-	    				{
-	    					list = $("#answersList");
-	    					if ($scope.openListItems.indexOf(response[i].AID) == -1)
-	    					{
-	    						listAnswerItem(response[i], list, $scope, "false");   						
-	    					}
-	    					else
-	    					{
-	    						listAnswerItem(response[i], list, $scope, "true");
-	    					}
-	    				}
-	    				$compile(list)($scope);
-	    			});
-	    }
+		 var userId;
+		    $http(
+					{
+						method: 'get',
+						url: 'useridservlet',
+						headers: {'Content-Type': 'application/json'}
+					}).success( function (response)
+					{
+						var li=  angular.element($event.currentTarget).parent().parent('li');
+						var answerId = li.attr("id");
+					    var data =  JSON.stringify("1,"+ answerId);
+					    var replier =li.attr("class");
+					    $scope.openListItems=[];
+					    for(var j=0; j<$('li div.visible').length; j++)
+					    {
+					    	var temp= $('li div.visible')[j];
+					    	$scope.openListItems.push(parseInt(temp.parentElement.getAttribute("id")));
+					    }
+					    	
+					   			
+									userId = response;
+								
+					    
+					    //if (getCookie("id") != replier)
+					    if (userId != replier)
+					    {
+					    	$http(
+					    			{
+					    				method: 'POST',
+					    				url: 'voteanswerservlet',
+					    				headers: {'Content-Type': 'application/json'},
+					    				data:  JSON.stringify(data)
+					    			}).success( function (response)
+					    			{	
+					    				$scope.listLength= response.length;
+					    				list = $("#answersList");
+					    				list.empty();
+					    				for(var i=0; i<response.length; i++)
+					    				{
+					    					list = $("#answersList");
+					    					if ($scope.openListItems.indexOf(response[i].AID) == -1)
+					    					{
+					    						listAnswerItem(response[i], list, $scope, "false");   						
+					    					}
+					    					else
+					    					{
+					    						listAnswerItem(response[i], list, $scope, "true");
+					    					}
+					    				}
+					    				$compile(list)($scope);
+					    			});
+					    }
+					});
 	 }
 	$scope.voteDownAnswer = function ($event) {
-		var li=  angular.element($event.currentTarget).parent().parent('li');
-		var answerId = li.attr("id");
-	    var data =  JSON.stringify("0,"+ answerId);
-	    var replier =li.attr("class");
-	    $scope.openListItems=[];
-	    for(var j=0; j<$('li div.visible').length; j++)
-	    {
-	    	var temp= $('li div.visible')[j];
-	    	$scope.openListItems.push(parseInt(temp.parentElement.getAttribute("id")));
-	    }
-	    	    
-	    var userId;
+		var userId;
 	    $http(
 				{
 					method: 'get',
 					url: 'useridservlet',
 					headers: {'Content-Type': 'application/json'}
 				}).success( function (response)
-				{			
-					userId = response;
+				{	
+					var li=  angular.element($event.currentTarget).parent().parent('li');
+					var answerId = li.attr("id");
+				    var data =  JSON.stringify("0,"+ answerId);
+				    var replier =li.attr("class");
+				    $scope.openListItems=[];
+				    for(var j=0; j<$('li div.visible').length; j++)
+				    {
+				    	var temp= $('li div.visible')[j];
+				    	$scope.openListItems.push(parseInt(temp.parentElement.getAttribute("id")));
+				    }
+				    	    
+				    		
+								userId = response;
+							
+				    
+				    //if (getCookie("id") != replier)
+				    if (userId != replier)
+				    {
+				    	$http(
+				    			{
+				    				method: 'POST',
+				    				url: 'voteanswerservlet',
+				    				headers: {'Content-Type': 'application/json'},
+				    				data:  JSON.stringify(data)
+				    			}).success( function (response)
+				    			{	
+				    				$scope.listLength= response.length;
+				    				list = $("#answersList");
+				    				list.empty();
+				    				for(var i=0; i<response.length; i++)
+				    				{
+				    					list = $("#answersList");
+				    					if ($scope.openListItems.indexOf(response[i].AID) == -1)
+				    					{
+				    						listAnswerItem(response[i], list, $scope, "false");   						
+				    					}
+				    					else
+				    					{
+				    						listAnswerItem(response[i], list, $scope, "true");
+				    					}
+				    				}
+				    				$compile(list)($scope);
+				    			});
+				    }
 				});
-	    
-	    //if (getCookie("id") != replier)
-	    if (userId != replier)
-	    {
-	    	$http(
-	    			{
-	    				method: 'POST',
-	    				url: 'voteanswerservlet',
-	    				headers: {'Content-Type': 'application/json'},
-	    				data:  JSON.stringify(data)
-	    			}).success( function (response)
-	    			{	
-	    				$scope.listLength= response.length;
-	    				list = $("#answersList");
-	    				list.empty();
-	    				for(var i=0; i<response.length; i++)
-	    				{
-	    					list = $("#answersList");
-	    					if ($scope.openListItems.indexOf(response[i].AID) == -1)
-	    					{
-	    						listAnswerItem(response[i], list, $scope, "false");   						
-	    					}
-	    					else
-	    					{
-	    						listAnswerItem(response[i], list, $scope, "true");
-	    					}
-	    				}
-	    				$compile(list)($scope);
-	    			});
-	    }
 	}
 
 });

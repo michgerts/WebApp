@@ -33,14 +33,20 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 		var pageNummberInt = pageNumberStr.pageNumber;
 		pageNummberInt++;
 		var response = JSON.parse(retrievedResponse);
-		table.empty();
-		table = $("#newQuestionsList > tbody:last-child");
-		tableHeaders(table);
-		for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
-		{
-			table = $("#newQuestionsList > tbody:last-child");
-			listItem(response[i], table);
-		}
+		if(pageNummberInt*20< response.length)
+			{
+				table.empty();
+				table = $("#newQuestionsList > tbody:last-child");
+				tableHeaders(table);
+				for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
+				{
+					table = $("#newQuestionsList > tbody:last-child");
+					listItem(response[i], table);
+				}
+			}
+		else
+			pageNummberInt--;
+		
 		$compile(table)($scope);
 		var pageNum = { "pageNumber": pageNummberInt };
 		// Put the object into storage
@@ -54,14 +60,21 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 		var pageNummberInt = pageNumberStr.pageNumber;
 		pageNummberInt--;
 		var response = JSON.parse(retrievedResponse);
-		table.empty();
-		table = $("#newQuestionsList > tbody:last-child");
-		tableHeaders(table);
-		for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
-		{
-			table = $("#newQuestionsList > tbody:last-child");
-			listItem(response[i], table);
-		}
+		if(pageNummberInt >=0)
+			{
+				table.empty();
+				table = $("#newQuestionsList > tbody:last-child");
+				tableHeaders(table);
+		
+				for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
+				{
+					table = $("#newQuestionsList > tbody:last-child");
+					listItem(response[i], table);
+				}
+			}
+		else 
+			pageNummberInt = 0;
+		
 		$compile(table)($scope);
 		var pageNum = { "pageNumber": pageNummberInt };
 		// Put the object into storage
