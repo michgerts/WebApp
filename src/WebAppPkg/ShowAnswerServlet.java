@@ -26,6 +26,8 @@ public class ShowAnswerServlet extends HttpServlet
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {
+    	try
+        {
     	WebAppDB db = new WebAppDB();
 		ResultSet answer;
 		db.createConnection(); 
@@ -40,8 +42,7 @@ public class ShowAnswerServlet extends HttpServlet
 		int qid = new Gson().fromJson(sb.toString(), int.class);
 		List<Answer> answersToPresent = new ArrayList<Answer>();
         answer = db.executeQuery("select * from " + tableName + " WHERE QID=" + qid + " order by Likes desc, Time asc");
-        try
-        {
+        
         	while (answer.next())
     		{
             	// there is such an answer
