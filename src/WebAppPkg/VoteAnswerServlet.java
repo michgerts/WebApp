@@ -36,8 +36,14 @@ public class VoteAnswerServlet extends HttpServlet
  		   throws IOException, ServletException
     {
     	WebAppDB db = new WebAppDB();
-		ResultSet answer;
-		db.createConnection(); 
+		ResultSet answer1;
+		db.createConnection();
+		try {
+			db.setAutoCommit();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	
         StringBuilder sb = new StringBuilder();
         BufferedReader br = request.getReader();
@@ -71,20 +77,21 @@ public class VoteAnswerServlet extends HttpServlet
 				db.executeUpdate("update ANSWERS set likes ="+ numOfLikesInt +"where AID = " + id.intValue());
 			}
 			List<Answer> answersToPresent = new ArrayList<Answer>();
-	        answer = db.executeQuery("select * from " + tableName + " WHERE QID=" + QIDStr + " order by Likes desc, Time asc");
+	        answer1 = db.executeQuery("select * from " + tableName + " WHERE QID=" + QIDStr + " order by Likes desc, Time asc");
 	       
-        	while (answer.next())
+        	while (answer1.next())
     		{
             	// there is such an answer
         		Answer A = new Answer(-1,-1,"","");
         		A.setQID(Integer.parseInt(QIDStr));
-        		A.setText(answer.getString("Text"));
-        		A.setTime(answer.getString("Time"));
-        		A.setUID(answer.getString("UID"));
-        		A.setAID(answer.getInt("AID"));
-        		A.setLikes(answer.getInt("Likes"));    
+        		A.setText(answer1.getString("Text"));
+        		A.setTime(answer1.getString("Time"));
+        		A.setUID(answer1.getString("UID"));
+        		A.setAID(answer1.getInt("AID"));
+        		A.setLikes(answer1.getInt("Likes"));    
         		answersToPresent.add(A);
     		}
+        	answer1.close();
         	String json = new Gson().toJson(answersToPresent);
         	response.setContentType("application/json");
         	response.setCharacterEncoding("UTF-8");
@@ -95,6 +102,9 @@ public class VoteAnswerServlet extends HttpServlet
         catch (SQLException e)
         {
 			e.printStackTrace();
+		}
+		finally{
+			db.closeConnection();
 		}
     }
 }

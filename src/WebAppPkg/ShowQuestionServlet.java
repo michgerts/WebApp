@@ -35,8 +35,8 @@ public class ShowQuestionServlet extends HttpServlet
  		   throws IOException, ServletException
     {
     	WebAppDB db = new WebAppDB();
-		ResultSet question;
-		db.createConnection(); 
+		ResultSet question = null;
+		
 	
         StringBuilder sb = new StringBuilder();
         BufferedReader br = request.getReader();
@@ -45,10 +45,14 @@ public class ShowQuestionServlet extends HttpServlet
         {
             sb.append(str);
         }
-		int qid = new Gson().fromJson(sb.toString(), int.class);
-        question = db.executeQuery("select * from " + tableName + " WHERE ID=" + qid);
+		
+       
         try
         {
+        	db.createConnection(); 
+        	db.setAutoCommit();
+        	int qid = new Gson().fromJson(sb.toString(), int.class);
+        	question = db.executeQuery("select * from " + tableName + " WHERE ID=" + qid);
         	Question Q = new Question(-1,"","","",0,false);
         	if (question.next())
     		{
@@ -65,11 +69,16 @@ public class ShowQuestionServlet extends HttpServlet
         	response.setCharacterEncoding("UTF-8");
         	response.getWriter().write(json);
         	response.getWriter().close();
-        	//db.closeConnection();
+        	question.close();
+        	
 		}
         catch (SQLException e)
         {
 			e.printStackTrace();
-		}
+		} 
+        finally{
+        	if(db!=null)
+        		db.closeConnection();
+        }
     }
 }

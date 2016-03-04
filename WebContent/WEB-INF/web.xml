@@ -58,6 +58,11 @@
 		<servlet-class>WebAppPkg.AllQuestionsServlet</servlet-class>
 	</servlet>
 
+    <servlet>
+   <servlet-name>AllTopicsServlet</servlet-name>
+      <servlet-class>WebAppPkg.AllTopicsServlet</servlet-class>
+   </servlet>
+
 	<!-- Note: All <servlet> elements MUST be grouped together and placed IN 
 		FRONT of the <servlet-mapping> elements -->
 
@@ -114,6 +119,11 @@
 		<servlet-name>AllQuestionsServlet</servlet-name>
 		<url-pattern>/allquestionsservlet</url-pattern>
 	</servlet-mapping>
+
+<servlet-mapping>
+      <servlet-name>AllTopicsServlet</servlet-name>
+      <url-pattern>/alltopicsservlet</url-pattern>
+   </servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>./html/Index.html</welcome-file>

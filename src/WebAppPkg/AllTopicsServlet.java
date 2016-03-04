@@ -5,6 +5,7 @@ import java.io.IOException;
 
 // SQL
 import WebAppPkg.WebAppDB;
+import WebAppPkg.TopicRating;
 //import jdk.nashorn.internal.parser.JSONParser;
 
 import java.sql.ResultSet;
@@ -21,35 +22,27 @@ import com.google.gson.Gson;
 // Data types
 import WebAppPkg.Question;
  
-/** This class is a servlet class that handles the details of the questions (answered and unanswered)
- * @author Michal Kogan
- * @author Rita Kaufman
- *
- */
-public class AllQuestionsServlet extends HttpServlet
+public class AllTopicsServlet extends HttpServlet
 {//this will submit an answer -- need to change the name
 	private static final long serialVersionUID = 1L;
-    private String tableName = "QUESTIONS";
+    private String tableName = "TOPICS";
 
-
-	
 	@Override
-	/** This method generates and returns  information about all of the questions in the system
-	 *  (answered and unanswered).
-	 * this will be displayed in the table presenting all of the questions.
-	 * @param  request  request from user
-	 * @param  response response back send to the user
-	 */
+   
    public void doGet (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {    	
 		WebAppDB db = new WebAppDB();
-		ResultSet questions;
+		ResultSet questions = null;
+		ResultSet questionsID = null;
+		ResultSet topics = null;
+		
     	try
     	{
     		
     		db.createConnection(); 
     		List<Question> questionsToPresent = new ArrayList<Question>();
+    		List<TopicRating>topicsToPresent = new ArrayList<TopicRating>();
     	
             StringBuilder sb = new StringBuilder();
             BufferedReader br = request.getReader();
@@ -58,34 +51,49 @@ public class AllQuestionsServlet extends HttpServlet
             {
                 sb.append(str);
             }
-
-    		   
-			questions = db.executeQuery("SELECT * FROM "+ tableName+ "  order by time desc");
-            
-            
-            while (questions.next())
+            //db.executeQuery("DELETE FROM TOPICS WHERE TOPIC IS NULL OR TRIM(TOPIC) = ''");
+            //db.executeQuery("UPDATE TOPICS SET TOPIC =(RTRIM(TOPIC)");
+			topics = db.executeQuery("SELECT DISTINCT TOPIC AS T FROM "+ tableName+"  order by T asc");           
+            while (topics.next())
     		{
-            		Question question = new Question( Integer.parseInt(questions.getString("ID")), questions.getString("Text"),
-                    		questions.getString("Time"), questions.getString("Asker"), Integer.parseInt(questions.getString("Likes")) , 
-                    		Boolean.parseBoolean(questions.getString("Answered")) );
+            	String topicName = topics.getString("T");
+            	topicName = topicName.replaceAll("'", "''");
+            	questionsID= db.executeQuery("SELECT QID AS ID FROM "+tableName+" Where topic='"+topicName+"'");
+            	float ratingAvg=0;
+        		int counter=0;
+    			while (questionsID.next())
+        		{
+        			questions= db.executeQuery("SELECT * FROM QUESTIONS WHERE ID="+questionsID.getInt("ID"));
+        			questions.next();
+        			Question question = new Question( Integer.parseInt(questions.getString("ID")), questions.getString("Text"),
+            		questions.getString("Time"), questions.getString("Asker"), Integer.parseInt(questions.getString("Likes")) , 
+            		Boolean.parseBoolean(questions.getString("Answered")) );
             		ResultSet likesSet= db.executeQuery("SELECT AVG(Likes) AS Likes FROM Answers Where QID="+question.getID());
 	            	int likes = 0;
 	            	String numLikesStr = null;
 	            	if(likesSet.next())
 	            		numLikesStr = likesSet.getString("Likes");
 	            		if  (numLikesStr!=null)
-	            			likes = Integer.parseInt(likesSet.getString("Likes"));
+	            			likes = Integer.parseInt(numLikesStr);
 	            	float rating = (float) (0.2*question.getLikes()+0.8*likes);
+	            	ratingAvg+=rating;
+	            	counter++;
 	            	question.setRating(rating);
             		questionsToPresent.add(question);
+        		}
+        		ratingAvg=(ratingAvg/counter);
+        		TopicRating TR= new TopicRating(topics.getString("T"),(float) ratingAvg);
+        		topicsToPresent.add(TR);
     		}
-            Collections.sort(questionsToPresent);
-            String categoriesJson = new Gson().toJson(questionsToPresent);
+            Collections.sort(topicsToPresent);
+            String categoriesJson = new Gson().toJson(topicsToPresent);
             response.setContentType("application/json");
 	    	response.setCharacterEncoding("UTF-8");
             response.getWriter().write(categoriesJson);
 			response.getWriter().close();
 			questions.close();
+			questionsID.close();
+			topics.close();
         	db.closeConnection();
 			}
     	catch (IOException | SQLException e)
@@ -95,14 +103,8 @@ public class AllQuestionsServlet extends HttpServlet
     	
     }
     
-	
 	@Override
-	/** This method is called when upVoting or downVoting a question in the 'all questions' table.
-	 * It updates the "like" number in the DB of this question and returns to the user the details of the questions in order
-	 * to present them after the like update.
-	 * @param  request  request from user
-	 * @param  response response back send to the user
-	 */
+	   
 	   public void doPost (HttpServletRequest request, HttpServletResponse response)
 	 		   throws IOException, ServletException
 	    {    	

@@ -13,8 +13,13 @@ app.controller('AllQuestions',function ($scope, $http, $window, $compile)
 		{			
 			var pageNum = { "pageNumber": 0 };
 			// Put the object into storage
+
 			$scope.pageNumS = JSON.stringify(pageNum);
 			$scope.responseS = JSON.stringify(response);
+
+			localStorage.setItem('pageNum', JSON.stringify(pageNum));
+			localStorage.setItem('responseAll', JSON.stringify(response));
+
 			for(var i=0; i<20 && i<response.length; i++)
 			{
 				table = $("#allQuestionsList > tbody:last-child");
@@ -27,8 +32,13 @@ app.controller('AllQuestions',function ($scope, $http, $window, $compile)
 	$scope.nextAll = function()
 	{
 		table = $("#allQuestionsList > tbody");
+
 		var retrievedPage = $scope.pageNumS;
 		var retrievedResponse = $scope.responseS;
+
+		var retrievedPage = localStorage.getItem('pageNum');
+		var retrievedResponse = localStorage.getItem('responseAll');
+
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
 		pageNummberInt++;
@@ -54,8 +64,13 @@ app.controller('AllQuestions',function ($scope, $http, $window, $compile)
 	}
 	$scope.prevAll = function()
 	{
+
 		var retrievedPage = $scope.pageNumS;
 		var retrievedResponse = $scope.responseS; 
+
+		var retrievedPage = localStorage.getItem('pageNum');
+		var retrievedResponse = localStorage.getItem('responseAll');
+
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
 		pageNummberInt--;
@@ -109,7 +124,11 @@ app.controller('AllQuestions',function ($scope, $http, $window, $compile)
 		    				data:  JSON.stringify(data)
 		    			}).success( function (response)
 		    			{	
+
 		    				$scope.responseS = JSON.stringify(response);
+
+		    				localStorage.setItem('responseAll', JSON.stringify(response));
+
 		    				table.empty();
 		    				table = $("#allQuestionsList > tbody:last-child");
 		    				tableHeaders(table);
@@ -152,7 +171,11 @@ app.controller('AllQuestions',function ($scope, $http, $window, $compile)
 		    				data:  JSON.stringify(data)
 		    			}).success( function (response)
 		    			{	
+
 		    				$scope.responseS = JSON.stringify(response);
+
+		    				localStorage.setItem('responseAll', JSON.stringify(response));
+
 		    				table.empty();
 		    				table = $("#allQuestionsList > tbody:last-child");
 		    				tableHeaders(table);

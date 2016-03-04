@@ -19,7 +19,7 @@ import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
  */
 public class WebAppDB
 {
-    private static Connection conn;
+    private Connection conn;
     
 	public WebAppDB ()
 	{
@@ -30,6 +30,7 @@ public class WebAppDB
    	 */
 	public void createConnection()
     {
+		
     	try
     	{
     		//obtain CustomerDB data source from Tomcat's context
@@ -106,6 +107,10 @@ public class WebAppDB
 			e.printStackTrace();
 		}
     }
+    public void setAutoCommit() throws SQLException
+    {
+    	conn.setAutoCommit(false);
+    };
     
 	
 }

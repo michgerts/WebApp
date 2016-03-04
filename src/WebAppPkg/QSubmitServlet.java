@@ -41,7 +41,13 @@ public class QSubmitServlet extends HttpServlet
     {
     	WebAppDB db = new WebAppDB();
 		ResultSet questions;
-		db.createConnection(); 
+		db.createConnection();
+		try {
+			db.setAutoCommit();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	
         StringBuilder sb = new StringBuilder();
         BufferedReader br = request.getReader();
@@ -84,6 +90,9 @@ public class QSubmitServlet extends HttpServlet
         catch (SQLException e)
         {
 			e.printStackTrace();
+		}
+        finally{
+			db.closeConnection();
 		}
     }
 }

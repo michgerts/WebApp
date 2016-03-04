@@ -42,6 +42,12 @@ public class AnswerSubmitServlet extends HttpServlet
     {
     	WebAppDB db = new WebAppDB();
 		db.createConnection(); 
+		try {
+			db.setAutoCommit();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	
         StringBuilder sb = new StringBuilder();
         BufferedReader br = request.getReader();
@@ -85,11 +91,15 @@ public class AnswerSubmitServlet extends HttpServlet
     	response.setCharacterEncoding("UTF-8");
     	response.getWriter().write(json);
     	response.getWriter().close();
+    	answers.close();
     	//db.closeConnection();
 	}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			
+		}finally{
+			db.closeConnection();
 		}
 }
 }
