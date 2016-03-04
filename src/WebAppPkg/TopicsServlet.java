@@ -42,7 +42,6 @@ public class TopicsServlet extends HttpServlet
 		Topic topicData = new Gson().fromJson(sb.toString(), Topic.class);
 		String stripppedtopicData = topicData.getTopic().replaceAll("(^ )|( $)", "");
 		db.executeUpdate("INSERT INTO " + tableName + "(QID, TOPIC) VALUES ("+topicData.getQID() +",'"+stripppedtopicData+"')");
-		//db.executeQuery("UPDATE TOPICS SET TOPIC=LTRIM(RTRIM(TOPIC))");
 		db.closeConnection();
     }
 }

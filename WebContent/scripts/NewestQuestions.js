@@ -13,8 +13,11 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 		{			
 			var pageNum = { "pageNumber": 0 };
 			// Put the object into storage
-			localStorage.setItem('pageNum', JSON.stringify(pageNum));
-			localStorage.setItem('responseNew', JSON.stringify(response));
+
+			$scope.responseS = JSON.stringify(response);
+			$scope.pageNumS = JSON.stringify(JSON.stringify(pageNum));
+
+
 			for(var i=0; i<20 && i<response.length; i++)
 			{
 				table = $("#newQuestionsList > tbody:last-child");
@@ -27,8 +30,11 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	$scope.next = function()
 	{
 		table = $("#newQuestionsList > tbody");
-		var retrievedPage = localStorage.getItem('pageNum');
-		var retrievedResponse = localStorage.getItem('responseNew');
+
+		var retrievedPage = $scope.pageNumS;
+		var retrievedResponse = $scope.responseS;
+
+
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
 		pageNummberInt++;
@@ -50,12 +56,16 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 		$compile(table)($scope);
 		var pageNum = { "pageNumber": pageNummberInt };
 		// Put the object into storage
-		localStorage.setItem('pageNum', JSON.stringify(pageNum));
+
+		$scope.pageNumS = JSON.stringify(pageNum);
 	}
 	$scope.prev = function()
 	{
-		var retrievedPage = localStorage.getItem('pageNum');
-		var retrievedResponse = localStorage.getItem('responseNew');
+
+		var retrievedPage = $scope.pageNumS;
+		var retrievedResponse = $scope.responseS;
+
+
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
 		pageNummberInt--;
@@ -78,11 +88,12 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 		$compile(table)($scope);
 		var pageNum = { "pageNumber": pageNummberInt };
 		// Put the object into storage
-		localStorage.setItem('pageNum', JSON.stringify(pageNum));
+
+		$scope.pageNumS = JSON.stringify(pageNum);
 	}
 	
 	$scope.voteUp = function ($event) {
-	    var retrievedPage = localStorage.getItem('pageNum');		
+	    var retrievedPage  = $scope.pageNumS;	
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;	
 		var questionId = angular.element($event.currentTarget).parent().parent('tr').attr("id");
@@ -110,7 +121,11 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 				    				data:  JSON.stringify(data)
 				    			}).success( function (response)
 				    			{	
-				    				localStorage.setItem('responseNew', JSON.stringify(response));
+
+				    				
+				    				$scope.responseS = JSON.stringify(response);
+
+
 				    				table.empty();
 				    				table = $("#newQuestionsList > tbody:last-child");
 				    				tableHeaders(table);
@@ -126,7 +141,7 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 				});
 	 }
 	$scope.voteDown = function ($event) {
-		var retrievedPage = localStorage.getItem('pageNum');
+		var retrievedPage = $scope.pageNumS;
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
 		var questionId = angular.element($event.currentTarget).parent().parent('tr').attr("id");
@@ -154,7 +169,11 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 				    				data:  JSON.stringify(data)
 				    			}).success( function (response)
 				    			{	
-				    				localStorage.setItem('responseNew', JSON.stringify(response));
+
+				    				
+				    				$scope.responseS = JSON.stringify(response);
+
+
 				    				table.empty();
 				    				table = $("#newQuestionsList > tbody:last-child");
 				    				tableHeaders(table);
@@ -225,4 +244,3 @@ function tableHeaders(table)
 {
 	 table.append( "<th>Question's text</th><th>Time of submission</th><th>Rating</th><th></th>");
 }
-

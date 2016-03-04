@@ -1,26 +1,28 @@
-
 // Front end js
-app.controller('AllQuestions',function ($scope, $http, $window, $compile)
+app.controller('AllQuestionsOnTopic',function ($scope, $http, $window, $compile)
 {
-	var table = $("#allQuestionsList > tbody");
+	
+	var Topic=  path.split("/")[7];
+	var table = $("#allQuestionsontopicList > tbody");
 	$scope.init = function ()
 	{
 		$http(
 		{
-			method: 'get',
-			url: 'allquestionsservlet',
-			headers: {'Content-Type': 'application/json'}
+			method: 'post',
+			url: 'allquestionsontopicservlet',
+			headers: {'Content-Type': 'application/json'},
+			data:  JSON.stringify(Topic)
 		}).success( function (response)
-		{			
+		{		
+			
 			var pageNum = { "pageNumber": 0 };
 			// Put the object into storage
-
+			
 			$scope.pageNumS = JSON.stringify(pageNum);
 			$scope.responseS = JSON.stringify(response);
-
 			for(var i=0; i<20 && i<response.length; i++)
 			{
-				table = $("#allQuestionsList > tbody:last-child");
+				table = $("#allQuestionsontopicList > tbody:last-child");
 				listItemAll(response[i], table);
 			}
 			$compile(table)($scope);		
@@ -29,69 +31,49 @@ app.controller('AllQuestions',function ($scope, $http, $window, $compile)
 	
 	$scope.nextAll = function()
 	{
-		table = $("#allQuestionsList > tbody");
-
+		table = $("#allQuestionsontopicList > tbody");
 		var retrievedPage = $scope.pageNumS;
 		var retrievedResponse = $scope.responseS;
-
-
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
 		pageNummberInt++;
 		var response = JSON.parse(retrievedResponse);
-		if(pageNummberInt*20< response.length)
+		table.empty();
+		table = $("#allQuestionsontopicList > tbody:last-child");
+		tableHeaders(table);
+		for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
 		{
-			table.empty();
-			table = $("#allQuestionsList > tbody:last-child");
-			tableHeaders(table);
-			for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
-			{
-				table = $("#allQuestionsList > tbody:last-child");
-				listItemAll(response[i], table);
-			}
+			table = $("#allQuestionsontopicList > tbody:last-child");
+			listItemAll(response[i], table);
 		}
-		else
-			pageNummberInt--;
-		
 		$compile(table)($scope);
 		var pageNum = { "pageNumber": pageNummberInt };
-
 		$scope.pageNumS = JSON.stringify(pageNum);
 	}
 	$scope.prevAll = function()
 	{
-
 		var retrievedPage = $scope.pageNumS;
 		var retrievedResponse = $scope.responseS; 
-
-
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
 		pageNummberInt--;
 		var response = JSON.parse(retrievedResponse);
-		if(pageNummberInt >=0)
+		table.empty();
+		table = $("#allQuestionsontopicList > tbody:last-child");
+		tableHeaders(table);
+		for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
 		{
-			table.empty();
-			table = $("#allQuestionsList > tbody:last-child");
-			tableHeaders(table);
-			for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
-			{
-				table = $("#allQuestionsList > tbody:last-child");
-				listItemAll(response[i], table);
-			}
+			table = $("##allQuestionsontopicList > tbody:last-child");
+			listItemAll(response[i], table);
 		}
-		else 
-			pageNummberInt = 0;
-		
 		$compile(table)($scope);
 		var pageNum = { "pageNumber": pageNummberInt };
 		// Put the object into storage
-
-		$scope.pageNumS = JSON.stringify(pageNum); 
+		$scope.pageNumS = JSON.stringify(pageNum);
 	}
 	
-	$scope.voteUpAll = function ($event) {
-	    var retrievedPage = $scope.pageNumS;	
+	$scope.voteUpAllQuestionsOnTopic = function ($event) {
+		var retrievedPage = $scope.pageNumS;		
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;	
 		var questionId = angular.element($event.currentTarget).parent().parent('tr').attr("id");
@@ -113,14 +95,12 @@ app.controller('AllQuestions',function ($scope, $http, $window, $compile)
 		    	$http(
 		    			{
 		    				method: 'POST',
-		    				url: 'allquestionsservlet',
+		    				url: 'allquestionsontopicservlet',
 		    				headers: {'Content-Type': 'application/json'},
 		    				data:  JSON.stringify(data)
 		    			}).success( function (response)
 		    			{	
-
 		    				$scope.responseS = JSON.stringify(response);
-
 		    				table.empty();
 		    				table = $("#allQuestionsList > tbody:last-child");
 		    				tableHeaders(table);
@@ -135,7 +115,7 @@ app.controller('AllQuestions',function ($scope, $http, $window, $compile)
 		    }
 		});
 	 }
-	$scope.voteDownAll = function ($event) {
+	$scope.voteDownAllQuestionsOnTopic = function ($event) {
 		var retrievedPage = $scope.pageNumS;
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
@@ -158,21 +138,18 @@ app.controller('AllQuestions',function ($scope, $http, $window, $compile)
 		    	$http(
 		    			{
 		    				method: 'POST',
-		    				url: 'allquestionsservlet',
+		    				url: 'allquestionsontopicservlet',
 		    				headers: {'Content-Type': 'application/json'},
 		    				data:  JSON.stringify(data)
 		    			}).success( function (response)
 		    			{	
-
 		    				$scope.responseS = JSON.stringify(response);
-
-
 		    				table.empty();
-		    				table = $("#allQuestionsList > tbody:last-child");
+		    				table = $("#allQuestionsOnTopicList > tbody:last-child");
 		    				tableHeaders(table);
 		    				for(var i=pageNummberInt*20; i<pageNummberInt*20+20 && i<response.length; i++)
 		    				{
-		    					table = $("#allQuestionsList > tbody:last-child");
+		    					table = $("#allQuestionsOnTopicList > tbody:last-child");
 		    					listItemAll(response[i], table);
 		    				}
 		    				$compile(table)($scope);
@@ -184,13 +161,13 @@ app.controller('AllQuestions',function ($scope, $http, $window, $compile)
 	}
     $scope.$on("UpdateFromNewB", function (event, args)
     		{
-    			table = $("#allQuestionsList > tbody"); 
+    			table = $("#allQuestionsOnTopicList > tbody"); 
     			table.empty();
     			$scope.init();
     		});
 });
 
-function listItemAll(response, table)
+function listItemAllQuestionsOnTopic(response, table)
 {
     var text = response.Text;
 	var time = formatDate(response.Time);	      
@@ -233,7 +210,7 @@ function listItemAll(response, table)
     table.append(tr);
 }
 
-function tableHeadersAll(table)
+function tableHeadersAllQuestionsOnTopic(table)
 {
 	 table.append( "<th>Question's text</th><th>Time of submission</th><th>Rating</th><th></th>");
 }

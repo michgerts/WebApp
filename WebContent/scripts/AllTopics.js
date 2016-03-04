@@ -13,8 +13,8 @@ app.controller('AllTopics',function ($scope, $http, $window, $compile)
 		{			
 			var pageNum = { "pageNumber": 0 };
 			// Put the object into storage
-			localStorage.setItem('pageNum', JSON.stringify(pageNum));
-			localStorage.setItem('responseTopics', JSON.stringify(response));
+			$scope.pageNumS = JSON.stringify(pageNum);
+			$scope.responseTopicsS = JSON.stringify(response);
 			for(var i=0; i<20 && i<response.length; i++)
 			{
 				table = $("#allTopicsList > tbody:last-child");
@@ -27,8 +27,8 @@ app.controller('AllTopics',function ($scope, $http, $window, $compile)
 	$scope.nextAllTopics = function()
 	{
 		table = $("#allTopicsList > tbody");
-		var retrievedPage = localStorage.getItem('pageNum');
-		var retrievedResponse = localStorage.getItem('responseTopics');
+		var retrievedPage = $scope.pageNumS;
+		var retrievedResponse = $scope.responseTopicsS;
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
 		pageNummberInt++;
@@ -49,12 +49,12 @@ app.controller('AllTopics',function ($scope, $http, $window, $compile)
 		$compile(table)($scope);
 		var pageNum = { "pageNumber": pageNummberInt };
 		// Put the object into storage
-		localStorage.setItem('pageNum', JSON.stringify(pageNum));
+		$scope.pageNumS = JSON.stringify(pageNum);
 	}
 	$scope.prevAllTopics = function()
 	{
-		var retrievedPage = localStorage.getItem('pageNum');
-		var retrievedResponse = localStorage.getItem('responseTopics');
+		var retrievedPage = $scope.pageNumS;
+		var retrievedResponse = $scope.responseTopicsS;
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
 		pageNummberInt--;
@@ -75,7 +75,7 @@ app.controller('AllTopics',function ($scope, $http, $window, $compile)
 		$compile(table)($scope);
 		var pageNum = { "pageNumber": pageNummberInt };
 		// Put the object into storage
-		localStorage.setItem('pageNum', JSON.stringify(pageNum));
+		$scope.pageNumS = JSON.stringify(pageNum);
 	}
 	$scope.$on("UpdateFromAllB", function (event, args)
 			{

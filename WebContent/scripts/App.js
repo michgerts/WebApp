@@ -42,7 +42,11 @@ app.controller('RouteConroller',function ($scope, $http, $window)
 								if (homeView == "questions")
 									{
 										$scope.view=homeView;
-									}				
+									}
+								if (homeView == "topics")
+								{
+									$scope.view=homeView;
+								}		
 							}
 					});
 		}

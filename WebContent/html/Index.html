@@ -18,6 +18,7 @@
 	<script type="text/javascript" src="./scripts/LeaderBoard.js"></script>
 	<script type="text/javascript" src="./scripts/AllQuestions.js"></script>
 	<script type="text/javascript" src="./scripts/AllTopics.js"></script>
+	<script type="text/javascript" src="./scripts/AllQuestionsOnTopic.js"></script>
 	<!-- Added bootstrap -->
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Tangerine">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple">
@@ -47,6 +48,9 @@
 		</div>		
 		<div ng-switch-when="userprofile" id="userprofile">
 			<ng-include src="'./html/Partials/UserProfile.html'"></ng-include>
+		</div>
+		<div ng-switch-when="allquestionsontopic" id="AllQuestionsOnTopic">
+			<ng-include src="'./html/Partials/AllQuestionsOnTopic.html'"></ng-include>
 		</div>	
 	</div>
 </body>
