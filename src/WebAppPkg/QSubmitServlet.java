@@ -22,11 +22,20 @@ import com.google.gson.JsonParser;
 // Data types
 import WebAppPkg.Question;
  
+/** This class is a servlet class that submits a new user question
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class QSubmitServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
     private String tableName = "QUESTIONS";
     @Override
+    /** This method inserts the new questions into the DB
+	 * @param  request  request from user
+	 * @param  response response back send to the user
+	 */
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {

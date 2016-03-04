@@ -1,5 +1,10 @@
 package WebAppPkg;
 
+/** This class represents an Answer
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class Answer
 {
 	private int AID;
@@ -9,7 +14,12 @@ public class Answer
 	private String Time;
 	private int Likes;
 
-	
+	/** Constructor for the Answer class
+	 * @param  aid  The answer id
+	 * @param  Qid 	The questions id
+	 * @param  Uid  The User id (his name)
+	 * @param  text The answer's text
+	 */
 	public Answer (int aid, int Qid, String Uid, String text)
 	{
 		AID= aid;

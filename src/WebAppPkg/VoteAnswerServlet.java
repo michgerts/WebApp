@@ -17,12 +17,21 @@ import com.google.gson.Gson;
 
 // Data types
 import WebAppPkg.Question;
- 
+
+/** This is a servlet class that handles the voting (up and down) on a certain answer
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class VoteAnswerServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
     private String tableName = "ANSWERS";
     @Override
+    /** This method handles the voting on answers
+   	 * @param  request  request from user
+   	 * @param  response response back send to the user
+   	 */
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {

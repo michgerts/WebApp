@@ -1,278 +1,259 @@
-
-.error-list
-{
-    color: red;
+.error-list {
+	color: red;
 	font-family: Courier New;
 }
-#shy,  #user, #time, #likes, #dearuser
-{
+
+#shy, #user, #time, #likes, #dearuser {
 	font-family: Rancho;
 	text-align: left;
 	color: red;
 	font-size: 2.7vw;
-	
 }
-#intro,  #firstA
-{
+
+#intro, #firstA {
 	margin-top: 90px;
 	font-family: Tangerine;
-	font-size: 4vw;	
+	font-size: 4vw;
 }
-#signOut
-{
+
+#signOut {
 	margin-left: 25px;
-    
 }
-#Hello
-{
+
+#Hello {
 	font-family: Rancho;
 	font-size: 60px;
 }
-#welcome
-{
+
+#welcome {
 	margin-top: 90px;
 	font-family: Tangerine;
 	margin-right: 30px;
 	font-size: 4vw;
-	color:#c3a343;
+	color: #c3a343;
 	font-weight: 400;
 }
-#fun
-{
+
+#fun {
 	font-family: Tangerine;
 	font-size: 3.4vw;
 }
-#words, #submit-question, #submit-topic
-{
+
+#words, #submit-question, #submit-topic {
 	margin-top: 10px;
 	margin-bottom: 15px;
 	margin-left: 35px;
-	font-size: 1.7vw;	
+	font-size: 1.7vw;
 }
-#user-login 
-{
+
+#user-login {
 	margin-left: 15px;
 }
-#SignUp, #hello
-{
+
+#SignUp, #hello {
 	margin-left: 63px;
 }
-html
-{
-  font-family: Courier New;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  background-color: #E6E6FA;
+
+html {
+	font-family: Courier New;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	background-color: #E6E6FA;
 }
-#indexPage, #signUpPage
-{
+
+#indexPage, #signUpPage {
 	background-image: url('../images/corpseBride.jpg');
- 	background-repeat: no-repeat;
+	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	font-family: Rancho;
 	height: 1100px;
 }
-.control-label, .btn-default, .btn
-{
+
+.control-label, .btn-default, .btn {
 	font-size: 16.7px;
 	width: 100
 }
-#homePage, #leaderboardPage, #questions,  #questionsDesign, #userprofile, #leaderboardPanel
-{
+
+#homePage, #leaderboardPage, #questions, #questionsDesign, #userprofile,
+	#leaderboardPanel {
 	/*background-image: url('../images/wood-texture-background-1366920330luN.jpg');*/
- 	/*background-repeat: no-repeat;*/
- 	background-color: #E6E6FA;
+	/*background-repeat: no-repeat;*/
+	background-color: #E6E6FA;
 	/*background-size:240% 100%;*/
 	/*opacity: 0.4;*/
 	font-family: Courier New;
 	/*height: 3500px;*/
-	
 }
-#SignUpContainer, #SignInContainer 
-{
-    height: 625px;
+
+#SignUpContainer, #SignInContainer {
+	height: 625px;
 }
-#happy, .lead
-{
+
+#happy, .lead {
 	font-family: Tangerine;
 	font-size: 6vw;
-	color:#c3a343;
+	color: #c3a343;
 }
-#leadBtn
-{
+
+#leadBtn {
 	font-family: Tangerine;
 	font-size: 3.2vw;
 }
-#MyQuestion, #MyTopic, .textArea, #leaderboardTable
-{
+
+#MyQuestion, #MyTopic, .textArea, #leaderboardTable {
 	font-family: Rancho;
 	font-size: 1.8vw;
 	text-align: left;
 }
 
-#pleaseProvide, .userProfileHeadline
-{
+#pleaseProvide, .userProfileHeadline {
 	font-family: Rancho;
 	text-align: center;
 }
-#topicErrors
-{
+
+#topicErrors {
 	text-align: left;
 }
+
 .list-group-item {
-    position: relative;
-    display: block;
-    margin-bottom: -1px;
-    border: 1px solid #ddd;
-    background-color: transparent;
-    width: 68%;
-}
-li
-{
-	font-size:1.3vw;
-}
-.control-label
-{
-	font-size: 1.8vw;
-}
-.div
-{
-	position: fixed;
-}
-.pager li
-{
-	float: left;	
+	position: relative;
+	display: block;
+	margin-bottom: -1px;
+	border: 1px solid #ddd;
+	background-color: transparent;
+	width: 68%;
 }
 
-ul#list-group li
-{
-    display: inline;
+li {
+	font-size: 1.3vw;
 }
-.invisible
-{
-    display: none;
-    visibility: hidden;
+
+.control-label {
+	font-size: 1.8vw;
 }
-.row
-{
+
+.div {
+	position: fixed;
+}
+
+.pager li {
+	float: left;
+}
+
+ul#list-group li {
 	display: inline;
 }
-td
-{
+
+.invisible {
+	display: none;
+	visibility: hidden;
+}
+
+.row {
+	display: inline;
+}
+
+td {
 	word-break: break-all;
 	word-break: break-word;
 	width: 680px;
 	max-width: 680px;
 }
-#familyGuy
-{
+
+#familyGuy {
 	display: block;
 	margin-left: auto;
-    margin-right: auto;
+	margin-right: auto;
 }
 
-#leaderboardTitle
-{
+#leaderboardTitle {
 	font-family: Rancho;
 	font-size: 50px;
 }
 
-.profilePics
-{
+.profilePics {
 	width: 100px;
 	height: 100px;
 }
 
-
-#leaderboardDiv{
+#leaderboardDiv {
 	height: 600px;
 	overflow-y: scroll;
 }
 
-#newestQuestions,  #UserProfileInfo, #allQuestions
-{
+#newestQuestions, #UserProfileInfo, #allQuestions {
 	height: 300px;
 	overflow-y: scroll;
 }
-.wrapper
-{
-	 text-align: center;
+
+.wrapper {
+	text-align: center;
 }
-.button
-{
-   position: absolute;
-   top: 50%;
+
+.button {
+	position: absolute;
+	top: 50%;
 }
-#textHigh
-{
+
+#textHigh {
 	background-color: yellow;
 	font-family: Rancho;
 	font-size: 1.8vw;
-	
+}
 
-} 
-
- .visible 
- {
- 	font-family: Rancho;
+.visible {
+	font-family: Rancho;
 	font-size: 2.8vw;
 	color: green;
 	margin-left: 58px;
- 
- }
- .move
- {
- margin-left: 58px;
- }
-
- #userImage
- {
-	 width:100%;
-	 height:100%;
- }
-#userFiveQuestionsPanel, #userExpertisePanel, #userAnswersPanel
- {
- 	background-color: #E7BDE9;
- 	font-family: Rancho;
-	font-size: 1.5vw;
-	overflow: auto;
- }
- 
- #userFiveQuestionsPanelTitle, #userFiveQuestionsPanelHeading, #userExpertisePanelHead, #userAnswersHeading, #userAnswersTitle
- {
- 	background-color: #B5ACA9;
- 	font-family: Rancho;
-	font-size: 1.6vw;
- }
- 
- #leaderboardPanel
- {
- 	margin-top: 30px;
- }
- 
- .topicLabels
- {
- 	margin-left:5px;
- 	display: inline-block;
- }
- #UserLastFiveQuestions
- {
-    max-height: 500px;
-	overflow-y: scroll;
- }
- 	
-.table-striped>tbody>tr:nth-of-type(odd) 
-{
-    background-color: #E8DFD7;
 }
 
-.fixed
-{
+.move {
+	margin-left: 58px;
+}
+
+#userImage {
+	width: 100%;
+	height: 100%;
+}
+
+#userFiveQuestionsPanel, #userExpertisePanel, #userAnswersPanel {
+	background-color: #E7BDE9;
+	font-family: Rancho;
+	font-size: 1.5vw;
+	overflow: auto;
+}
+
+#userFiveQuestionsPanelTitle, #userFiveQuestionsPanelHeading,
+	#userExpertisePanelHead, #userAnswersHeading, #userAnswersTitle {
+	background-color: #B5ACA9;
+	font-family: Rancho;
+	font-size: 1.6vw;
+}
+
+#leaderboardPanel {
+	margin-top: 30px;
+}
+
+.topicLabels {
+	margin-left: 5px;
+	display: inline-block;
+}
+
+#UserLastFiveQuestions {
+	max-height: 500px;
+	overflow-y: scroll;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+	background-color: #E8DFD7;
+}
+
+.fixed {
 	width: 70px;
 	height: 62px;
 }
-#newestQuestions
-{
-	
+
+#newestQuestions {
 	margin-bottom: 40px;
 }

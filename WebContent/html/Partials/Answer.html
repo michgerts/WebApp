@@ -5,7 +5,8 @@
 			<div class="container-fluid" id="home">
 				<div class='row'>
 					<div class='col-lg-8'>
-						<h2 id="Hello">Hello {{currentUser.NickName}}, please remember:</h2>
+						<h2 id="Hello">Hello {{currentUser.NickName}}, please
+							remember:</h2>
 						<h1 id="happy">Happy Wife = Happy Life!</h1>
 					</div>
 				</div>
@@ -13,35 +14,45 @@
 		</header>
 		<div ng-controller='AnswerController' ng-init="init()">
 			<div class="panel panel-default">
-				  <div class="panel-body" id="textHigh">{{question.Text}}</div>
+				<div class="panel-body" id="textHigh">{{question.Text}}</div>
 			</div>
-			<h3><span id="user">{{question.Asker}}</span> asked this question at <span id="time">{{question.Time}}</span> and received <span id="likes">{{question.Likes}}</span> Likes</h3>
+			<h3>
+				<span id="user">{{question.Asker}}</span> asked this question at <span
+					id="time">{{question.Time}}</span> and received <span id="likes">{{question.Likes}}</span>
+				Likes
+			</h3>
 			<div ng-if="listLength==0">
-				<span id="firstA">You are the first to answer this question! what an honor :)</span>
+				<span id="firstA">You are the first to answer this question!
+					what an honor :)</span>
 			</div>
 			<ul id="answersList"></ul>
 			<form class="form-horizontal" ng-submit='submitAnswer()'>
-				<h2 id="dearuser">Dear {{currentUser.NickName}} please submit your answer here:</h2>
-					<div class="form-group has-feedback " id="submit-answer">
-						   		<label class='control-label col-md-3 text-center' id="MyAnswer">My Answer</label>
-						   		<div class='col-md-9' id="texting">
-							   		<textarea class="form-control" name="user-answer" placeholder="Answer" ng-model='answer.Text' id="textArea" ></textarea>
-						  	 	</div>
+				<h2 id="dearuser">Dear {{currentUser.NickName}} please submit
+					your answer here:</h2>
+				<div class="form-group has-feedback " id="submit-answer">
+					<label class='control-label col-md-3 text-center' id="MyAnswer">My
+						Answer</label>
+					<div class='col-md-9' id="texting">
+						<textarea class="form-control" name="user-answer"
+							placeholder="Answer" ng-model='answer.Text' id="textArea"></textarea>
 					</div>
-					 <button type="submit" class="btn btn-primary center-block" id="submitBtnAns" ng-click='ask()'>Submit my answer</button>
+				</div>
+				<button type="submit" class="btn btn-primary center-block"
+					id="submitBtnAns" ng-click='ask()'>Submit my answer</button>
 			</form>
 			<div class="error-list" id="answerLength"></div>
 		</div>
-		<div class='row'>				
-					<p>
-					<img class="fixed" title="Sign Out" alt="signOut" src= './images/Exit-48.png' ng-click='signout()'/>
-					<a href="./#/home">
-						<img class="fixed" title="Home" alt="home" src= './images/Home-48.png'>
-					</a>
-					<a href="./#/leaderboard">
-						<img class= "fixed" title="LeaderBoard" alt="LeaderBoard" src= './images/Superman-48.png'>
-					</a>
-					</p>
+		<div class='row'>
+			<p>
+				<img class="fixed" title="Sign Out" alt="signOut"
+					src='./images/Exit-48.png' ng-click='signout()' /> <a
+					href="./#/home"> <img class="fixed" title="Home" alt="home"
+					src='./images/Home-48.png'>
+				</a> <a href="./#/leaderboard"> <img class="fixed"
+					title="LeaderBoard" alt="LeaderBoard"
+					src='./images/Superman-48.png'>
+				</a>
+			</p>
 		</div>
 	</div>
 </div>

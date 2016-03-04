@@ -22,11 +22,21 @@ import com.google.gson.JsonParser;
 // Data types
 import WebAppPkg.Answer;
  
+/** This class is a servlet class that submits a user's answer to a certain question 
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class AnswerSubmitServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
     private String tableName = "ANSWERS";
     @Override
+    /** This method inserts the new answer submitted to the DB
+	 * and updates the questions' table field 'answered' to true
+	 * @param  request  request from user
+	 * @param  response response back send to the user
+	 */
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {
