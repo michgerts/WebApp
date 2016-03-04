@@ -3,6 +3,11 @@ package WebAppPkg;
 import java.util.List;
 import java.util.Collections;
 
+/** This class represents a question an all of its details
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class Question implements Comparable<Question>
 {
 	private int ID;
@@ -14,6 +19,14 @@ public class Question implements Comparable<Question>
 	private float Rating;
 	private List<String> Topics;
 	
+	/** Constructor for the Question class
+	 * @param  id		The question id
+	 * @param  text 	The question text
+	 * @param  time  	The time when the question was asked
+	 * @param  asker	The question asker
+	 * @param  likes	The number of 'like' this question got
+	 * @param  answered	Whether this question was answered
+	 */
 	public Question (int id, String text, String time, String asker, int likes, boolean answered)
 	{
 		ID = id;
@@ -95,6 +108,10 @@ public class Question implements Comparable<Question>
 		Rating = rating;
 	}
 	@Override
+	/** A comparator for this class. It compares between the ratings of this instance and a given one.
+	 * @param  comparestq	the question that is compared to.
+	 * @return 1 if this instance has a greater rating than the given one. -1 if the opposite is true. 0 if they're equal.  
+	 */
 	public int compareTo(Question comparestq)
 	{
 	        float comparerate=((Question)comparestq).getRating();

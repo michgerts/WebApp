@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <div ng-controller='NewestQuestions' data-ng-init="initNewest()">
-			<div>
-			<button data-toggle="collapse" data-target="#newestQuestions" class="btn btn-primary collapseBTN">All Unanswered Questions</button>
-				 <div id="newestQuestions" class="collapse">
-					<table id="newQuestionsList" class="table">
-						  <th>Question's text</th>
-						  <th>Time of submission</th> 
-						  <th>Rating</th> 
-						  <th></th>
-					</table>
-					<div id = "pagingDiv">
-						<ul class="pager" >
-						  <li class="previous" ><a href="" ng-click="prev()" >Prev</a></li>
-						  <li class="next" ><a href="" ng-click="next()" >Next</a></li>
-						</ul>					
-					</div>
-				</div>
+	<div>
+		<button data-toggle="collapse" data-target="#newestQuestions"
+			class="btn btn-primary collapseBTN">All Unanswered Questions</button>
+		<div id="newestQuestions" class="collapse">
+			<table id="newQuestionsList" class="table">
+				<th>Question's text</th>
+				<th>Time of submission</th>
+				<th>Rating</th>
+				<th></th>
+			</table>
+			<div id="pagingDiv">
+				<ul class="pager">
+					<li class="previous"><a href="" ng-click="prev()">Prev</a></li>
+					<li class="next"><a href="" ng-click="next()">Next</a></li>
+				</ul>
 			</div>
-		
+		</div>
+	</div>
+
 </div>
 
 

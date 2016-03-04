@@ -21,13 +21,25 @@ import com.google.gson.Gson;
 // Data types
 import WebAppPkg.Question;
  
+/** This class is a servlet class that handles the details of the questions (answered and unanswered)
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class AllQuestionsServlet extends HttpServlet
 {//this will submit an answer -- need to change the name
 	private static final long serialVersionUID = 1L;
     private String tableName = "QUESTIONS";
 
+
+	
 	@Override
-   
+	/** This method generates and returns  information about all of the questions in the system
+	 *  (answered and unanswered).
+	 * this will be displayed in the table presenting all of the questions.
+	 * @param  request  request from user
+	 * @param  response response back send to the user
+	 */
    public void doGet (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {    	
@@ -83,8 +95,14 @@ public class AllQuestionsServlet extends HttpServlet
     	
     }
     
+	
 	@Override
-	   
+	/** This method is called when upVoting or downVoting a question in the 'all questions' table.
+	 * It updates the "like" number in the DB of this question and returns to the user the details of the questions in order
+	 * to present them after the like update.
+	 * @param  request  request from user
+	 * @param  response response back send to the user
+	 */
 	   public void doPost (HttpServletRequest request, HttpServletResponse response)
 	 		   throws IOException, ServletException
 	    {    	

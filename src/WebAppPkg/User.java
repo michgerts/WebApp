@@ -1,5 +1,10 @@
 package WebAppPkg;
 
+/** This class represents a user and all of his details
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class User
 {
 	private int ID;
@@ -9,6 +14,14 @@ public class User
 	private String Description;	
 	private String Pic;
 	
+	/** Constructor for the User class
+	 * @param  id		The user's id
+	 * @param  name 	The user's name
+	 * @param  pass		The user's password
+	 * @param  nick		The user's nickname
+	 * @param  desc		The user's description
+	 * @param  pic		The user's profile picture
+	 */
 	public User (int id, String name, String pass, String nick, String desc, String pic)
 	{
 		ID = id;

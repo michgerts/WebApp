@@ -25,6 +25,11 @@ import com.google.gson.JsonParser;
 // Data types
 import WebAppPkg.Question;
  
+/** This is a servlet class that handles the newest questions information
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class NewestQuestionsServlet extends HttpServlet
 {//this will submit an answer -- need to change the name
 	private static final long serialVersionUID = 1L;
@@ -32,6 +37,11 @@ public class NewestQuestionsServlet extends HttpServlet
 
 	@Override
    
+	/** This method generates and returns information about the unanswered questions in the system
+	 * this will be displayed in the table presenting the newest questions.
+	 * @param  request  request from user
+	 * @param  response response back send to the user
+	 */
    public void doGet (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {    	
@@ -78,8 +88,13 @@ public class NewestQuestionsServlet extends HttpServlet
 		} 
     }
     
-	@Override
-	   
+		@Override
+		/** This method is called when upVoting or downVoting a question in the 'newest questions' table.
+		 * It updates the "like" number in the DB of this question and returns to the user the details of the questions in order
+		 * to present them after the like update.
+		 * @param  request  request from user
+		 * @param  response response back send to the user
+		 */
 	   public void doPost (HttpServletRequest request, HttpServletResponse response)
 	 		   throws IOException, ServletException
 	    {    	

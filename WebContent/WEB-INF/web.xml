@@ -1,141 +1,139 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<web-app version="3.0"
-  xmlns="http://java.sun.com/xml/ns/javaee"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
- 
-  <!-- To save as <CATALINA_HOME>\webapps\helloservlet\WEB-INF\web.xml -->
- 
-   <servlet>
-      <servlet-name>UserServlet</servlet-name>
-      <servlet-class>WebAppPkg.UserServlet</servlet-class>
-   </servlet>
-   <servlet>
-      <servlet-name>SignUpServlet</servlet-name>
-      <servlet-class>WebAppPkg.SignUpServlet</servlet-class>
-   </servlet>
-   <servlet>
-      <servlet-name>LoginServlet</servlet-name>
-      <servlet-class>WebAppPkg.LoginServlet</servlet-class>
-   </servlet>
-   <servlet>
-      <servlet-name>QSubmitServlet</servlet-name>
-      <servlet-class>WebAppPkg.QSubmitServlet</servlet-class>
-   </servlet>
-   <servlet>
-      <servlet-name>NewestQuestionsServlet</servlet-name>
-      <servlet-class>WebAppPkg.NewestQuestionsServlet</servlet-class>
-   </servlet>
-   <servlet>
-      <servlet-name>TopicsServlet</servlet-name>
-      <servlet-class>WebAppPkg.TopicsServlet</servlet-class>
-   </servlet>
-   <servlet>
-      <servlet-name>ShowQuestionServlet</servlet-name>
-      <servlet-class>WebAppPkg.ShowQuestionServlet</servlet-class>
-   </servlet>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+	<!-- To save as <CATALINA_HOME>\webapps\helloservlet\WEB-INF\web.xml -->
+
 	<servlet>
-      <servlet-name>ASubmitServlet</servlet-name>
-      <servlet-class>WebAppPkg.AnswerSubmitServlet</servlet-class>
-   </servlet>
-   <servlet>
-      <servlet-name>LeaderboardServlet</servlet-name>
-      <servlet-class>WebAppPkg.LeaderboardServlet</servlet-class>
-   </servlet>
-   <servlet>
-      <servlet-name>ShowAnswerServlet</servlet-name>
-      <servlet-class>WebAppPkg.ShowAnswerServlet</servlet-class>
-   </servlet>
-   <servlet>
-      <servlet-name>VoteAnswerServlet</servlet-name>
-      <servlet-class>WebAppPkg.VoteAnswerServlet</servlet-class>
-   </servlet>
-   <servlet>
-      <servlet-name>UserIDServlet</servlet-name>
-      <servlet-class>WebAppPkg.UserIDServlet</servlet-class>
-   </servlet>
-   <servlet>
-   <servlet-name>AllQuestionsServlet</servlet-name>
-      <servlet-class>WebAppPkg.AllQuestionsServlet</servlet-class>
-   </servlet>
+		<servlet-name>UserServlet</servlet-name>
+		<servlet-class>WebAppPkg.UserServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>SignUpServlet</servlet-name>
+		<servlet-class>WebAppPkg.SignUpServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>WebAppPkg.LoginServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>QSubmitServlet</servlet-name>
+		<servlet-class>WebAppPkg.QSubmitServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>NewestQuestionsServlet</servlet-name>
+		<servlet-class>WebAppPkg.NewestQuestionsServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TopicsServlet</servlet-name>
+		<servlet-class>WebAppPkg.TopicsServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ShowQuestionServlet</servlet-name>
+		<servlet-class>WebAppPkg.ShowQuestionServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ASubmitServlet</servlet-name>
+		<servlet-class>WebAppPkg.AnswerSubmitServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>LeaderboardServlet</servlet-name>
+		<servlet-class>WebAppPkg.LeaderboardServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ShowAnswerServlet</servlet-name>
+		<servlet-class>WebAppPkg.ShowAnswerServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>VoteAnswerServlet</servlet-name>
+		<servlet-class>WebAppPkg.VoteAnswerServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UserIDServlet</servlet-name>
+		<servlet-class>WebAppPkg.UserIDServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AllQuestionsServlet</servlet-name>
+		<servlet-class>WebAppPkg.AllQuestionsServlet</servlet-class>
+	</servlet>
+
     <servlet>
    <servlet-name>AllTopicsServlet</servlet-name>
       <servlet-class>WebAppPkg.AllTopicsServlet</servlet-class>
    </servlet>
- 
-   <!-- Note: All <servlet> elements MUST be grouped together and
-         placed IN FRONT of the <servlet-mapping> elements -->
- 
-   <servlet-mapping>
-      <servlet-name>LoginServlet</servlet-name>
-      <url-pattern>/loginservlet</url-pattern>
-   </servlet-mapping>
-   <servlet-mapping>
-      <servlet-name>SignUpServlet</servlet-name>
-      <url-pattern>/signupservlet</url-pattern>
-   </servlet-mapping>
-   <servlet-mapping>
-      <servlet-name>UserServlet</servlet-name>
-      <url-pattern>/userservlet</url-pattern>
-   </servlet-mapping>
-    <servlet-mapping>
-      <servlet-name>QSubmitServlet</servlet-name>
-      <url-pattern>/qsubmitservlet</url-pattern>
-   </servlet-mapping>
-   <servlet-mapping>
-      <servlet-name>NewestQuestionsServlet</servlet-name>
-      <url-pattern>/newestquestionsservlet</url-pattern>
-   </servlet-mapping>         
-   <servlet-mapping>
-      <servlet-name>TopicsServlet</servlet-name>
-      <url-pattern>/topicsservlet</url-pattern>
-   </servlet-mapping>
-    <servlet-mapping>
-      <servlet-name>ShowQuestionServlet</servlet-name>
-      <url-pattern>/showquestionservlet</url-pattern>
-   </servlet-mapping>  
-   <servlet-mapping>
-      <servlet-name>LeaderboardServlet</servlet-name>
-      <url-pattern>/leaderboardservlet</url-pattern>
-   </servlet-mapping>    
-   <servlet-mapping>
-      <servlet-name>ASubmitServlet</servlet-name>
-      <url-pattern>/asubmitservlet</url-pattern>
-   </servlet-mapping>  
-     <servlet-mapping>
-      <servlet-name>ShowAnswerServlet</servlet-name>
-      <url-pattern>/showanswerservlet</url-pattern>
-   </servlet-mapping>      
-     <servlet-mapping>
-      <servlet-name>VoteAnswerServlet</servlet-name>
-      <url-pattern>/voteanswerservlet</url-pattern>
-   </servlet-mapping>
-   <servlet-mapping>
-   	  <servlet-name>UserIDServlet</servlet-name>
-      <url-pattern>/useridservlet</url-pattern>
-   </servlet-mapping>
 
-   <servlet-mapping>
-      <servlet-name>AllQuestionsServlet</servlet-name>
-      <url-pattern>/allquestionsservlet</url-pattern>
-   </servlet-mapping>
-      <servlet-mapping>
+	<!-- Note: All <servlet> elements MUST be grouped together and placed IN 
+		FRONT of the <servlet-mapping> elements -->
+
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/loginservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SignUpServlet</servlet-name>
+		<url-pattern>/signupservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UserServlet</servlet-name>
+		<url-pattern>/userservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>QSubmitServlet</servlet-name>
+		<url-pattern>/qsubmitservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>NewestQuestionsServlet</servlet-name>
+		<url-pattern>/newestquestionsservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TopicsServlet</servlet-name>
+		<url-pattern>/topicsservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ShowQuestionServlet</servlet-name>
+		<url-pattern>/showquestionservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LeaderboardServlet</servlet-name>
+		<url-pattern>/leaderboardservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ASubmitServlet</servlet-name>
+		<url-pattern>/asubmitservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ShowAnswerServlet</servlet-name>
+		<url-pattern>/showanswerservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>VoteAnswerServlet</servlet-name>
+		<url-pattern>/voteanswerservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UserIDServlet</servlet-name>
+		<url-pattern>/useridservlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>AllQuestionsServlet</servlet-name>
+		<url-pattern>/allquestionsservlet</url-pattern>
+	</servlet-mapping>
+
+<servlet-mapping>
       <servlet-name>AllTopicsServlet</servlet-name>
       <url-pattern>/alltopicsservlet</url-pattern>
    </servlet-mapping>
-   
-   <welcome-file-list>
-    	<welcome-file>./html/Index.html</welcome-file>
-   </welcome-file-list>
-         
-   <resource-ref>
-	<!--
-	CustomerDatasource: the name of the datasource that
-	represents your
-	Derby database.
-	-->
-	<res-ref-name>jdbc/webAppDataSource</res-ref-name>
-	<res-type>javax.sql.DataSource</res-type>
-	<res-auth>Container</res-auth>
+
+	<welcome-file-list>
+		<welcome-file>./html/Index.html</welcome-file>
+	</welcome-file-list>
+
+	<resource-ref>
+		<!-- CustomerDatasource: the name of the datasource that represents your 
+			Derby database. -->
+		<res-ref-name>jdbc/webAppDataSource</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
 	</resource-ref>
 </web-app>

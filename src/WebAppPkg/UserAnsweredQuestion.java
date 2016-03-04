@@ -2,19 +2,25 @@ package WebAppPkg;
 
 import java.util.List;
 
+/** This class represents a qestion that a certain user has answered. 
+ * it contains the questions's topics, the question itself, user's answer and user's answer rating
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class UserAnsweredQuestion
 {
-	//private String Text;
-	//private String Time;
-	//private String Asker;
-	//private int Likes;	
-	//private boolean Answered;
 	Question Question;
 	private List<String> Topics;
 	private String UserAnswerText;
 	private int UserAnswerRating;
 	
-	
+	/** Constructor for the User class
+	 * @param  question				The question this user answered
+	 * @param  topics 				The topics of the question
+	 * @param  userAnswerText		The user's answer
+	 * @param  userAnswerRating		The answer's rating
+	 */
 	public UserAnsweredQuestion (Question question, List<String> topics, String userAnswerText, int userAnswerRating)
 	{
 		Question = question;

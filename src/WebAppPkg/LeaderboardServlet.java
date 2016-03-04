@@ -31,8 +31,13 @@ import com.google.gson.JsonParser;
 // Data types
 import WebAppPkg.Question;
  
+/** This class is a servlet class that returns the users' info that will be presented in the leaders board
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class LeaderboardServlet extends HttpServlet
-{//this will submit an answer -- need to change the name
+{
 	private static final long serialVersionUID = 1L;
     private String QTableName = "QUESTIONS";
     private String UTableName = "USERS";
@@ -41,7 +46,12 @@ public class LeaderboardServlet extends HttpServlet
     private int page=0;
     @SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
-   
+	/** This method returns details on all of the users and orders them by rating.
+	 * this will eventually update the leader board table in the front end.
+	 * The returned details will also contain all of the user's profile details.
+	 * @param  request  request from user
+	 * @param  response response back send to the user
+	 */
    public void doGet (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {    	
@@ -97,8 +107,13 @@ public class LeaderboardServlet extends HttpServlet
             	while(userExpertise.next() && j<5)
         		{
             		topic = userExpertise.getString("Topic");
-            		fiveTopTopics.add(topic);
-            		j++;
+            		if(!topicExistsInExpertise(topic, (ArrayList<String>)fiveTopTopics))
+            		{
+            			fiveTopTopics.add(topic);
+            			j++;
+            		}
+            			
+            		
         		}
             	
             	userP.setTopFiveTopics(fiveTopTopics);
@@ -214,6 +229,12 @@ public class LeaderboardServlet extends HttpServlet
     	
     }
     
+    /** This method searches the given usersProfiles for a user with a name
+     * equal to the given parameter 'name'.
+     * Returns true if this user already exists in the given usersProfiles list and false otherwise.
+	 * @param  name   the name 
+	 * @param  topics the list of topic to perform the search on.
+	 */
     private boolean nameExistsInUP(String name, ArrayList<UserProfile> usersProfiles)
     {
     	Iterator<UserProfile> iterator = usersProfiles.iterator();
@@ -224,6 +245,24 @@ public class LeaderboardServlet extends HttpServlet
         	}
         }
 		return true;
+    	
+    }
+    /** This method searches the given expertise topics (per user) for a topic with a name
+     * equal to the given parameter 'name'.
+     * Returns true if this topic already exists in the given topics list and false otherwise.
+	 * @param  name   the name 
+	 * @param  topics the list of topic to perform the search on.
+	 */
+    private boolean topicExistsInExpertise(String name, ArrayList<String> topics)
+    {
+    	Iterator<String> iterator = topics.iterator();
+        while (iterator.hasNext()) {
+        	String currTopic = iterator.next();
+            if (currTopic.equals(name)) {
+            	return true;
+        	}
+        }
+		return false;
     	
     }
     

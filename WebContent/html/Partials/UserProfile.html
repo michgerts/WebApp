@@ -1,75 +1,77 @@
 <!DOCTYPE html>
-<div class='container' >
-	<div ng-controller='LeaderboardController' data-ng-init="getUserProfile()">
+<div class='container'>
+	<div ng-controller='UserProfileController'
+		data-ng-init="getUserProfile2($event)">
 
-		<div class="container-fluid" >
+		<div class="container-fluid">
+			<div class='row'>
+				<div class='col-md-12'>
+					<h1 class="userProfileHeadline" id="userProfileName"></h1>
+				</div>
+			</div>
+			<div id="#UserProfileInfo">
 				<div class='row'>
-					<div class='col-md-12'>
-						<h1 class="userProfileHeadline"> {{thisUser.Name}}</h1> 
+					<div class='col-md-3 col-xs-3 col-lg-3'>
+						<h2>
+							<img class="img-circle" id="userImage" alt="UserProfilePic">
+						</h2>
+						<h3 class="userProfileHeadline" id="userProfileNickname"></h3>
+						<h3 class="userProfileHeadline" id="userProfileRating"></h3>
+					</div>
+					<div class='col-md-6  col-xs-6 col-lg-6'>
+						<br /> <br />
+						<h3 class="userProfileHeadline" id="userProfileDesc"></h3>
 					</div>
 				</div>
-				<div id="#UserProfileInfo">
-					<div class='row'>
-						<div class='col-md-3 col-xs-3 col-lg-3'>
-							<h2 > <img class="img-circle" id="userImage" ng-src="{{thisUser.Pic}}" alt="UserProfilePic"></h2> 
-							<h3 class="userProfileHeadline"> {{thisUser.Nickname}}</h3> 
-							<h3 class="userProfileHeadline">Rating: {{thisUser.Rating}}</h3> 
-						</div>
-						<div class='col-md-6  col-xs-6 col-lg-6'>
-						<br/>
-						<br/>
-							<h3 class="userProfileHeadline"> {{thisUser.Description}}</h3> 
+				<div class='row'>
+					<div class='col-md-3 col-xs-3 col-lg-3'>
+						<div class="panel panel-default" id="userExpertisePanel">
+							<div class="panel-heading" id="userExpertisePanelHead">Expertise</div>
+							<div class="panel-body">
+								<h3 id="userExpertise"></h3>
+							</div>
+
 						</div>
 					</div>
-					<div class='row'>
-						<div class='col-md-3 col-xs-3 col-lg-3'>
-							<div class="panel panel-default" id ="userExpertisePanel">
-							  <div class="panel-heading"  id ="userExpertisePanelHead">Expertise</div>
-							  <div class="panel-body" >
-							  	<h3 id="userExpertise">You can ask {{thisUser.Nickname}} about:
-							  	<br>
-							  	</h3>
-							  </div>
-									
+					<div class='col-md-8 col-xs-8 col-lg-8'>
+						<div class="panel panel-default" id="userFiveQuestionsPanel">
+							<div class="panel-heading userProfileHeadline"
+								id="userFiveQuestionsPanelHeading">
+								<h1 class="panel-title" id="userFiveQuestionsPanelTitle">Five
+									last questions the user asked:</h1>
 							</div>
-						</div>
-						<div class='col-md-8 col-xs-8 col-lg-8'>
-							<div class = "panel panel-default" id ="userFiveQuestionsPanel">
-							   <div class = "panel-heading userProfileHeadline" id ="userFiveQuestionsPanelHeading" >
-							      <h1 class = "panel-title" id ="userFiveQuestionsPanelTitle">Five last questions the user asked:</h1>
-							   </div>
-								<table class="table" id = "UserLastFiveQuestions">
-									<tr>
-										 <th>Time</th>
-										 <th>Question's text</th> 
-										 <th>Topic</th> 
-										 <th>Rating</th> 
-							    	</tr>
-								 </table>
-							</div>
+							<table class="table" id="UserLastFiveQuestions">
+								<tr>
+									<th>Time</th>
+									<th>Question's text</th>
+									<th>Topic</th>
+									<th>Rating</th>
+								</tr>
+							</table>
 						</div>
 					</div>
-					<div class='row'>
-						<div class='col-md-3 col-xs-3 col-lg-3'>
-						</div>
-						<div class='col-md-8 col-xs-8 col-lg-8'>
-						<div class = "panel panel-default" id ="userAnswersPanel">
-							   <div class = "panel-heading" id ="userAnswersHeading">
-							      <h1 class = "panel-title" id ="userAnswersTitle">Five last user answers on questions </h1>
-							   </div>
-								<table class="table table-striped" id = "userAnswersTable">
-									<tr>
-										 <th>Question's Time</th>
-										 <th>Question's text</th> 
-										 <th>Question's Topics</th> 
-										 <th>Question's Rating</th> 
-							    	</tr>
-								 </table>
+				</div>
+				<div class='row'>
+					<div class='col-md-3 col-xs-3 col-lg-3'></div>
+					<div class='col-md-8 col-xs-8 col-lg-8'>
+						<div class="panel panel-default" id="userAnswersPanel">
+							<div class="panel-heading" id="userAnswersHeading">
+								<h1 class="panel-title" id="userAnswersTitle">Five last
+									user answers on questions</h1>
 							</div>
+							<table class="table table-striped" id="userAnswersTable">
+								<tr>
+									<th>Question's Time</th>
+									<th>Question's text</th>
+									<th>Question's Topics</th>
+									<th>Question's Rating</th>
+								</tr>
+							</table>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 		<div class='row'>				
 					<p>
 					<a href="./#/">

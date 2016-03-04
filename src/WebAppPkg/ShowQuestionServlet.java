@@ -15,11 +15,22 @@ import com.google.gson.Gson;
 // Data types
 import WebAppPkg.Question;
  
+/** This class is a servlet class that handles a certain question's details.
+ * The details are then presented to the user.
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class ShowQuestionServlet extends HttpServlet
 {
+	
 	private static final long serialVersionUID = 1L;
     private String tableName = "QUESTIONS";
     @Override
+    /** This method returns a certain question's details
+	 * @param  request  request from user
+	 * @param  response response back send to the user
+	 */
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {
