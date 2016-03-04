@@ -98,7 +98,7 @@ function listItemAllTopics(response, table)
     var tr = document.createElement("tr");
     var td = document.createElement("td");
     a.textContent = topic;
-    a.setAttribute('href', "./#/home/topics/" + topic);
+    a.setAttribute('href', "./#/topics/" + topic);
     td.appendChild(a);
     tr.setAttribute("id", topic);
     tr.appendChild(td);

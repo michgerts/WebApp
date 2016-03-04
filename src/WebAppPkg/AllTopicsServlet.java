@@ -51,8 +51,6 @@ public class AllTopicsServlet extends HttpServlet
             {
                 sb.append(str);
             }
-            //db.executeQuery("DELETE FROM TOPICS WHERE TOPIC IS NULL OR TRIM(TOPIC) = ''");
-            //db.executeQuery("UPDATE TOPICS SET TOPIC =(RTRIM(TOPIC)");
 			topics = db.executeQuery("SELECT DISTINCT TOPIC AS T FROM "+ tableName+"  order by T asc");           
             while (topics.next())
     		{

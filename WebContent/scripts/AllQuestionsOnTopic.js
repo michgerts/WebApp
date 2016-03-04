@@ -1,10 +1,10 @@
 // Front end js
-app.controller('AllQuestionsOnTopic',function ($scope, $http, $window, $compile)
+app.controller('A',function ($scope, $http, $window, $compile)
 {
 	
 	var Topic=  path.split("/")[7];
 	var table = $("#allQuestionsontopicList > tbody");
-	$scope.init = function ()
+	$scope.initOnTopic = function ()
 	{
 		$http(
 		{

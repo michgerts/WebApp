@@ -8,7 +8,7 @@ app.controller('RouteConroller',function ($scope, $http, $window)
 	{
 		var siteView = next.split('/#');
 		siteView = siteView[1];
-		var views = ["signup", "home", "leaderboard", "userprofile"];
+		var views = ["signup", "home", "leaderboard", "userprofile", "topics"];
 		siteView = siteView.split('/')[1];
 		var params = next.split('/#/')[1];
 		$scope.username = params.split('/')[1];
@@ -43,25 +43,24 @@ app.controller('RouteConroller',function ($scope, $http, $window)
 									{
 										$scope.view=homeView;
 									}
-								if (homeView == "topics")
-								{
-									$scope.view=homeView;
-								}		
+							
 							}
 					});
 		}
-		else 
-			if(siteView == "leaderboard")
-				{
-				var userprofile= next.split("/")[6];
-				if (userprofile == "userprofile")
-					{
-					$scope.view=userprofile;
-					}
-				else
-					
-					$scope.view=siteView;
-				}
+		else if (siteView == "topics")
+		{
+				$scope.view="allquestionsontopic";
+		}
+		else if(siteView == "leaderboard")
+		{
+			var userprofile= next.split("/")[6];
+			if (userprofile == "userprofile")
+			{
+				$scope.view=userprofile;
+			}
+			else
+				$scope.view=siteView;
+		}
 	});
 	
 	
@@ -84,25 +83,6 @@ app.factory('dataService', function()
 	}
 });
 
-function setCookie(cname, cvalue, exdays)
-{
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + "; " + expires;
-}
-
-function getCookie(cname)
-{
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0; i<ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1);
-        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-    }
-    return "";
-}
 function formatDate(oldDate)
 {
 	oldDate= new Date(oldDate);
