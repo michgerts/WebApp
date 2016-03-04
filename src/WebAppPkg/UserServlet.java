@@ -15,11 +15,20 @@ import com.google.gson.Gson;
 // Data types
 import WebAppPkg.User;
  
+/** This class is a servlet class that returns details that belong to a certain user
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class UserServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
     private String tableName = "USERS";
     @Override
+    /** This method returns to the user the details of a certain user
+	 * @param  request  request from user
+	 * @param  response response back send to the user
+	 */
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {

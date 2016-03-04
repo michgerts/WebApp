@@ -16,6 +16,11 @@ import com.google.gson.JsonParser;
 
 // Data types
 import WebAppPkg.User;
+/** This is a servlet class that handles the system login
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class LoginServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
@@ -23,6 +28,10 @@ public class LoginServlet extends HttpServlet
     @SuppressWarnings("deprecation")
 
 	@Override
+	/** This method returns the details of the user that logged into the system
+	 * @param  request  request from user
+	 * @param  response response back send to the user
+	 */
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {

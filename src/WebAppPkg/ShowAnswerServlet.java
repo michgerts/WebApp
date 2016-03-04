@@ -18,11 +18,20 @@ import com.google.gson.Gson;
 // Data types
 import WebAppPkg.Question;
  
+/** This class is servlet class that returns the details of a certain answer to a certain question
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class ShowAnswerServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
     private String tableName = "ANSWERS";
     @Override
+    /** This method returns answer's details.
+	 * @param  request  request from user
+	 * @param  response response back send to the user
+	 */
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {

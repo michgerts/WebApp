@@ -12,7 +12,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
-
+/** This class handles the connection to the DB 
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class WebAppDB
 {
     private static Connection conn;
@@ -22,6 +26,8 @@ public class WebAppDB
 		conn = null;
 	}
 	
+	/** This method creates a connection to the DB
+   	 */
 	public void createConnection()
     {
     	try
@@ -41,6 +47,9 @@ public class WebAppDB
     	}
     }
 	
+	/** This method executes a given query
+	 * @param SQLQuuery 	the query to be executed
+   	 */
     public ResultSet executeQuery(String SQLQuuery)
     {
     	Statement stmt = null;
@@ -57,6 +66,9 @@ public class WebAppDB
 		return results;
     }
     
+    /** This method executes a given query - that updates the DB
+	 * @param SQLQuuery 	the query to be executed
+   	 */
     public void executeUpdate(String SQLQuuery)
     {
     	Statement stmt = null;
@@ -71,22 +83,26 @@ public class WebAppDB
     		sqlExcept.printStackTrace();
     	}    	
     }
+    /** This method closes the connection to the DB
+   	 */
     public void closeConnection()
     {
     	try {
     		if(conn != null && !conn.isClosed())
     			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
     }
+    
+    /** This method commits to the DB
+   	 */
     public void commit()
     {
     	try {
 			conn.commit();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }

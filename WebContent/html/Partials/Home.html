@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <div class='container' id="SignInContainer">
-	<div ng-controller='HomeController' data-ng-init="init()"> 
+	<div ng-controller='HomeController' data-ng-init="init()">
 		<header>
 			<div class="container-fluid" id="home">
 				<div class='row'>
 					<div class='col-lg-12'>
-						<h2 id="Hello">Hello {{currentUser.NickName}}, please remember:</h2> 
+						<h2 id="Hello">Hello {{currentUser.NickName}}, please
+							remember:</h2>
 						<h1 id="happy">Happy Wife = Happy Life!</h1>
 					</div>
 				</div>
@@ -14,7 +15,7 @@
 		<div id="questionsDesign">
 			<ng-include src="'./html/Partials/Question.html'"></ng-include>
 		</div>
-			
+
 		<div>
 			<ng-include src="'./html/Partials/NewestQuestions.html'"></ng-include>
 		</div>
@@ -22,13 +23,14 @@
 			<ng-include src="'./html/Partials/AllQuestions.html'"></ng-include>
 		</div>
 		<div class='row'>
-					<div class='col-lg-12' id="SignOut">
-						<img class="fixed" title="Sign Out" alt="SignOut" src= './images/Exit-48.png' ng-click='signout()'>
-						<a href="./#/leaderboard">
-						<img class= "fixed" title="LeaderBoard" alt="LeaderBoard" src= './images/Superman-48.png'>
-						</a>
-					</div>
-					
+			<div class='col-lg-12' id="SignOut">
+				<img class="fixed" title="Sign Out" alt="SignOut"
+					src='./images/Exit-48.png' ng-click='signout()'> <a
+					href="./#/leaderboard"> <img class="fixed" title="LeaderBoard"
+					alt="LeaderBoard" src='./images/Superman-48.png'>
+				</a>
+			</div>
+
 		</div>
 	</div>
 </div>

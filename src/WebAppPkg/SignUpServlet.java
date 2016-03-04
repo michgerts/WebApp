@@ -17,11 +17,20 @@ import com.google.gson.JsonParser;
 // Data types
 import WebAppPkg.User;
  
+/** This class is a servlet class that handles user's sign up
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class SignUpServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
     private String tableName = "USERS";
     @Override
+    /** This method handles a user sign up. It inserts the new user's detail into the DB.
+	 * @param  request  request from user
+	 * @param  response response back send to the user
+	 */
     public void doPost (HttpServletRequest request, HttpServletResponse response)
  		   throws IOException, ServletException
     {

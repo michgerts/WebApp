@@ -1,6 +1,11 @@
 package WebAppPkg;
 import java.util.Collections;
 import java.util.List;
+/** This class represents a user profile and all of its properties
+ * @author Michal Kogan
+ * @author Rita Kaufman
+ *
+ */
 public class UserProfile implements Comparable
 {
 	private User user;
@@ -9,8 +14,14 @@ public class UserProfile implements Comparable
 	private float rating;
 	private List<String> fiveTopTopics;
 	
-	
-	public UserProfile(User user, List<Question> askedQuestions, List<Answer> userAnswers, int rating, List<String> fiveTopTopics, List<UserAnsweredQuestion> userAnsweredQuestions)
+	/** Constructor #1 for the UserProfile class
+	 * @param  user						The user's info
+	 * @param  askedQuestions 			The questions that this user asked
+	 * @param  rating					The rating of this user
+	 * @param  fiveTopTopics			User's expertise
+	 * @param  userAnsweredQuestions	Five last answers this user gave and their questions
+	 */
+	public UserProfile(User user, List<Question> askedQuestions, int rating, List<String> fiveTopTopics, List<UserAnsweredQuestion> userAnsweredQuestions)
 	{
 		this.user = user;
 		this.askedQuestions = askedQuestions;
@@ -20,6 +31,8 @@ public class UserProfile implements Comparable
 		
 	}
 	
+	/** Constructor #2 for the UserProfile class (empty constructor)
+	 */
 	public UserProfile() 
 	{		
 		this.fiveTopTopics = Collections.emptyList();
@@ -76,6 +89,10 @@ public class UserProfile implements Comparable
 		 this.fiveTopTopics = fiveTopTopics;
 	}
 	@Override
+	/** Comparator for the class UserProfile. It compares both objects' ratings.
+	 * @param  userP	a user
+	 * @return 			1 if this rating is greater then the given one. -1 if the opposite is correct. 0 if they're equal.
+	 */
 	public int compareTo(Object userP) {
 		float compareage=((UserProfile)userP).getRating();
 		if((this.rating - compareage)> 0)
