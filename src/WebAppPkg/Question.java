@@ -98,7 +98,6 @@ public class Question implements Comparable<Question>
 	public int compareTo(Question comparestq)
 	{
 	        float comparerate=((Question)comparestq).getRating();
-	        /* For Ascending order*/
 	        if (this.Rating>comparerate)
 	        	return -1;
 	        else if (this.Rating<comparerate)

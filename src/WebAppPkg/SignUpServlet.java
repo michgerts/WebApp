@@ -27,7 +27,13 @@ public class SignUpServlet extends HttpServlet
     {
     	WebAppDB db = new WebAppDB();
 		ResultSet users;
-		db.createConnection(); 
+		db.createConnection();
+		try {
+			db.setAutoCommit();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}; 
 	
         StringBuilder sb = new StringBuilder();
         BufferedReader br = request.getReader();
@@ -61,11 +67,13 @@ public class SignUpServlet extends HttpServlet
         	response.setCharacterEncoding("UTF-8");
         	response.getWriter().write(json);
         	response.getWriter().close();
-        	//db.closeConnection();
 		}
         catch (SQLException e)
         {
 			e.printStackTrace();
+		}
+        finally{
+			db.closeConnection();
 		}
     }
 }

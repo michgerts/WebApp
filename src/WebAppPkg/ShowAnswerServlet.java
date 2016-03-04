@@ -27,8 +27,8 @@ public class ShowAnswerServlet extends HttpServlet
  		   throws IOException, ServletException
     {
     	WebAppDB db = new WebAppDB();
-		ResultSet answer;
-		db.createConnection(); 
+		ResultSet answer = null;
+		
 	
         StringBuilder sb = new StringBuilder();
         BufferedReader br = request.getReader();
@@ -37,11 +37,14 @@ public class ShowAnswerServlet extends HttpServlet
         {
             sb.append(str);
         }
-		int qid = new Gson().fromJson(sb.toString(), int.class);
-		List<Answer> answersToPresent = new ArrayList<Answer>();
-        answer = db.executeQuery("select * from " + tableName + " WHERE QID=" + qid + " order by Likes desc, Time asc");
+		
         try
         {
+        	db.createConnection();
+        	db.setAutoCommit();
+        	int qid = new Gson().fromJson(sb.toString(), int.class);
+    		List<Answer> answersToPresent = new ArrayList<Answer>();
+        	answer = db.executeQuery("select * from " + tableName + " WHERE QID=" + qid + " order by Likes desc, Time asc");
         	while (answer.next())
     		{
             	// there is such an answer
@@ -59,11 +62,14 @@ public class ShowAnswerServlet extends HttpServlet
         	response.setCharacterEncoding("UTF-8");
         	response.getWriter().write(json);
         	response.getWriter().close();
-        	db.closeConnection();
+        	answer.close();        	
 		}
         catch (SQLException e)
         {
 			e.printStackTrace();
+		} finally{
+			if(db!=null)
+				db.closeConnection();
 		}
     }
 }

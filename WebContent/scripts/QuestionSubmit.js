@@ -11,11 +11,8 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 					headers: {'Content-Type': 'application/json'}
 				}).success( function (response)
 				{			
-					userIdFromSession = response;
-					//$scope.userIDFromSession = userId;
-				
-		
-		
+		userIdFromSession = response;
+		//$scope.userIDFromSession = userId;
 		/*Handels questions submit*/
 		$scope.question.Time= new Date();
 		$scope.question.Asker = userIdFromSession;
@@ -36,8 +33,7 @@ app.controller('QuestionSubmit',function ($scope, $http, $window)
 						flag = "true"       	
 					}
 				}
-				
-			if (flag=="false")
+			if ((flag=="false") && (topicsArray[i].trim()!=""))
 				res.push(commaSep(topicsArray[i]));
 		}
 		topicsArray = res;

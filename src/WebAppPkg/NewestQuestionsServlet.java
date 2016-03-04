@@ -38,8 +38,9 @@ public class NewestQuestionsServlet extends HttpServlet
     	try
     	{
     		WebAppDB db = new WebAppDB();
-    		ResultSet questions;
+    		ResultSet questions1;
     		db.createConnection(); 
+    		db.setAutoCommit();
     		List<Question> questionsToPresent = new ArrayList<Question>();
     	
             StringBuilder sb = new StringBuilder();
@@ -51,14 +52,14 @@ public class NewestQuestionsServlet extends HttpServlet
             }
 
     		   
-			questions = db.executeQuery("SELECT * FROM "+ tableName+ " where answered=false order by time desc");
+			questions1 = db.executeQuery("SELECT * FROM "+ tableName+ " where answered=false order by time desc");
             
             
-            while (questions.next())
+            while (questions1.next())
     		{
-            		Question question = new Question( Integer.parseInt(questions.getString("ID")), questions.getString("Text"),
-                    		questions.getString("Time"), questions.getString("Asker"), Integer.parseInt(questions.getString("Likes")) , 
-                    		Boolean.parseBoolean(questions.getString("Answered")) );
+            		Question question = new Question( Integer.parseInt(questions1.getString("ID")), questions1.getString("Text"),
+                    		questions1.getString("Time"), questions1.getString("Asker"), Integer.parseInt(questions1.getString("Likes")) , 
+                    		Boolean.parseBoolean(questions1.getString("Answered")) );
 	            	float rating = (float) 0.2*question.getLikes();
 	            	question.setRating(rating);
 	            	questionsToPresent.add(question);
@@ -67,6 +68,7 @@ public class NewestQuestionsServlet extends HttpServlet
             response.setContentType("application/json");
 	    	response.setCharacterEncoding("UTF-8");
             response.getWriter().write(categoriesJson);
+            questions1.close();
 			response.getWriter().close();
         	//db.closeConnection();
 			}
@@ -84,7 +86,7 @@ public class NewestQuestionsServlet extends HttpServlet
 	    	try
 	    	{
 	    		WebAppDB db = new WebAppDB();
-	    		ResultSet questions;
+	    		ResultSet questions1;
 	    		db.createConnection(); 
 	    		List<Question> questionsToPresent = new ArrayList<Question>();
 	    	
@@ -121,13 +123,13 @@ public class NewestQuestionsServlet extends HttpServlet
     			}
             
     			
-    			questions = db.executeQuery("SELECT * FROM "+ tableName+ " where answered=false order by time desc");
+    			questions1 = db.executeQuery("SELECT * FROM "+ tableName+ " where answered=false order by time desc");
                 
-                while (questions.next())
+                while (questions1.next())
         		{
-                		Question question = new Question( Integer.parseInt(questions.getString("ID")), questions.getString("Text"),
-                        		questions.getString("Time"), questions.getString("Asker"), Integer.parseInt(questions.getString("Likes")) , 
-                        		Boolean.parseBoolean(questions.getString("Answered")) );
+                		Question question = new Question( Integer.parseInt(questions1.getString("ID")), questions1.getString("Text"),
+                        		questions1.getString("Time"), questions1.getString("Asker"), Integer.parseInt(questions1.getString("Likes")) , 
+                        		Boolean.parseBoolean(questions1.getString("Answered")) );
     	            	float rating = (float) 0.2*question.getLikes();
     	            	question.setRating(rating);
                 		questionsToPresent.add(question);
@@ -137,6 +139,7 @@ public class NewestQuestionsServlet extends HttpServlet
 	            response.setContentType("application/json");
 		    	response.setCharacterEncoding("UTF-8");
 	            response.getWriter().write(categoriesJson);
+	            questions1.close();
 				response.getWriter().close();
 				//db.closeConnection();
 				}

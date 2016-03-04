@@ -14,7 +14,7 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 			var pageNum = { "pageNumber": 0 };
 			// Put the object into storage
 			localStorage.setItem('pageNum', JSON.stringify(pageNum));
-			localStorage.setItem('response', JSON.stringify(response));
+			localStorage.setItem('responseNew', JSON.stringify(response));
 			for(var i=0; i<20 && i<response.length; i++)
 			{
 				table = $("#newQuestionsList > tbody:last-child");
@@ -28,7 +28,7 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	{
 		table = $("#newQuestionsList > tbody");
 		var retrievedPage = localStorage.getItem('pageNum');
-		var retrievedResponse = localStorage.getItem('response');
+		var retrievedResponse = localStorage.getItem('responseNew');
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
 		pageNummberInt++;
@@ -55,7 +55,7 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 	$scope.prev = function()
 	{
 		var retrievedPage = localStorage.getItem('pageNum');
-		var retrievedResponse = localStorage.getItem('response');
+		var retrievedResponse = localStorage.getItem('responseNew');
 		var pageNumberStr = JSON.parse(retrievedPage);
 		var pageNummberInt = pageNumberStr.pageNumber;
 		pageNummberInt--;
@@ -110,7 +110,7 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 				    				data:  JSON.stringify(data)
 				    			}).success( function (response)
 				    			{	
-				    				localStorage.setItem('response', JSON.stringify(response));
+				    				localStorage.setItem('responseNew', JSON.stringify(response));
 				    				table.empty();
 				    				table = $("#newQuestionsList > tbody:last-child");
 				    				tableHeaders(table);
@@ -154,7 +154,7 @@ app.controller('NewestQuestions',function ($scope, $http, $window, $compile)
 				    				data:  JSON.stringify(data)
 				    			}).success( function (response)
 				    			{	
-				    				localStorage.setItem('response', JSON.stringify(response));
+				    				localStorage.setItem('responseNew', JSON.stringify(response));
 				    				table.empty();
 				    				table = $("#newQuestionsList > tbody:last-child");
 				    				tableHeaders(table);

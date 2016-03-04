@@ -49,6 +49,7 @@ public class LeaderboardServlet extends HttpServlet
     	{
     		WebAppDB db = new WebAppDB();
     		db.createConnection(); 
+    		db.setAutoCommit();
     		ArrayList<UserProfile> usersProfiles = new ArrayList<UserProfile>();
     	
 
@@ -204,12 +205,13 @@ public class LeaderboardServlet extends HttpServlet
 	    	response.setCharacterEncoding("UTF-8");
             response.getWriter().write(categoriesJson);
 			response.getWriter().close();
-			//db.closeConnection();
+			db.closeConnection();
 			}
     	catch (IOException | NumberFormatException | SQLException e)
     	{
 			e.printStackTrace();
-		} 
+		}  
+    	
     }
     
     private boolean nameExistsInUP(String name, ArrayList<UserProfile> usersProfiles)

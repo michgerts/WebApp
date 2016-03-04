@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<div ng-controller='AllTopics' data-ng-init="initTopics()">
+	<div >	
+		<button data-toggle="collapse" data-target="#allTopics" class="btn btn-primary collapseBTN">All Topics by rating</button>
+		<div id="allTopics" class="collapse">
+			<table id="allTopicsList" class="table">
+				  <th>Topic</th>
+				  <!--<th>Time of submission</th>-->
+				  <th>Rating</th> 
+				  <th></th>
+			</table>
+			<div id = "pagingAllDiv">
+				<ul class="pager" >
+				  <li class="previous" ><a href="" ng-click="prevAllTopics()" >Prev</a></li>
+				  <li class="next" ><a href="" ng-click="nextAllTopics()" >Next</a></li>
+				</ul>					
+			</div>
+		</div>					
+	</div>
+</div>
+
+
+

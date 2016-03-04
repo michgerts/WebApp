@@ -27,7 +27,8 @@ public class UserServlet extends HttpServlet
         {
     	WebAppDB db = new WebAppDB();
 		ResultSet users;
-		db.createConnection(); 
+		db.createConnection();
+		db.setAutoCommit();
 	
         StringBuilder sb = new StringBuilder();
         BufferedReader br = request.getReader();
@@ -54,13 +55,14 @@ public class UserServlet extends HttpServlet
         	response.setCharacterEncoding("UTF-8");
         	response.getWriter().write(json);
         	response.getWriter().close();
+        	users.close();
         	if(db!=null)
         		db.closeConnection();
 		}
         catch (SQLException e)
         {
 			e.printStackTrace();
-		}
+		} 
     }
 
 }
